@@ -1,1 +1,1 @@
-# This repository hold the content for the z/OS Configuration as Code Lab. It contains the content that will be used by each student.
+# z/OS Configuration Lab

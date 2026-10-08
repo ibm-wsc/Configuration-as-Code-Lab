@@ -1,3 +1,481 @@
 {
-    "explorer.sortOrder": "filesFirst"
+    "explorer.sortOrder": "filesFirst",
+    "editor.semanticTokenColorCustomizations": {
+        "[Default Dark+]": {
+            "rules": {
+                "zVariable": "#D4D4D4",
+                "zFunction": "#569CD6",
+                "zPreprocessor": "#D76BF3",
+                "zMacro": "#4EC9B0"
+            }
+        },
+        "[Default Dark Modern]": {
+            "rules": {
+                "zVariable": "#D4D4D4",
+                "zFunction": "#569CD6",
+                "zPreprocessor": "#D76BF3",
+                "zMacro": "#4EC9B0"
+            }
+        },
+        "[Experimental Dark]": {
+            "rules": {
+                "zVariable": "#BBBEBF",
+                "zFunction": "#4F8FDD",
+                "zPreprocessor": "#D76BF3",
+                "zMacro": "#4EC9B0"
+            }
+        },
+        "[Default Light+]": {
+            "rules": {
+                "zVariable": "#000000",
+                "zFunction": "#0000FF",
+                "zPreprocessor": "#BE0DEA",
+                "zMacro": "#007A72"
+            }
+        },
+        "[Default Light Modern]": {
+            "rules": {
+                "zVariable": "#3B3B3B",
+                "zFunction": "#0000FF",
+                "zPreprocessor": "#BE0DEA",
+                "zMacro": "#007A72"
+            }
+        },
+        "[Experimental Light]": {
+            "rules": {
+                "zVariable": "#202020",
+                "zFunction": "#5460C1",
+                "zPreprocessor": "#BE0DEA",
+                "zMacro": "#007A72"
+            }
+        },
+        "[Light 2026]": {
+            "rules": {
+                "zVariable": "#202020",
+                "zFunction": "#CF222E",
+                "zPreprocessor": "#BE0DEA",
+                "zLabel": "#116329",
+                "zMacro": "#007A72"
+            }
+        },
+        "[Complete Light]": {
+            "rules": {
+                "zVariable": "#202020",
+                "zFunction": "#CF222E",
+                "zPreprocessor": "#BE0DEA",
+                "zLabel": "#116329",
+                "zMacro": "#007A72"
+            }
+        },
+        "[Visual Studio Light]": {
+            "rules": {
+                "zVariable": "#000000",
+                "zFunction": "#0000FF",
+                "zPreprocessor": "#BE0DEA",
+                "zLabel": "#800000",
+                "zMacro": "#007A72"
+            }
+        },
+        "[Light Modern]": {
+            "rules": {
+                "zVariable": "#3B3B3B",
+                "zFunction": "#0000FF",
+                "zPreprocessor": "#BE0DEA",
+                "zLabel": "#800000",
+                "zMacro": "#007A72"
+            }
+        },
+        "[Light+]": {
+            "rules": {
+                "zVariable": "#000000",
+                "zFunction": "#0000FF",
+                "zPreprocessor": "#BE0DEA",
+                "zLabel": "#800000",
+                "zMacro": "#007A72"
+            }
+        },
+        "[Quiet Light]": {
+            "rules": {
+                "zVariable": "#333333",
+                "zFunction": {
+                    "foreground": "#4b69c6",
+                    "fontStyle": ""
+                },
+                "zPreprocessor": "#BE0DEA",
+                "zLabel": "#4B69C6",
+                "zMacro": "#007A72"
+            }
+        },
+        "[Solarized Light]": {
+            "rules": {
+                "zVariable": "#657B83",
+                "zFunction": "#859900",
+                "zPreprocessor": "#BE0DEA",
+                "zLabel": "#268BD2",
+                "zMacro": "#1E8A7A"
+            }
+        },
+        "[Dark 2026]": {
+            "rules": {
+                "zVariable": "#BBBEBF",
+                "zFunction": "#FF7B72",
+                "zPreprocessor": "#D76BF3",
+                "zLabel": "#7EE787",
+                "zMacro": "#4EC9B0"
+            }
+        },
+        "[Abyss]": {
+            "rules": {
+                "zVariable": "#6688CC",
+                "zFunction": "#225588",
+                "zPreprocessor": "#D76BF3",
+                "zLabel": "#225588",
+                "zMacro": "#4EC9B0"
+            }
+        },
+        "[Bob Theme]": {
+            "rules": {
+                "zVariable": "#D4D4D4",
+                "zFunction": "#C678DD",
+                "zPreprocessor": "#D76BF3",
+                "zLabel": "#E06C75",
+                "zMacro": "#4EC9B0"
+            }
+        },
+        "[Complete Dark]": {
+            "rules": {
+                "zVariable": "#D4D4D4",
+                "zFunction": "#569CD6",
+                "zPreprocessor": "#D76BF3",
+                "zLabel": "#569CD6",
+                "zMacro": "#4EC9B0"
+            }
+        },
+        "[Visual Studio Dark]": {
+            "rules": {
+                "zVariable": "#D4D4D4",
+                "zFunction": "#569CD6",
+                "zPreprocessor": "#D76BF3",
+                "zLabel": "#569CD6",
+                "zMacro": "#4EC9B0"
+            }
+        },
+        "[Dark Modern]": {
+            "rules": {
+                "zVariable": "#D4D4D4",
+                "zFunction": "#569CD6",
+                "zPreprocessor": "#D76BF3",
+                "zLabel": "#569CD6",
+                "zMacro": "#4EC9B0"
+            }
+        },
+        "[Dark+]": {
+            "rules": {
+                "zVariable": "#D4D4D4",
+                "zFunction": "#569CD6",
+                "zPreprocessor": "#D76BF3",
+                "zLabel": "#569CD6",
+                "zMacro": "#4EC9B0"
+            }
+        },
+        "[Kimbie Dark]": {
+            "rules": {
+                "zVariable": "#D3AF86",
+                "zFunction": "#98676A",
+                "zPreprocessor": "#D76BF3",
+                "zLabel": "#DC3958",
+                "zMacro": "#4EC9B0"
+            }
+        },
+        "[Monokai]": {
+            "rules": {
+                "zVariable": "#F8F8F2",
+                "zFunction": "#F92672",
+                "zPreprocessor": "#D76BF3",
+                "zLabel": "#F92672",
+                "zMacro": "#4EC9B0"
+            }
+        },
+        "[Monokai Dimmed]": {
+            "rules": {
+                "zVariable": "#C5C8C6",
+                "zFunction": "#676867",
+                "zPreprocessor": "#D76BF3",
+                "zLabel": "#6089B4",
+                "zMacro": "#4EC9B0"
+            }
+        },
+        "[Red]": {
+            "rules": {
+                "zVariable": {
+                    "foreground": "#F8F8F8",
+                    "fontStyle": ""
+                },
+                "zFunction": "#F12727",
+                "zPreprocessor": "#D76BF3",
+                "zLabel": "#FEC758",
+                "zMacro": "#4EC9B0"
+            }
+        },
+        "[Solarized Dark]": {
+            "rules": {
+                "zVariable": "#839496",
+                "zFunction": "#859900",
+                "zPreprocessor": "#D76BF3",
+                "zLabel": "#268BD2",
+                "zMacro": "#1E8A7A"
+            }
+        },
+        "[Tomorrow Night Blue]": {
+            "rules": {
+                "zVariable": "#FFFFFF",
+                "zFunction": "#EBBBFF",
+                "zPreprocessor": "#D76BF3",
+                "zLabel": "#FF9DA4",
+                "zMacro": "#4EC9B0"
+            }
+        },
+        "[Default High Contrast]": {
+            "rules": {
+                "zVariable": "#FFFFFF",
+                "zFunction": "#569CD6",
+                "zPreprocessor": "#D76BF3",
+                "zLabel": "#569CD6",
+                "zMacro": "#4EC9B0"
+            }
+        },
+        "[Default High Contrast Light]": {
+            "rules": {
+                "zVariable": "#292929",
+                "zFunction": "#0F4A85",
+                "zPreprocessor": "#BE0DEA",
+                "zLabel": "#0F4A85",
+                "zMacro": "#006B63"
+            }
+        },
+        "[*Dark*]": {
+            "rules": {
+                "zosLevel-WSC-Configurations": {
+                    "foreground": "#F98739"
+                },
+                "zosLevel-ATGPLEX": {
+                    "foreground": "#1192e8"
+                },
+                "zosLevel-ATG1": {
+                    "foreground": "#98FB98"
+                },
+                "zosLevel-ATSPLEX-3-2": {
+                    "foreground": "#1192e8"
+                },
+                "zosLevel-ATS1": {
+                    "foreground": "#98FB98"
+                },
+                "zosLevel-ATS2": {
+                    "foreground": "#98FB98"
+                },
+                "zosLevel-BACPLEX": {
+                    "foreground": "#1192e8"
+                },
+                "zosLevel-BAC1-3-1": {
+                    "foreground": "#98FB98"
+                },
+                "zosLevel-CMWPLEX": {
+                    "foreground": "#1192e8"
+                },
+                "zosLevel-ESYSMVS": {
+                    "foreground": "#1192e8"
+                },
+                "zosLevel-MVS1": {
+                    "foreground": "#98FB98"
+                },
+                "zosLevel-FUTLPLEX": {
+                    "foreground": "#1192e8"
+                },
+                "zosLevel-FUTL-2-5": {
+                    "foreground": "#98FB98"
+                },
+                "zosLevel-KUTLPLEX": {
+                    "foreground": "#1192e8"
+                },
+                "zosLevel-KUTL-2-5": {
+                    "foreground": "#98FB98"
+                },
+                "zosLevel-LABK-GDPS-no-data": {
+                    "foreground": "#1192e8"
+                },
+                "zosLevel-LABPLEX": {
+                    "foreground": "#1192e8"
+                },
+                "zosLevel-LAB1-3-2": {
+                    "foreground": "#98FB98"
+                },
+                "zosLevel-LAB2-3-2": {
+                    "foreground": "#98FB98"
+                },
+                "zosLevel-SAOPLEX": {
+                    "foreground": "#1192e8"
+                },
+                "zosLevel-SAOD-2-5": {
+                    "foreground": "#98FB98"
+                },
+                "zosLevel-SCRPLEX": {
+                    "foreground": "#1192e8"
+                },
+                "zosLevel-SCR1-3-1": {
+                    "foreground": "#98FB98"
+                },
+                "zosLevel-SCR2-3-1": {
+                    "foreground": "#98FB98"
+                },
+                "zosLevel-TEC2": {
+                    "foreground": "#1192e8"
+                },
+                "zosLevel-TSTPLEX": {
+                    "foreground": "#1192e8"
+                },
+                "zosLevel-TST1": {
+                    "foreground": "#98FB98"
+                },
+                "zosLevel-TST2": {
+                    "foreground": "#98FB98"
+                },
+                "zosLevel-ZHBPLEX": {
+                    "foreground": "#1192e8"
+                },
+                "zosLevel-ZHB1-3-1": {
+                    "foreground": "#98FB98"
+                },
+                "zosLevel-ZTXPLEX": {
+                    "foreground": "#1192e8"
+                },
+                "zosLevel-ZTX1-3-2": {
+                    "foreground": "#98FB98"
+                },
+                "zosLevel-sysplex": {
+                    "foreground": "#1192e8"
+                },
+                "zosLevel-lpar1": {
+                    "foreground": "#98FB98"
+                },
+                "zosLevel-lpar2": {
+                    "foreground": "#98FB98"
+                },
+                "zosLevel-lpar3": {
+                    "foreground": "#98FB98"
+                }
+            }
+        },
+        "[*Light*]": {
+            "rules": {
+                "zosLevel-WSC-Configurations": {
+                    "foreground": "#F98739"
+                },
+                "zosLevel-ATGPLEX": {
+                    "foreground": "#1192e8"
+                },
+                "zosLevel-ATG1": {
+                    "foreground": "#98FB98"
+                },
+                "zosLevel-ATSPLEX-3-2": {
+                    "foreground": "#1192e8"
+                },
+                "zosLevel-ATS1": {
+                    "foreground": "#98FB98"
+                },
+                "zosLevel-ATS2": {
+                    "foreground": "#98FB98"
+                },
+                "zosLevel-BACPLEX": {
+                    "foreground": "#1192e8"
+                },
+                "zosLevel-BAC1-3-1": {
+                    "foreground": "#98FB98"
+                },
+                "zosLevel-CMWPLEX": {
+                    "foreground": "#1192e8"
+                },
+                "zosLevel-ESYSMVS": {
+                    "foreground": "#1192e8"
+                },
+                "zosLevel-MVS1": {
+                    "foreground": "#98FB98"
+                },
+                "zosLevel-FUTLPLEX": {
+                    "foreground": "#1192e8"
+                },
+                "zosLevel-FUTL-2-5": {
+                    "foreground": "#98FB98"
+                },
+                "zosLevel-KUTLPLEX": {
+                    "foreground": "#1192e8"
+                },
+                "zosLevel-KUTL-2-5": {
+                    "foreground": "#98FB98"
+                },
+                "zosLevel-LABK-GDPS-no-data": {
+                    "foreground": "#1192e8"
+                },
+                "zosLevel-LABPLEX": {
+                    "foreground": "#1192e8"
+                },
+                "zosLevel-LAB1-3-2": {
+                    "foreground": "#98FB98"
+                },
+                "zosLevel-LAB2-3-2": {
+                    "foreground": "#98FB98"
+                },
+                "zosLevel-SAOPLEX": {
+                    "foreground": "#1192e8"
+                },
+                "zosLevel-SAOD-2-5": {
+                    "foreground": "#98FB98"
+                },
+                "zosLevel-SCRPLEX": {
+                    "foreground": "#1192e8"
+                },
+                "zosLevel-SCR1-3-1": {
+                    "foreground": "#98FB98"
+                },
+                "zosLevel-SCR2-3-1": {
+                    "foreground": "#98FB98"
+                },
+                "zosLevel-TEC2": {
+                    "foreground": "#1192e8"
+                },
+                "zosLevel-TSTPLEX": {
+                    "foreground": "#1192e8"
+                },
+                "zosLevel-TST1": {
+                    "foreground": "#98FB98"
+                },
+                "zosLevel-TST2": {
+                    "foreground": "#98FB98"
+                },
+                "zosLevel-ZHBPLEX": {
+                    "foreground": "#1192e8"
+                },
+                "zosLevel-ZHB1-3-1": {
+                    "foreground": "#98FB98"
+                },
+                "zosLevel-ZTXPLEX": {
+                    "foreground": "#1192e8"
+                },
+                "zosLevel-ZTX1-3-2": {
+                    "foreground": "#98FB98"
+                },
+                "zosLevel-sysplex": {
+                    "foreground": "#1192e8"
+                },
+                "zosLevel-lpar1": {
+                    "foreground": "#98FB98"
+                },
+                "zosLevel-lpar2": {
+                    "foreground": "#98FB98"
+                },
+                "zosLevel-lpar3": {
+                    "foreground": "#98FB98"
+                }
+            }
+        }
+    }
 }
