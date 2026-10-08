@@ -1,0 +1,98 @@
+data_management_definitions:
+  storage_management_subsystem_definitions:
+    allocation_system_defaults:
+      allocate_offline_policy:
+        action: WAITHOLD
+        action_if_wait_isnt_allowed: WTOR
+      catalog_error_actions:
+        fail_active_job: false
+        write_error_message_to_console: true
+      space_definitions:
+        block_length: 8192
+        directory: 0
+        measure: AVEBLK
+        primary: 4
+        primary_organization: CONTIG
+        release_unused_space: true
+        round: true
+        secondary: 24
+      special_volume_wait_policy:
+        action: WAITNOH
+        action_if_wait_isnt_allowed: CANCEL
+        maximum_wait_decision_tries: 5
+      task_input_output_table:
+        table_size: 64
+      two_digit_date_policy:
+        action: WARN
+      unit_definitions:
+        name: SYSALLDA
+      volume_enqueue_policy:
+        action: WTOR
+      volume_mount_policy:
+        action: WTOR
+    sms_definition:
+      active_control_dataset: ATSPLEX.SMS.ACDS
+      activity_keypoint_intervals:
+      - 200
+      - 200
+      automatic_class_selection:
+        use_defaults: true
+      communications_dataset: ATSPLEX.SMS.COMMDS
+      coupling_facility_time: 3600
+      dfsms_tvs:
+        deadlock_detection:
+          interval: 15
+        server_names:
+        - 1
+        - 2
+        system_names:
+        - ATS1
+        - ATS2
+        use_warm_start:
+        - true
+        - true
+      enabled_shared_writing_of_pdse_in_sysplex: true
+      general_interval: 15
+      pdse_configuration:
+        restartable_address_space: true
+      rls:
+        above_bar_max_pool_size:
+          size: 1024
+          use_same_size_for_all_systems: true
+        disable_maximum_coupling_facility_feature_level: true
+        fixed_pool_size:
+          size: 0
+          use_same_size_for_all_systems: true
+        initialize: true
+        maximum_pool_size: 850
+      smf_time_stamping: true
+      trace_configuration:
+        deselect_events:
+        - ALL
+        enabled: false
+        select_events:
+        - ACSINT
+        - ACSPRO
+vatlst:
+  vatdef:
+    ipluse: PRIVATE
+    sysuse: PRIVATE
+  volume_entries:
+  - entry:
+      volume_specifications:
+        volume_serial: USRAT%
+        specific_identifier: false
+        mount_attribute: false
+      use_attribute: '0'
+      device_type: '*'
+    mount_message_suppression: true
+    extra_message: SYSTEM                         STORAGE VOLUME
+  - entry:
+      volume_specifications:
+        volume_serial: USRAT%
+        specific_identifier: false
+        mount_attribute: false
+      use_attribute: '0'
+      device_type: '*'
+    mount_message_suppression: true
+    extra_message: SYSTEM                         STORAGE VOLUME

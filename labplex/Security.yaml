@@ -1,0 +1,16 @@
+racf_definitions:
+  irrprm_definitions:
+    database_options:
+      dataset_name_table:
+        entries:
+        - primary_dataset_name: ATSPLEX.RACF.PRIMARY.DATABASE
+          backup_dataset_name: ATSPLEX.RACF.BACKUP.DATABASE
+          update_backup: NOSTATS
+          buffers: 255
+      range_table:
+        ranges:
+        - start:
+            value: '00'
+            format: HEX
+          entry_number: 1
+      sysplex: COMMUNICATIONS

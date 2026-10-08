@@ -1,0 +1,153 @@
+data_sources:
+  unix_file_systems:
+    file_system_types:
+      zos_file_system:
+        entry_point: IOEFSCM
+        address_space:
+          procedure_name: ZFS
+          start_parameters: SUB=MSTR
+        parm: PRM=(00)
+      automnt_file_system:
+        entry_point: BPXTAMD
+      process_file_system:
+        entry_point: BPXUPINT
+      temporary_file_system:
+        entry_point: BPXTFS
+    root_file_system:
+      file_system: USSZFS.ATSPLEX.ROOT.ZFS
+      file_system_type: ZFS
+      mode: Read-Write
+    file_systems:
+    - file_system: ATSUSS.OMVS.ROOT.ZFS
+      mount_point: /$VERSION
+      file_system_type: ZFS
+      mode: READ
+    - file_system: USSZFS.ATS2.SYSTEM.ZFS
+      mount_point: /ATS2
+      file_system_type: ZFS
+      mode: RDWR
+      unmount: true
+    - file_system: USSZFS.ATS2.DEV.ZFS
+      mount_point: /ATS2/dev
+      file_system_type: ZFS
+      mode: RDWR
+      unmount: true
+    - file_system: USSZFS.ATS2.V3R2.ETC.ZFS
+      mount_point: /ATS2/etc
+      file_system_type: ZFS
+      mode: RDWR
+      unmount: true
+    - file_system: USSZFS.ATS2.V3R2.VAR.ZFS
+      mount_point: /ATS2/var
+      file_system_type: ZFS
+      mode: RDWR
+      unmount: true
+    - file_system: ATS2.TMP
+      mount_point: /ATS2/tmp
+      file_system_type: TFS
+      parm: -s 900
+    - file_system: /PROC
+      mount_point: /proc
+      file_system_type: PROC
+    - file_system: ATSUSS.OMVS.JAV64V21.ZFS
+      mount_point: /usr/lpp/java/J21.0_64
+      file_system_type: ZFS
+      mode: READ
+    - file_system: IZU.SIZUUSRD
+      mount_point: /global/zosmf
+      file_system_type: ZFS
+      mode: RDWR
+      unmount: true
+    - file_system: ATSUSS.OMVS.SAZDZFS.ZFS
+      mount_point: /usr/lpp/zcx_zos/
+      file_system_type: ZFS
+      mode: READ
+    - file_system: ATSUSS.OMVS.SBBLZFS.ZFS
+      mount_point: /usr/lpp/liberty_zos/
+      file_system_type: ZFS
+      mode: READ
+    - file_system: CIM.VARWBEM.ZFS
+      mount_point: /shared/wbem
+      file_system_type: ZFS
+      mode: RDWR
+      unmount: true
+    - file_system: ATSUSS.OMVS.NETVHFS.ZFS
+      mount_point: /usr/lpp/netview/v6r4/
+      file_system_type: ZFS
+      mode: READ
+    - file_system: ATSUSS.OMVS.SINGZFS.ZFS
+      mount_point: /usr/lpp/ing
+      file_system_type: ZFS
+      mode: READ
+    - file_system: SPFORCES.PYTHON.GA1.ZFS
+      mount_point: /shared/IBM/cyp
+      file_system_type: ZFS
+      mode: RDWR
+    - file_system: ATSUSS.OMVS.SCYPROOT.ZFS
+      mount_point: /usr/lpp/IBM/cyp/v3r13/
+      file_system_type: ZFS
+      mode: READ
+    - file_system: PYTHON.V3R14.OMVS.SCYPROOT.ZFS
+      mount_point: /shared/IBM/cyp/v3r14
+      file_system_type: ZFS
+      mode: RDWR
+    - file_system: IDZ.ZOAU.ZFS
+      mount_point: /shared/IBM/zoautil
+      file_system_type: ZFS
+      mode: RDWR
+    - file_system: ZOAU.V1R4.ZFS
+      mount_point: /shared/IBM/zoautil/v1r4
+      file_system_type: ZFS
+      mode: RDWR
+    - file_system: ZOAU.V1R3.ZFS
+      mount_point: /shared/IBM/zoautil/v1r3
+      file_system_type: ZFS
+      mode: RDWR
+    - file_system: IDZ.EXPLORER.ZFS
+      mount_point: /shared/IBM/zexpl
+      file_system_type: ZFS
+      mode: RDWR
+    - file_system: OPNXLC2.ZFS
+      mount_point: /shared/IBM/cnw/v2r1
+      file_system_type: ZFS
+      mode: RDWR
+    - file_system: OPNXLC2.V2R2.ZFS
+      mount_point: /shared/IBM/cnw/v2r2
+      file_system_type: ZFS
+      mode: RDWR
+    - file_system: EOF.CBC.HAMN110.ZFS
+      mount_point: /usr/lpp/IBM/foz/v1r1
+      file_system_type: ZFS
+      mode: RDWR
+    - file_system: EOF.ZOPEN.ZFS
+      mount_point: /global/zopen
+      file_system_type: ZFS
+      mode: RDWR
+    - file_system: SPFORCES.VARIOUS.ZFS
+      mount_point: /shared/spforces/cool-stuff
+      file_system_type: ZFS
+      mode: RDWR
+    - file_system: SITE.PACKAGES.ZFS
+      mount_point: /shared/python_site_packages
+      file_system_type: ZFS
+      mode: RDWR
+    - file_system: SPFORCES.PYUTILS.ZFS
+      mount_point: /shared/python_utilities
+      file_system_type: ZFS
+      mode: RDWR
+    - file_system: CTS530.CICSTS.CICSTS53
+      mount_point: /shared/cicsts/cicsts53
+      file_system_type: ZFS
+      mode: READ
+    - file_system: DSN1210.DB2.ZFS
+      mount_point: /shared/db2/v12r0
+      file_system_type: ZFS
+      mode: READ
+    - file_system: RDSN1310.DB2.ZFS
+      mount_point: /shared/db2/v13r0
+      file_system_type: ZFS
+      mode: READ
+    sysplex: true
+    version_file_system:
+      version: ATSCAT
+    super_user: OMVSKERN

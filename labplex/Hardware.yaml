@@ -1,0 +1,86 @@
+physical_resource_definitions:
+  device_support_definitions:
+    secondary_space_reduction: false
+    tape_compact_format: true
+    vol_nsns: true
+  program_function_key_table_definitions:
+  - table_name: SS
+    pfk_definitions:
+    - key_number:
+      - 1
+      command: K E,1
+    - key_number:
+      - 2
+      command: K E
+    - key_number:
+      - 3
+      command: K E,D
+    - key_number:
+      - 4
+      command: K D,F
+    - key_number:
+      - 5
+      command: K S,DEL=N
+    - key_number:
+      - 6
+      command: K S,DEL=RD
+    - key_number:
+      - 7
+      command: D A,L
+    - key_number:
+      - 8
+      command: K D,F
+    - key_number:
+      - 9
+      command: K D,U
+    - key_number:
+      - 10
+      command: D U,DASD,ONLINE
+    - key_number:
+      - 11
+      command: D U,TAPE,ONLINE
+    - key_number:
+      - 12
+      command: $DU,PRTS,SHORT
+    - key_number:
+      - 13
+      command: $DU,LNES,SHORT
+    - key_number:
+      - 14
+      command: S RMF.RMF
+    - key_number:
+      - 15
+      command: F RMF,S III
+    - key_number:
+      - 16
+      command: F RMF,P III
+    - key_number:
+      - 17
+      command: $DI;$DA
+    - key_number:
+      - 18
+      command: D DUMP,E
+    - key_number:
+      - 19
+      command: RO ABCD,_
+      conversational: true
+    - key_number:
+      - 20
+      command: RO T=0,_
+      conversational: true
+    - key_number:
+      - 21
+      command: K V,CMDSYS=SYSA
+      conversational: false
+    - key_number:
+      - 22
+      command: K V,CMDSYS=SYSB
+      conversational: false
+    - key_number:
+      - 23
+      command: K V,CMDSYS=SYSC
+      conversational: false
+    - key_number:
+      - 24
+      command: K V,CMDSYS=SYSD
+      conversational: false

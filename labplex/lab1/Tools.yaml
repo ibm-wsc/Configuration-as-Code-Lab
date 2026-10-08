@@ -1,0 +1,8 @@
+system_rexx_options:
+  axr_user_id: AXRUSER
+  prefix:
+    prefix_value: REXXS1
+    scope: sysplex
+  rexx_libraries:
+  - mvs_directory: SYSS.SYSSUPT.SAXREXEC
+  - mvs_directory: SYS1.SAXREXEC

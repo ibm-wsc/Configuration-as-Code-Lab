@@ -1,0 +1,55 @@
+subsystem_definitions:
+  parallel_initialization:
+  - subsystem_name: RACF
+    initialization_routine: IRRSSI00
+    initialization_parameters: '@,M'
+  - subsystem_name: OMVS
+  - subsystem_name: ATRR
+  - subsystem_name: BLSR
+    initialization_routine: CSRBISUB
+  - subsystem_name: CICS
+  - subsystem_name: DBS1
+    initialization_routine: DSN3INI
+    initialization_parameters: DSN3EPX,-DBS1,S
+  - subsystem_name: IRLM
+  - subsystem_name: DBLM
+  - subsystem_name: IRS1
+  - subsystem_name: DLFX
+  - subsystem_name: EKGX
+  - subsystem_name: FFST
+  - subsystem_name: JRLM
+  - subsystem_name: JESA
+  - subsystem_name: JESB
+  - subsystem_name: LOGR
+    initialization_routine: IXGSSINT
+  - subsystem_name: NETV
+  - subsystem_name: AUTO
+    initialization_routine: DSI4LSIT
+    initialization_parameters: TINYDS
+  - subsystem_name: OAM1
+    initialization_routine: CBRINIT
+  - subsystem_name: OCCF
+  - subsystem_name: PSP1
+    initialization_routine: ASFPMSSI
+  - subsystem_name: OPCA
+    initialization_routine: EQQINITN
+    initialization_parameters: 100,N
+  - subsystem_name: TRK
+    initialization_routine: EQQINITN
+    initialization_parameters: 100,N
+  - subsystem_name: IXFP
+    initialization_routine: SIBSSIPL
+    initialization_parameters: DYNDDSR(N),INIT(N),KEY(4),MIH(S),MSGP(N)
+  serial_initialization:
+  - subsystem_name: SMS
+    initialization_routine: IGDSSIIN
+    initialization_parameters: ID=01,PROMPT=DISPLAY
+  - subsystem_name: JES2
+    primary: true
+    automatic_start: false
+  - subsystem_name: DFRM
+  - subsystem_name: TNF
+    initialization_routine: MVPTSSI
+  - subsystem_name: VMCF
+    initialization_routine: MVPXSSI
+    initialization_parameters: WSC202

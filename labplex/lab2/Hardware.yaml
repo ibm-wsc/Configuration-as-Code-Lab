@@ -1,0 +1,110 @@
+console_definitions:
+  consoles:
+  - device_number: E47
+    unit_type: 3270-X
+    name: ATS2@E47
+    command_authority: MASTER
+    console_usage_mode: FC
+    routing_codes: ALL
+    conversational_mode: false
+    scroll_segment_lines: 28
+    message_deletion_mode: R
+    roll_line_count: 20
+    roll_interval_seconds: 1
+    message_display_format:
+    - T
+    - S
+    - J
+    display_areas: NONE
+    command_recall_buffer_size: 15
+  - device_number: SYSCONS
+    name: HMC
+    command_authority: MASTER
+    routing_codes: ALL
+    auto_activate_group: NOCNSGRP
+  - device_number: SMCS
+    name: ATS2SM1
+    command_authority: MASTER
+    console_usage_mode: FC
+    routing_codes: ALL
+    message_levels: ALL
+    conversational_mode: false
+    scroll_segment_lines: 19
+    message_deletion_mode: RD
+    roll_line_count: 19
+    roll_interval_seconds: 1
+    message_display_format:
+    - T
+    - J
+    display_areas: NONE
+    command_recall_buffer_size: 10
+    logon_requirement: REQUIRED
+  - device_number: SMCS
+    name: ATS2SM2
+    command_authority: MASTER
+    console_usage_mode: FC
+    routing_codes: ALL
+    message_levels: ALL
+    conversational_mode: false
+    scroll_segment_lines: 19
+    message_deletion_mode: RD
+    roll_line_count: 19
+    roll_interval_seconds: 1
+    message_display_format:
+    - T
+    - J
+    display_areas: NONE
+    command_recall_buffer_size: 10
+    logon_requirement: REQUIRED
+  - device_number: SUBSYSTEM
+    name: ATS2SUB1
+    command_authority: ALL
+  - device_number: SUBSYSTEM
+    name: ATS2SUB2
+    command_authority: ALL
+  - device_number: SUBSYSTEM
+    name: ATS2SUB3
+    command_authority: ALL
+  - device_number: SUBSYSTEM
+    name: ATS2SUB4
+    command_authority: ALL
+  - device_number: SUBSYSTEM
+    name: ATS2SUB5
+    command_authority: ALL
+  - device_number: SUBSYSTEM
+    name: ATS2SUB6
+    command_authority: ALL
+  console_defaults:
+    routing_codes:
+    - 2
+    hold_mode_enabled: false
+    synchronous_message_group: SYNCHDST
+  hardcopy:
+    hardcopy_output:
+      use_syslog: true
+      use_operlog: true
+    routing_codes: ALL
+    command_inclusion_level: CMDS
+  initialization:
+    wto_buffer_limit: 5000
+    syslog_buffer_limit: 10000
+    wtor_buffer_limit: 50
+    action_message_retention: true
+    message_exit_enabled: true
+    message_processing_facility:
+    - SA
+    - '00'
+    pfk_table_suffix: '00'
+    console_group_suffixes:
+    - '00'
+    command_delimiter: ;
+    smcs_applid: SMCSS2
+console_groups:
+  groups:
+  - name: SYNCHDST
+    members:
+    - '*SYSCON*'
+    - ATS2@E47
+  - name: NOCNSGRP
+    members:
+    - ATS2@E47

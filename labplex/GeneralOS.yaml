@@ -1,0 +1,176 @@
+cluster_definitions:
+  coupling_facility_definitions:
+    classdef:
+      - class_name: SMALL
+        message_length: 4028
+        group_list:
+          - UNDESIG
+      - class_name: LARGE
+        message_length: 16316
+        group_list:
+          - UNDESIG
+    couple:
+      cleanup_duration_during_system_termination: 60
+      component_trace_options_locations:
+        - parmlib_member: CTIXCF00
+        - parmlib_member: CTIXES00
+      couple_mvs_directories:
+        alternate:
+          name: ATSPLEX.XCFCDS.ALT
+        primary:
+          name: ATSPLEX.XCFCDS.PRI
+      maximum_number_of_message_buffers: 1000
+      signal_path_failure_retries: 10
+      sysplex_name: ATSPLEX
+    data:
+      - additional_couple_mvs_directories:
+          primary:
+            name: ATSPLEX.ARMCDS.PRI
+          alternate:
+            name: ATSPLEX.ARMCDS.ALT
+          services_using_the_couple_mvs_directories:
+            - ARM
+      - additional_couple_mvs_directories:
+          primary:
+            name: ATSPLEX.SHFSCDS.PRI
+          alternate:
+            name: ATSPLEX.SHFSCDS.ALT
+          services_using_the_couple_mvs_directories:
+            - BPXMCDS
+      - additional_couple_mvs_directories:
+          primary:
+            name: ATSPLEX.CFRMCDS.PRI
+          alternate:
+            name: ATSPLEX.CFRMCDS.ALT
+          services_using_the_couple_mvs_directories:
+            - CFRM
+      - additional_couple_mvs_directories:
+          primary:
+            name: ATSPLEX.LOGRCDS.PRI
+          alternate:
+            name: ATSPLEX.LOGRCDS.ALT
+          services_using_the_couple_mvs_directories:
+            - LOGR
+      - additional_couple_mvs_directories:
+          primary:
+            name: ATSPLEX.SFMCDS.PRI
+          alternate:
+            name: ATSPLEX.SFMCDS.ALT
+          services_using_the_couple_mvs_directories:
+            - SFM
+      - additional_couple_mvs_directories:
+          primary:
+            name: ATSPLEX.WLMCDS.PRI
+          alternate:
+            name: ATSPLEX.WLMCDS.ALT
+          services_using_the_couple_mvs_directories:
+            - WLM
+    pathin:
+      - coupling_facility_structure_names:
+          - IXCSTR1
+          - IXCSTR2
+    pathout:
+      - class_name: SMALL
+        coupling_facility_structure_names:
+          - IXCSTR1
+      - class_name: LARGE
+        coupling_facility_structure_names:
+          - IXCSTR2
+  global_resource_serialization_definitions:
+    - threshold_of_systems_that_see_a_request: 99
+      component_trace_registry_member: CTIGRS00
+      ring_system_authority_message_residency_time: 10
+      maximum_tolerance_time_for_ring_system_authority_message: 180
+  global_resource_serialization_name_list_definitions:
+    - resource_major_name: SYSDSN
+      resource_type: GENERIC
+      resource_name_list: INCLUSION
+    - resource_major_name: SYSIKJBC
+      resource_type: GENERIC
+      resource_name_list: INCLUSION
+    - resource_major_name: SYSZVOLS
+      resource_type: GENERIC
+      resource_name_list: INCLUSION
+    - resource_major_name: SYSDSN
+      resource_minor_name: "&SYS#1..LOGREC"
+      resource_type: SPECIFIC
+      resource_name_list: EXCLUSION
+    - resource_major_name: SYSDSN
+      resource_minor_name: "&SYS#2..LOGREC"
+      resource_type: SPECIFIC
+      resource_name_list: EXCLUSION
+    - resource_major_name: SYSDSN
+      resource_minor_name: "&SYS#1..MAN"
+      resource_type: GENERIC
+      resource_name_list: EXCLUSION
+    - resource_major_name: SYSDSN
+      resource_minor_name: "&SYS#2..MAN"
+      resource_type: GENERIC
+      resource_name_list: EXCLUSION
+    - resource_major_name: SYSDSN
+      resource_minor_name: "&SYS#1..PAGE"
+      resource_type: GENERIC
+      resource_name_list: EXCLUSION
+    - resource_major_name: SYSDSN
+      resource_minor_name: "&SYS#2..PAGE"
+      resource_type: GENERIC
+      resource_name_list: EXCLUSION
+    - resource_major_name: SYSDSN
+      resource_minor_name: "&SYS#1..STGINDEX"
+      resource_type: SPECIFIC
+      resource_name_list: EXCLUSION
+    - resource_major_name: SYSDSN
+      resource_minor_name: "&SYS#2..STGINDEX"
+      resource_type: SPECIFIC
+      resource_name_list: EXCLUSION
+    - resource_major_name: SYSVTOC
+      resource_type: GENERIC
+      resource_name_list: EXCLUSION
+    - resource_major_name: SYSZVVDS
+      resource_type: GENERIC
+      resource_name_list: EXCLUSION
+    - resource_major_name: SYSZJES2
+      resource_type: GENERIC
+      resource_name_list: EXCLUSION
+    - resource_major_name: SYSIGGV2
+      resource_type: GENERIC
+      resource_name_list: CONVERSION
+    - resource_major_name: SPFEDIT
+      resource_type: GENERIC
+      resource_name_list: CONVERSION
+    - resource_major_name: SYSIEWLP
+      resource_type: GENERIC
+      resource_name_list: CONVERSION
+    - resource_major_name: SPZAPLIB
+      resource_type: GENERIC
+      resource_name_list: CONVERSION
+    - resource_major_name: IGDCDSXS
+      resource_type: GENERIC
+      resource_name_list: CONVERSION
+    - resource_major_name: DSPURI01
+      resource_type: GENERIC
+      resource_name_list: CONVERSION
+diagnosis_definitions:
+  base_definitions:
+    control_common_storage_tracking_and_gfs_trace:
+      automatic_boot:
+        operating_system:
+          use_last: true
+        stand_alone_dump: NONE
+unix_definitions:
+  component_trace_member: CTIBPX00
+  maximum_concurrent_tasks: 3000
+  maximum_concurrent_threads: 1000
+  maximum_cpu_time_for_new_processes: 2147483647
+  maximum_file_descriptors: 64000
+  maximum_pseudo_terminals: 256
+  maximum_shared_member_segment_pages: 25600
+  maximum_size_of_shared_library_region:
+    amount: 67108864
+  maximum_system_processes: 2048
+  maximum_unique_message_queues: 680
+  maximum_unique_semiphore_sets: 680
+  maximum_user_processes: 100
+  path_to_step_library_list: /system/steplib
+  priority_service_class_goal_list:
+    - EBIZ_LO

@@ -1,0 +1,1154 @@
+boot_definitions:
+  load_definitions:
+    symbol_files:
+      symbol_file_suffix_list:
+        - Z2
+        - SS
+      display_symbol_files_on_console: true
+    queue_area_reserved:
+      system_queue_area:
+        amount: 256
+        units: K
+      extended_system_queue_area:
+        amount: 512
+        units: K
+    io_definitions:
+      io_definition_suffix: 9
+      high_level_qualifier: ATSPLEX
+      os_configuration_identifier: MVS1
+      eligible_device_table: "00"
+    nucleus_number: 1
+    nucleus_list_definitions:
+      nucleus_file_suffix: "00"
+    registry_mvs_file_list:
+      - file_name: SYS1.SITE.PARMLIB
+      - file_name: SYS1.PARMLIB
+      - file_name: SYS1.IBM.PARMLIB
+    master_catalog_parameters:
+      disk_name: ATSCAT
+      sys1_conversion: false
+      alias_name_level: 2
+      catalog_address_space_service_task_lower_limit: 3C
+      master_catalog_name: CATALOG.ATSPLEX.MASTER
+    ieasysxx_registry_suffix:
+      ieasysxx_registry_suffix_list:
+        - Z2
+      display_ieasysxx_on_console: true
+    sysplex_name: ATSPLEX
+  system_parameter_definitions:
+    registry_suffixes:
+      product_enablement_policy_suffixes:
+        - "00"
+        - Z2
+      resource_access_control_facility_suffixes:
+        - "00"
+      global_resource_config_suffix: "00"
+      global_resource_name_list_suffixes:
+        - "00"
+      supervisor_call_definitions_suffixes:
+        - "00"
+      fix_suffixes:
+        suffix:
+          - "00"
+      unix_definitions_suffixes:
+        - Z2
+      allocation_suffixes:
+        - "00"
+      system_management_facilities_suffix: "00"
+      console_suffixes:
+        suffix:
+          - "00"
+      subsystem_initialization_suffixes:
+        - "00"
+      io_susystem_configuration_suffix: "00"
+      link_pack_area_list_suffixes:
+        suffix:
+          - Z2
+        display_contents: true
+      program_properties_and_trace_abend_information_suffixes:
+        suffix:
+          - "00"
+      clock_suffixes:
+        suffix:
+          - Z2
+      couple_suffix: "00"
+      authorized_program_definitions_suffixes:
+        - A2
+        - L2
+        - EX
+      master_jcl_suffix:
+        suffix: Z2
+        display_contents: true
+      integrated_cryptographic_services_facility_suffix: "00"
+      volume_attributes_list_suffixes:
+        - "00"
+      device_support_format_suffixes:
+        - "00"
+      storage_management_subsystem_suffix: "00"
+    additional_entries:
+      - CMD=(00
+      - L)
+      - DUMP=(DASD
+      - 00-02
+      - L)
+      - ILMMODE=NONE
+      - LFAREA=(1M=20%
+      - 2G=40%)
+    system_parms:
+      common_service_area_sizes:
+        common_service_area_size:
+          amount: 1500
+          unit: K
+        extended_common_service_area_size:
+          amount: 300
+          unit: M
+      load_lpa_from_lpalst: true
+      how_to_join_global_resource_serialization: STAR
+      integrated_cryptographic_facility_procedure: ICSF
+      job_entry_subsystem_output_class_for_logs: L
+      job_entry_subsystem_log_limit: 50000
+      log_recording_medium: ATS1.LOGREC
+      maximum_number_of_concurrent_started_tasks_per_user: 500
+      number_of_linkage_indexes: 250
+      page_mvs_files:
+        file_name:
+          - ATS1.PAGE.PLPA
+          - ATS1.PAGE.CSA
+          - ATS1.PAGE.LOCAL1
+          - ATS1.PAGE.LOCAL2
+        display_on_the_console: true
+      sysplex_configuration: MULTISYSTEM
+      maximum_amount_of_real_storage: 0
+      reduced_error_recovery: YES
+      storage_reconfiguration_amount: 0
+      number_of_adress_space_vector_table_entries_reserved_for_replace: 200
+      system_queue_area_sizes:
+        below_16M:
+          amount: 6
+        above_16M:
+          amount: 256
+      virtual_io_mvs_filename: ATS1.STGINDEX
+  product_enablement_policy_definitions:
+    when_contexts:
+      - when_parameters:
+          hwname: "*"
+        product_statements:
+          - owner: IBM CORP
+            id: 5655-ZOS
+            name: z/OS
+            featurename: z/OS
+            version: "*"
+            release: "*"
+            mod: "*"
+            state: enabled
+          - owner: IBM CORP
+            id: 5655-ZOS
+            name: z/OS
+            featurename: TCP/IP BASE
+            version: "*"
+            release: "*"
+            mod: "*"
+            state: enabled
+          - owner: IBM CORP
+            id: 5655-ZOS
+            name: z/OS
+            featurename: TCP/IP CICS
+            version: "*"
+            release: "*"
+            mod: "*"
+            state: enabled
+          - owner: IBM CORP
+            id: 5655-ZOS
+            name: z/OS
+            featurename: TCP/IP IMS
+            version: "*"
+            release: "*"
+            mod: "*"
+            state: enabled
+          - owner: IBM CORP
+            id: 5655-ZOS
+            name: z/OS
+            featurename: DFSMSDSS
+            version: "*"
+            release: "*"
+            mod: "*"
+            state: enabled
+          - owner: IBM CORP
+            id: 5655-ZOS
+            name: z/OS
+            featurename: DFSMSHSM
+            version: "*"
+            release: "*"
+            mod: "*"
+            state: enabled
+          - owner: IBM CORP
+            id: 5655-ZOS
+            name: z/OS
+            featurename: DFSMSRMM
+            version: "*"
+            release: "*"
+            mod: "*"
+            state: enabled
+          - owner: IBM CORP
+            id: 5655-ZOS
+            name: z/OS
+            featurename: GDDM-REXX
+            version: "*"
+            release: "*"
+            mod: "*"
+            state: enabled
+          - owner: IBM CORP
+            id: 5655-ZOS
+            name: z/OS
+            featurename: C/C++
+            version: "*"
+            release: "*"
+            mod: "*"
+            state: enabled
+          - owner: IBM CORP
+            id: 5655-ZOS
+            name: z/OS
+            featurename: RUCSA
+            version: "*"
+            release: "*"
+            mod: "*"
+            state: enabled
+          - owner: IBM CORP
+            id: 5650-ZOS
+            name: z/OS
+            featurename: WorkloadIntCorr
+            version: "*"
+            release: "*"
+            mod: "*"
+            state: enabled
+          - owner: IBM CORP
+            id: 5655-ZOS
+            name: z/OS
+            featurename: CHANGE TRACKER
+            version: "*"
+            release: "*"
+            mod: "*"
+            state: enabled
+          - owner: IBM CORP
+            id: 5655-ZOS
+            name: z/OS
+            featurename: ZACS
+            version: "*"
+            release: "*"
+            mod: "*"
+            state: enabled
+          - owner: IBM CORP
+            id: 5655-ZOS
+            name: z/OS
+            featurename: ADV DG
+            version: "*"
+            release: "*"
+            mod: "*"
+            state: enabled
+          - owner: IBM CORP
+            id: 5655-HG8
+            name: HOURGLASS V8
+            featurename: HOURGLASS V8
+            version: "*"
+            release: "*"
+            mod: "*"
+            state: enabled
+          - owner: IBM CORP
+            id: 5655-ZOS
+            name: z/OS
+            featurename: DFSORT
+            version: "*"
+            release: "*"
+            mod: "*"
+            state: enabled
+          - owner: IBM CORP
+            id: 5655-ZOS
+            name: z/OS
+            featurename: GDDM-PGF
+            version: "*"
+            release: "*"
+            mod: "*"
+            state: enabled
+          - owner: IBM CORP
+            id: 5655-ZOS
+            name: z/OS
+            featurename: TOOLKIT DEBUGGER
+            version: "*"
+            release: "*"
+            mod: "*"
+            state: enabled
+          - owner: IBM CORP
+            id: 5655-ZOS
+            name: z/OS
+            featurename: TOOLKIT DISASSEM
+            version: "*"
+            release: "*"
+            mod: "*"
+            state: enabled
+          - owner: IBM CORP
+            id: 5655-ZOS
+            name: z/OS
+            featurename: TOOLKIT SUPERC
+            version: "*"
+            release: "*"
+            mod: "*"
+            state: enabled
+          - owner: IBM CORP
+            id: 5655-ZOS
+            name: z/OS
+            featurename: TOOLKIT XREF
+            version: "*"
+            release: "*"
+            mod: "*"
+            state: enabled
+          - owner: IBM CORP
+            id: 5655-ZOS
+            name: z/OS
+            featurename: SECURITY SERVER
+            version: "*"
+            release: "*"
+            mod: "*"
+            state: enabled
+          - owner: IBM CORP
+            id: 5655-ZOS
+            name: z/OS
+            featurename: RMF
+            version: "*"
+            release: "*"
+            mod: "*"
+            state: enabled
+          - owner: IBM CORP
+            id: 5655-ZOS
+            name: z/OS
+            featurename: SDSF
+            version: "*"
+            release: "*"
+            mod: "*"
+            state: enabled
+          - owner: IBM CORP
+            id: 5655-ZOS
+            name: z/OS
+            featurename: zEDC
+            version: "*"
+            release: "*"
+            mod: "*"
+            state: enabled
+          - owner: IBM CORP
+            id: 5655-ZOS
+            name: z/OS
+            featurename: HCM
+            version: "*"
+            release: "*"
+            mod: "*"
+            state: enabled
+          - owner: IBM CORP
+            id: 5655-ZOS
+            name: z/OS
+            featurename: INFOPRINT SERVER
+            version: "*"
+            release: "*"
+            mod: "*"
+            state: enabled
+          - owner: IBM CORP
+            id: 5655-PL6
+            name: Enterprise PL/I
+            featurename: "*"
+            version: "*"
+            release: "*"
+            mod: "*"
+            state: enabled
+      - when_parameters:
+          hwname: "*"
+        product_statements:
+          - owner: IBM CORP
+            id: 5655-ZOS
+            name: z/OS
+            featurename: z/OS
+            version: "*"
+            release: "*"
+            mod: "*"
+            state: enabled
+          - owner: IBM CORP
+            id: 5655-ZOS
+            name: z/OS
+            featurename: TCP/IP BASE
+            version: "*"
+            release: "*"
+            mod: "*"
+            state: enabled
+          - owner: IBM CORP
+            id: 5655-ZOS
+            name: z/OS
+            featurename: TCP/IP CICS
+            version: "*"
+            release: "*"
+            mod: "*"
+            state: enabled
+          - owner: IBM CORP
+            id: 5655-ZOS
+            name: z/OS
+            featurename: TCP/IP IMS
+            version: "*"
+            release: "*"
+            mod: "*"
+            state: enabled
+          - owner: IBM CORP
+            id: 5655-ZOS
+            name: z/OS
+            featurename: DFSMSDSS
+            version: "*"
+            release: "*"
+            mod: "*"
+            state: enabled
+          - owner: IBM CORP
+            id: 5655-ZOS
+            name: z/OS
+            featurename: DFSMSHSM
+            version: "*"
+            release: "*"
+            mod: "*"
+            state: enabled
+          - owner: IBM CORP
+            id: 5655-ZOS
+            name: z/OS
+            featurename: DFSMSRMM
+            version: "*"
+            release: "*"
+            mod: "*"
+            state: enabled
+          - owner: IBM CORP
+            id: 5655-ZOS
+            name: z/OS
+            featurename: DFSMSTVS
+            version: "*"
+            release: "*"
+            mod: "*"
+            state: enabled
+          - owner: IBM CORP
+            id: 5655-ZOS
+            name: z/OS
+            featurename: GDDM-REXX
+            version: "*"
+            release: "*"
+            mod: "*"
+            state: enabled
+          - owner: IBM CORP
+            id: 5655-ZOS
+            name: z/OS
+            featurename: C/C++
+            version: "*"
+            release: "*"
+            mod: "*"
+            state: enabled
+          - owner: IBM CORP
+            id: 5655-ZOS
+            name: z/OS
+            featurename: RUCSA
+            version: "*"
+            release: "*"
+            mod: "*"
+            state: enabled
+          - owner: IBM CORP
+            id: 5655-HZ1
+            name: z/OS CHF
+            featurename: CONTAINERHOSTFND
+            version: "*"
+            release: "*"
+            mod: "*"
+            state: disabled
+          - owner: IBM CORP
+            id: 5655-ZOS
+            name: z/OS
+            featurename: CHANGE TRACKER
+            version: "*"
+            release: "*"
+            mod: "*"
+            state: enabled
+          - owner: IBM CORP
+            id: 5655-ZOS
+            name: z/OS
+            featurename: ZACS
+            version: "*"
+            release: "*"
+            mod: "*"
+            state: enabled
+          - owner: IBM CORP
+            id: 5655-ZOS
+            name: z/OS
+            featurename: ADV DG
+            version: "*"
+            release: "*"
+            mod: "*"
+            state: enabled
+          - owner: IBM CORP
+            id: 5655-U59
+            name: HOURGLASS V7
+            featurename: HOURGLASS V7
+            version: "*"
+            release: "*"
+            mod: "*"
+            state: enabled
+          - owner: IBM CORP
+            id: 5755-A06
+            name: IBM DEBUG FOR Z
+            featurename: "*"
+            version: "*"
+            release: "*"
+            mod: "*"
+            state: enabled
+          - owner: IBM CORP
+            id: 5748-XX9
+            name: DCF
+            featurename: DCF
+            version: "*"
+            release: "*"
+            mod: "*"
+            state: enabled
+          - owner: IBM CORP
+            id: 5655-ZOS
+            name: z/OS
+            featurename: DFSORT
+            version: "*"
+            release: "*"
+            mod: "*"
+            state: enabled
+          - owner: IBM CORP
+            id: 5655-ZOS
+            name: z/OS
+            featurename: GDDM-PGF
+            version: "*"
+            release: "*"
+            mod: "*"
+            state: enabled
+          - owner: IBM CORP
+            id: 5668-812
+            name: GDDM-PGF
+            featurename: GDDM-PGF
+            version: "*"
+            release: "*"
+            mod: "*"
+            state: disabled
+          - owner: IBM CORP
+            id: 5655-ZOS
+            name: z/OS
+            featurename: TOOLKIT DEBUGGER
+            version: "*"
+            release: "*"
+            mod: "*"
+            state: enabled
+          - owner: IBM CORP
+            id: 5696-234
+            name: HI LVL ASSEMBLER
+            featurename: TOOLKIT DEBUGGER
+            version: "*"
+            release: "*"
+            mod: "*"
+            state: disabled
+          - owner: IBM CORP
+            id: 5655-ZOS
+            name: z/OS
+            featurename: TOOLKIT DISASSEM
+            version: "*"
+            release: "*"
+            mod: "*"
+            state: enabled
+          - owner: IBM CORP
+            id: 5696-234
+            name: HI LVL ASSEMBLER
+            featurename: TOOLKIT DISASSEM
+            version: "*"
+            release: "*"
+            mod: "*"
+            state: disabled
+          - owner: IBM CORP
+            id: 5655-ZOS
+            name: z/OS
+            featurename: TOOLKIT SUPERC
+            version: "*"
+            release: "*"
+            mod: "*"
+            state: enabled
+          - owner: IBM CORP
+            id: 5696-234
+            name: HI LVL ASSEMBLER
+            featurename: TOOLKIT SUPERC
+            version: "*"
+            release: "*"
+            mod: "*"
+            state: disabled
+          - owner: IBM CORP
+            id: 5655-ZOS
+            name: z/OS
+            featurename: TOOLKIT XREF
+            version: "*"
+            release: "*"
+            mod: "*"
+            state: enabled
+          - owner: IBM CORP
+            id: 5696-234
+            name: HI LVL ASSEMBLER
+            featurename: TOOLKIT XREF
+            version: "*"
+            release: "*"
+            mod: "*"
+            state: disabled
+          - owner: IBM CORP
+            id: 5655-ZOS
+            name: z/OS
+            featurename: SECURITY SERVER
+            version: "*"
+            release: "*"
+            mod: "*"
+            state: enabled
+          - owner: IBM CORP
+            id: 5655-ZOS
+            name: z/OS
+            featurename: RMF
+            version: "*"
+            release: "*"
+            mod: "*"
+            state: enabled
+          - owner: IBM CORP
+            id: 5655-ZOS
+            name: z/OS
+            featurename: SDSF
+            version: "*"
+            release: "*"
+            mod: "*"
+            state: enabled
+          - owner: IBM CORP
+            id: 5655-ZOS
+            name: z/OS
+            featurename: zEDC
+            version: "*"
+            release: "*"
+            mod: "*"
+            state: enabled
+          - owner: IBM CORP
+            id: 5655-ZOS
+            name: z/OS
+            featurename: HCM
+            version: "*"
+            release: "*"
+            mod: "*"
+            state: enabled
+          - owner: IBM CORP
+            id: 5655-ZOS
+            name: z/OS
+            featurename: INFOPRINT SERVER
+            version: "*"
+            release: "*"
+            mod: "*"
+            state: enabled
+          - owner: IBM CORP
+            id: 5655-M32
+            name: PSF for z/OS
+            featurename: PSF for z/OS
+            version: "*"
+            release: "*"
+            mod: "*"
+            state: enabled
+          - owner: IBM CORP
+            id: 5655-PL6
+            name: Enterprise PL/I
+            featurename: "*"
+            version: "*"
+            release: "*"
+            mod: "*"
+            state: enabled
+          - owner: IBM CORP
+            id: 5755-A05
+            name: IBM IDz EE
+            featurename: "*"
+            version: "*"
+            release: "*"
+            mod: "*"
+            state: enabled
+          - owner: IBMCORP
+            id: 5655-ZOS
+            name: IBMAPP DLIVFND
+            featurename: "*"
+            version: "*"
+            release: "*"
+            mod: "*"
+            state: enabled
+          - owner: IBM CORP
+            id: 5655-HZ1
+            name: z/OS CHF
+            featurename: ContainerHostFnd
+            version: "*"
+            release: "*"
+            mod: "*"
+            state: enabled
+  system_symbol_definitions:
+    - symbol_definitions:
+        "&JESVOL": ATSSYS
+        "&JESNODE": WSC202
+        "&JSXCFGN": "&PREFIX.XCFGN"
+        "&BLANK": ""
+        "&CL2": "&SYSCLONE."
+        "&CNMTCPN": TCPIP
+        "&SUFFIX": "00"
+        "&CATVOL": ATSCAT
+        "&SYS#2": ATS2
+        "&OMVS": Z2
+        "&JES2NJE": WZ&SUBAREA.NJE
+        "&SSCPNAM": S&SUBAREA.CDRM
+        "&ZOSMFPM": CONNECT
+        "&SYS#1": ATS1
+        "&SUBAREA": "202"
+        "&CNMNETID": USIBMWZ
+        "&CNMDOMN": CNM01
+        "&PREFIX": ATS
+        "&CL1": "&CL2(-1:1)"
+        "&JESPRE": ATS
+        "&SYSCLONE": "&SYSNAME(-2:2)"
+        "&DOMAIN": CNM01
+        "&CNMRODM": CNMRODM
+    - logical_partition_name: MOSP11
+      system_name: ATS1
+      symbol_definitions:
+        "&ZOSMFPM": LOCAL
+        "&SUBAREA": "202"
+    - logical_partition_name: MOSP12
+      system_name: ATS2
+      symbol_definitions:
+        "&CNMDOMN": CNM02
+        "&DOMAIN": CNM02
+        "&SUBAREA": "203"
+    - symbol_definitions:
+        "&USSPRE": "&PREFX.USS"
+        "&COPYDT": "26.111"
+        "&SYSR3": "&PREFX.RS1"
+        "&SRUN2": "&PREFX.RS1"
+        "&SYSSMP": "&PREFX.RS1"
+        "&SUNIC": "&PREFX.RS1"
+        "&VV": "&VVRR(1:2)"
+        "&SYSR4": "&PREFX.RS1"
+        "&RR": "&VVRR(-2:2)"
+        "&VVRR": V3R2
+        "&PREFX": "&SYSR1(1:3)"
+        "&SYSR2": "&PREFX.RS1"
+        "&PUTLEV": "2603"
+  master_scheduler_definitions:
+    master_scheduler_jcl: |
+      //MSTJCLZ2 JOB MSGLEVEL=(1,1),
+      //             TIME=1440
+      //*--------------------------------------------------------------------
+      //* MASTER SCHEDULER JCL
+      //*--------------------------------------------------------------------
+      //       EXEC  PGM=IEEMB860,
+      //             DPRTY=(15,15)
+      //STCINRDR DD  SYSOUT=(A,INTRDR)
+      //TSOINRDR DD  SYSOUT=(A,INTRDR)
+      //IEFPDSI  DD  DSN=SYS1.SITE.PROCLIB,
+      //             DISP=SHR
+      //         DD  DSN=SYS1.PROCLIB,
+      //             DISP=SHR
+      //         DD  DSN=SYS1.IBM.PROCLIB,
+      //             DISP=SHR
+      //         DD  DSN=SYS1.SITE.USER.PROCLIB,
+      //             DISP=SHR
+      //*IEFJOBS  DD  DSN=SYS1.STARTJCL,DISP=SHR
+      //*IEFPARM  DD  DSN=SYS1.PARMLIB,DISP=SHR
+      //*         DD  DSN=SYS1.PARMLIB.IBM,DISP=SHR
+      //*SYSUADS  DD  DSN=SYS1.UADS,DISP=SHR
+      //SYSLBC   DD  DSN=SYS1.BRODCAST,
+      //             DISP=SHR
+  system_augmentation_definitions:
+    authorized_program_files_list_format: DYNAMIC
+    authorized_program_files_to_add:
+      - mvs_file_name: SYS1.CMDLIB
+        disk_name: "******"
+      - mvs_file_name: SYS1.CSSLIB
+        disk_name: "******"
+      - mvs_file_name: SYS1.DFQLLIB
+        disk_name: "******"
+      - mvs_file_name: SYS1.DGTLLIB
+        disk_name: "******"
+      - mvs_file_name: SYS1.LINKLIB
+        disk_name: "******"
+      - mvs_file_name: SYS1.LPALIB
+        disk_name: "******"
+      - mvs_file_name: SYS1.MIGLIB
+        disk_name: "******"
+      - mvs_file_name: SYS1.NFSLIBE
+        disk_name: "******"
+      - mvs_file_name: SYS1.NUCLEUS
+        disk_name: "******"
+      - mvs_file_name: SYS1.SCBDHENU
+        disk_name: "******"
+      - mvs_file_name: SYS1.SERBLNKE
+        disk_name: "******"
+      - mvs_file_name: SYS1.SGRBLINK
+        disk_name: "******"
+      - mvs_file_name: SYS1.SHASLNKE
+        disk_name: "******"
+      - mvs_file_name: SYS1.SHASMIG
+        disk_name: "******"
+      - mvs_file_name: SYS1.SICELINK
+        disk_name: "******"
+      - mvs_file_name: SYS1.SIEAMIGE
+        disk_name: "******"
+      - mvs_file_name: SYS1.SISTCLIB
+        disk_name: "******"
+      - mvs_file_name: SYS1.SVCLIB
+        disk_name: "******"
+      - mvs_file_name: SYS1.VTAMLIB
+        disk_name: "******"
+      - mvs_file_name: SYS1.ASM.SASMMOD1
+        disk_name: "******"
+      - mvs_file_name: SYS1.ASM.SASMMOD2
+        disk_name: "******"
+      - mvs_file_name: SYS1.CEE.SCEERUN
+        disk_name: "******"
+      - mvs_file_name: SYS1.CEE.SCEERUN2
+        disk_name: "******"
+      - mvs_file_name: SYS1.CSF.SCSFMOD0
+        disk_name: "******"
+      - mvs_file_name: SYS1.CSF.SCSFSTUB
+        disk_name: "******"
+      - mvs_file_name: SYS1.FEK.SFEKAUTH
+        disk_name: "******"
+      - mvs_file_name: SYS1.FFST.V120ESA.SEPWMOD1
+        disk_name: "******"
+      - mvs_file_name: SYS1.FFST.V120ESA.SEPWMOD2
+        disk_name: "******"
+      - mvs_file_name: SYS1.FFST.V120ESA.SEPWMOD3
+        disk_name: "******"
+      - mvs_file_name: SYS1.ISF.SISFLINK
+        disk_name: "******"
+      - mvs_file_name: SYS1.ISF.SISFLOAD
+        disk_name: "******"
+      - mvs_file_name: SYS1.ISF.SISFLPA
+        disk_name: "******"
+      - mvs_file_name: SYS1.ISP.SISPLOAD
+        disk_name: "******"
+      - mvs_file_name: SYS1.ISP.SISPLPA
+        disk_name: "******"
+      - mvs_file_name: SYS1.NETVIEW.SCNMLNK1
+        disk_name: "******"
+      - mvs_file_name: SYS1.NETVIEW.CNMLINK
+        disk_name: "******"
+      - mvs_file_name: SYS1.TCPIP.SEZADSIL
+        disk_name: "******"
+      - mvs_file_name: SYS1.TCPIP.SEZALNK2
+        disk_name: "******"
+      - mvs_file_name: SYS1.TCPIP.SEZALOAD
+        disk_name: "******"
+      - mvs_file_name: SYS1.TCPIP.SEZALPA
+        disk_name: "******"
+      - mvs_file_name: SYS1.TCPIP.SEZATCP
+        disk_name: "******"
+      - mvs_file_name: SYS1.REXX.SEAGALT
+        disk_name: "******"
+      - mvs_file_name: SOF.LINKLIB
+        disk_name: "*MCAT*"
+      - mvs_file_name: SYSS.SYSSUPT.LINKLIB
+        disk_name: "*MCAT*"
+      - mvs_file_name: SYSS.SYSSUPT.VTAMLIB
+        disk_name: "*MCAT*"
+      - mvs_file_name: SYSU.USER.LINKLIB
+        disk_name: "*MCAT*"
+      - mvs_file_name: SYS1.ING.SINGLOAD
+        disk_name: "******"
+      - mvs_file_name: SYS1.ING.SINGLODE
+        disk_name: "******"
+      - mvs_file_name: SYS1.ING.SINGLINK
+        disk_name: "******"
+      - mvs_file_name: SYS1.ING.SINGLPA
+        disk_name: "******"
+      - mvs_file_name: SYS1.NETVIEW.CNMLINK
+        disk_name: "******"
+      - mvs_file_name: SYS1.NETVIEW.SAQNLINK
+        disk_name: "******"
+      - mvs_file_name: SYS1.NETVIEW.SCNMLNKN
+        disk_name: "******"
+      - mvs_file_name: SYS1.NETVIEW.SCNMLNK1
+        disk_name: "******"
+      - mvs_file_name: CTS530.CICS.SDFHAUTH
+        disk_name: CICSTS
+      - mvs_file_name: CTS530.CICS.SDFJAUTH
+        disk_name: CICSTS
+      - mvs_file_name: CTS530.CPSM.SEYUAUTH
+        disk_name: CICSTS
+      - mvs_file_name: CTS530.CICS.SDFHLINK
+        disk_name: CICSTS
+      - mvs_file_name: CTS530.CPSM.SEYULINK
+        disk_name: CICSTS
+      - mvs_file_name: CTS530.CICS.SDFHLIC
+        disk_name: CICSTS
+      - mvs_file_name: CTS550.CICS.SDFHAUTH
+        disk_name: CICSTS
+      - mvs_file_name: CTS550.CPSM.SEYUAUTH
+        disk_name: CICSTS
+      - mvs_file_name: CTS550.CICS.SDFHLINK
+        disk_name: CICSTS
+      - mvs_file_name: CTS550.CPSM.SEYULINK
+        disk_name: CICSTS
+      - mvs_file_name: CTS550.CICS.SDFHLIC
+        disk_name: CICSTS
+      - mvs_file_name: IEXPLORE.SFEKAUTH
+        disk_name: ATS001
+      - mvs_file_name: IDZ.EXPLORER.SFEKAUTH
+        disk_name: ATS001
+      - mvs_file_name: ZOWE.SISLOAD
+        disk_name: USRAT1
+      - mvs_file_name: ZOWE.TARGET.SZWEAUTH
+        disk_name: USRAT1
+      - mvs_file_name: ZSECURE.V310.CKR.SCKRLOAD
+        disk_name: PROD02
+      - mvs_file_name: ODTZ.V15R1.SFEUAUTH
+        disk_name: PROD01
+      - mvs_file_name: RDSN1310.TARGET.SDSNLINK
+        disk_name: PROD01
+      - mvs_file_name: RDSN1310.TARGET.SDSNEXIT
+        disk_name: PROD01
+      - mvs_file_name: RDSN1310.TARGET.SDSNLOAD
+        disk_name: PROD01
+      - mvs_file_name: RDSN1310.TARGET.SDXRRESL
+        disk_name: PROD01
+    link_lists_to_activate:
+      name: WSC.LNKLST
+    exits_to_add:
+      - exit_name: SYS.IEFACTRT
+        module_name: WSCACTRT
+        mvs_file_name: SYSS.EXITS.LINKLIB
+      - exit_name: SYS.IEFUTL
+        module_name: WSCUTL
+        mvs_file_name: SYSS.EXITS.LINKLIB
+      - exit_name: SYS.IEFUJI
+        module_name: WSCUJI
+        mvs_file_name: SYSS.EXITS.LINKLIB
+      - exit_name: SYS.IEFUSI
+        module_name: WSCUSI
+        mvs_file_name: SYSS.EXITS.LINKLIB
+      - exit_name: SYSSTC.IEFU29
+        module_name: WSCU29
+        mvs_file_name: SYSS.EXITS.LINKLIB
+      - exit_name: SYSSTC.IEFACTRT
+        module_name: WSCACTRT
+        mvs_file_name: SYSS.EXITS.LINKLIB
+      - exit_name: SYSJES2.IEFACTRT
+        module_name: WSCACTRT
+        mvs_file_name: SYSS.EXITS.LINKLIB
+    link_list_files_to_add:
+      - name: WSC.LNKLST
+        mvs_file_name: SYS1.LINKLIB
+      - name: WSC.LNKLST
+        mvs_file_name: SYS1.CMDLIB
+      - name: WSC.LNKLST
+        mvs_file_name: SYS1.MIGLIB
+      - name: WSC.LNKLST
+        mvs_file_name: SYS1.CSSLIB
+      - name: WSC.LNKLST
+        mvs_file_name: SYS1.SERBLNKE
+      - name: WSC.LNKLST
+        mvs_file_name: SYS1.SGRBLINK
+      - name: WSC.LNKLST
+        mvs_file_name: SYS1.SHASLNKE
+      - name: WSC.LNKLST
+        mvs_file_name: SYS1.SHASMIG
+      - name: WSC.LNKLST
+        mvs_file_name: SYS1.ISF.SISFLOAD
+      - name: WSC.LNKLST
+        mvs_file_name: SYS1.ISP.SISPLOAD
+      - name: WSC.LNKLST
+        mvs_file_name: SYS1.SICELINK
+      - name: WSC.LNKLST
+        mvs_file_name: SYS1.SORTLIB
+      - name: WSC.LNKLST
+        mvs_file_name: SYS1.GIM.SGIMLMD0
+      - name: WSC.LNKLST
+        mvs_file_name: SYS1.TCPIP.SEZALOAD
+      - name: WSC.LNKLST
+        mvs_file_name: SYS1.TCPIP.SEZATCP
+      - name: WSC.LNKLST
+        mvs_file_name: SYS1.TCPIP.SEZALNK2
+      - name: WSC.LNKLST
+        mvs_file_name: SYS1.SIEALNKE
+      - name: WSC.LNKLST
+        mvs_file_name: SYS1.SIEAMIGE
+      - name: WSC.LNKLST
+        mvs_file_name: SYS1.VTAMLIB
+      - name: WSC.LNKLST
+        mvs_file_name: SYS1.CEE.SCEERUN
+      - name: WSC.LNKLST
+        mvs_file_name: SYS1.CEE.SCEERUN2
+      - name: WSC.LNKLST
+        mvs_file_name: SYS1.CEE.SCEELKED
+      - name: WSC.LNKLST
+        mvs_file_name: SYS1.CEE.SIBMTASK
+      - name: WSC.LNKLST
+        mvs_file_name: SYS1.CEE.SIBMCAL2
+      - name: WSC.LNKLST
+        mvs_file_name: SYS1.CEE.SIBMMATH
+      - name: WSC.LNKLST
+        mvs_file_name: SYS1.CEE.SIBMCALL
+      - name: WSC.LNKLST
+        mvs_file_name: SYS1.ASM.SASMMOD1
+      - name: WSC.LNKLST
+        mvs_file_name: SYS1.ASM.SASMMOD2
+      - name: WSC.LNKLST
+        mvs_file_name: SYS1.CSF.SCSFMOD0
+      - name: WSC.LNKLST
+        mvs_file_name: SYS1.CSF.SCSFSTUB
+      - name: WSC.LNKLST
+        mvs_file_name: SYS1.DFQLLIB
+      - name: WSC.LNKLST
+        mvs_file_name: SYS1.DGTLLIB
+      - name: WSC.LNKLST
+        mvs_file_name: SYS1.NFSLIBE
+      - name: WSC.LNKLST
+        mvs_file_name: SYS1.FFST.V120ESA.SEPWMOD2
+      - name: WSC.LNKLST
+        mvs_file_name: SYS1.FFST.V120ESA.SEPWMOD4
+      - name: WSC.LNKLST
+        mvs_file_name: SYS1.REXX.SEAGALT
+      - name: WSC.LNKLST
+        mvs_file_name: SYS1.CBC.SCLBDLL
+      - name: WSC.LNKLST
+        mvs_file_name: SYS1.SCBDHENU
+      - name: WSC.LNKLST
+        mvs_file_name: SYS1.NUCLEUS
+      - name: WSC.LNKLST
+        mvs_file_name: SYSS.WSC.ISPFLOAD
+      - name: WSC.LNKLST
+        mvs_file_name: SYSS.SYSSUPT.LINKLIB
+      - name: WSC.LNKLST
+        mvs_file_name: SYSS.EXITS.LINKLIB
+      - name: WSC.LNKLST
+        mvs_file_name: SYS1.ING.SINGLOAD
+      - name: WSC.LNKLST
+        mvs_file_name: SYS1.ING.SINGLINK
+      - name: WSC.LNKLST
+        mvs_file_name: SYS1.NETVIEW.CNMLINK
+      - name: WSC.LNKLST
+        mvs_file_name: SYS1.NETVIEW.SAQNLINK
+      - name: WSC.LNKLST
+        mvs_file_name: SYS1.NETVIEW.SCNMLNKN
+      - name: WSC.LNKLST
+        mvs_file_name: SYS1.NETVIEW.SCNMLNK1
+    link_lists_to_define:
+      - name: WSC.LNKLST
+  fixed_lpa_list_definitions:
+    include:
+      - library: SYS1.LPALIB
+        modules:
+          - IGC0001G
+          - IEAVAR00
+          - ICHRFC00
+          - ICHRFR00
+          - ICHSFR00
+  system_clock_definitions:
+    operator_sets_the_time: false
+    time_zone: W.05.00.00
+    using_server_timer_protocol_mode: true
+    get_time_zone_from_server_time_protocol: true
+    difference_between_system_tod_and_stp_server: 10
+  nucleus_customization_definitions:
+    modules_to_include_in_nucleus:
+      - IGC203
+performance_definitions:
+  workload_performance_definitions:
+    program_properties_table_definitions:
+      master_trace_table:
+        master_trace_table_size: 24
+      program_properties_table:
+        - program_name: CREDISP0
+          privledged: true
+          dataset_integrity:
+            require: false
+        - program_name: ITPENTER
+          swappable: false
+        - program_name: DFSNRC00
+          swappable: false
+        - program_name: DXRRLM00
+          cancelable: true
+          protection_key_specification: 7
+          swappable: false
+          aff_deprecated: NONE
+          system_task: true
+          no_short_term_private_area_fixed_pages_aligned: true
+    system_management_facilities_definitions:
+      enable_smf_recording: true
+      maximum_time_data_stays_in_buffer:
+        minutes: 15
+        seconds: 0
+      global_recording_interval: 1
+      default_memory_limit:
+        define_limit: false
+      synchronize_recording_interval: 0
+      mvs_folders_for_smf_dataset_recording:
+        - ATS1.MAN1
+        - ATS1.MAN2
+        - ATS1.MAN3
+      system_identifier_list:
+        - identifier: ATS1
+      enable_smf_dataset_status_message: true
+      interval_between_smf_status_records:
+        hours: 1
+        minutes: 0
+        seconds: 0
+      record_all_scratch_data_set_records: false
+      prompt_operator_to_display_smf_parameters_at_boot: false
+      job_wait:
+        hours: 24
+        minutes: 0
+      subsystem_recording_options_list:
+        - subsystem_name: STC
+          options:
+            smf_record_type_list:
+              - record_type_range:
+                  from: 0
+                  to: 18
+              - record_type_range:
+                  from: 20
+                  to: 255
+            interval_between_smf_status_records:
+              sync_to_global: true
+            exits:
+              exit_list:
+                - IEFACTRT
+                - IEFU29
+                - IEFU83
+                - IEFUJI
+        - subsystem_name: OMVS
+          options:
+            smf_record_type_list:
+              - record_type: 0
+              - record_type: 30
+              - record_type_range:
+                  from: 70
+                  to: 79
+              - record_type_range:
+                  from: 88
+                  to: 90
+              - record_type: 103
+              - record_type: 245
+            interval_between_smf_status_records:
+              sync_to_global: true
+            exits:
+              use: false
+        - subsystem_name: JES2
+          options:
+            exits:
+              exit_list:
+                - IEFUJI
+                - IEFUSI
+                - IEFU83
+                - IEFACTRT
+      system_wide_settings:
+        smf_no_record_type_list:
+          - record_type: 32
+          - record_type: 89
+          - record_type: 99
+        interval_between_smf_status_records:
+          sync_to_global: true
+        detail_tso_and_stc: false
+        exits:
+          exit_list:
+            - IEFACTRT
+            - IEFUSI
+            - IEFUTL
+            - IEFU83
