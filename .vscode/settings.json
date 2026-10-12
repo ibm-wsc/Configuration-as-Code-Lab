@@ -255,227 +255,33 @@
         },
         "[*Dark*]": {
             "rules": {
-                "zosLevel-WSC-Configurations": {
-                    "foreground": "#F98739"
+                "zosLevel-labplex": {
+                    "foreground": "#438FFF"
                 },
-                "zosLevel-ATGPLEX": {
-                    "foreground": "#1192e8"
+                "zosLevel-lab1": {
+                    "foreground": "#73B761"
                 },
-                "zosLevel-ATG1": {
-                    "foreground": "#98FB98"
-                },
-                "zosLevel-ATSPLEX-3-2": {
-                    "foreground": "#1192e8"
-                },
-                "zosLevel-ATS1": {
-                    "foreground": "#98FB98"
-                },
-                "zosLevel-ATS2": {
-                    "foreground": "#98FB98"
-                },
-                "zosLevel-BACPLEX": {
-                    "foreground": "#1192e8"
-                },
-                "zosLevel-BAC1-3-1": {
-                    "foreground": "#98FB98"
-                },
-                "zosLevel-CMWPLEX": {
-                    "foreground": "#1192e8"
-                },
-                "zosLevel-ESYSMVS": {
-                    "foreground": "#1192e8"
-                },
-                "zosLevel-MVS1": {
-                    "foreground": "#98FB98"
-                },
-                "zosLevel-FUTLPLEX": {
-                    "foreground": "#1192e8"
-                },
-                "zosLevel-FUTL-2-5": {
-                    "foreground": "#98FB98"
-                },
-                "zosLevel-KUTLPLEX": {
-                    "foreground": "#1192e8"
-                },
-                "zosLevel-KUTL-2-5": {
-                    "foreground": "#98FB98"
-                },
-                "zosLevel-LABK-GDPS-no-data": {
-                    "foreground": "#1192e8"
-                },
-                "zosLevel-LABPLEX": {
-                    "foreground": "#1192e8"
-                },
-                "zosLevel-LAB1-3-2": {
-                    "foreground": "#98FB98"
-                },
-                "zosLevel-LAB2-3-2": {
-                    "foreground": "#98FB98"
-                },
-                "zosLevel-SAOPLEX": {
-                    "foreground": "#1192e8"
-                },
-                "zosLevel-SAOD-2-5": {
-                    "foreground": "#98FB98"
-                },
-                "zosLevel-SCRPLEX": {
-                    "foreground": "#1192e8"
-                },
-                "zosLevel-SCR1-3-1": {
-                    "foreground": "#98FB98"
-                },
-                "zosLevel-SCR2-3-1": {
-                    "foreground": "#98FB98"
-                },
-                "zosLevel-TEC2": {
-                    "foreground": "#1192e8"
-                },
-                "zosLevel-TSTPLEX": {
-                    "foreground": "#1192e8"
-                },
-                "zosLevel-TST1": {
-                    "foreground": "#98FB98"
-                },
-                "zosLevel-TST2": {
-                    "foreground": "#98FB98"
-                },
-                "zosLevel-ZHBPLEX": {
-                    "foreground": "#1192e8"
-                },
-                "zosLevel-ZHB1-3-1": {
-                    "foreground": "#98FB98"
-                },
-                "zosLevel-ZTXPLEX": {
-                    "foreground": "#1192e8"
-                },
-                "zosLevel-ZTX1-3-2": {
-                    "foreground": "#98FB98"
-                },
-                "zosLevel-sysplex": {
-                    "foreground": "#1192e8"
-                },
-                "zosLevel-lpar1": {
-                    "foreground": "#98FB98"
-                },
-                "zosLevel-lpar2": {
-                    "foreground": "#98FB98"
-                },
-                "zosLevel-lpar3": {
-                    "foreground": "#98FB98"
+                "zosLevel-lab2": {
+                    "foreground": "#73B761"
                 }
             }
         },
         "[*Light*]": {
             "rules": {
-                "zosLevel-WSC-Configurations": {
-                    "foreground": "#F98739"
+                "zosLevel-labplex": {
+                    "foreground": "#438FFF"
                 },
-                "zosLevel-ATGPLEX": {
-                    "foreground": "#1192e8"
+                "zosLevel-lab1": {
+                    "foreground": "#73B761"
                 },
-                "zosLevel-ATG1": {
-                    "foreground": "#98FB98"
-                },
-                "zosLevel-ATSPLEX-3-2": {
-                    "foreground": "#1192e8"
-                },
-                "zosLevel-ATS1": {
-                    "foreground": "#98FB98"
-                },
-                "zosLevel-ATS2": {
-                    "foreground": "#98FB98"
-                },
-                "zosLevel-BACPLEX": {
-                    "foreground": "#1192e8"
-                },
-                "zosLevel-BAC1-3-1": {
-                    "foreground": "#98FB98"
-                },
-                "zosLevel-CMWPLEX": {
-                    "foreground": "#1192e8"
-                },
-                "zosLevel-ESYSMVS": {
-                    "foreground": "#1192e8"
-                },
-                "zosLevel-MVS1": {
-                    "foreground": "#98FB98"
-                },
-                "zosLevel-FUTLPLEX": {
-                    "foreground": "#1192e8"
-                },
-                "zosLevel-FUTL-2-5": {
-                    "foreground": "#98FB98"
-                },
-                "zosLevel-KUTLPLEX": {
-                    "foreground": "#1192e8"
-                },
-                "zosLevel-KUTL-2-5": {
-                    "foreground": "#98FB98"
-                },
-                "zosLevel-LABK-GDPS-no-data": {
-                    "foreground": "#1192e8"
-                },
-                "zosLevel-LABPLEX": {
-                    "foreground": "#1192e8"
-                },
-                "zosLevel-LAB1-3-2": {
-                    "foreground": "#98FB98"
-                },
-                "zosLevel-LAB2-3-2": {
-                    "foreground": "#98FB98"
-                },
-                "zosLevel-SAOPLEX": {
-                    "foreground": "#1192e8"
-                },
-                "zosLevel-SAOD-2-5": {
-                    "foreground": "#98FB98"
-                },
-                "zosLevel-SCRPLEX": {
-                    "foreground": "#1192e8"
-                },
-                "zosLevel-SCR1-3-1": {
-                    "foreground": "#98FB98"
-                },
-                "zosLevel-SCR2-3-1": {
-                    "foreground": "#98FB98"
-                },
-                "zosLevel-TEC2": {
-                    "foreground": "#1192e8"
-                },
-                "zosLevel-TSTPLEX": {
-                    "foreground": "#1192e8"
-                },
-                "zosLevel-TST1": {
-                    "foreground": "#98FB98"
-                },
-                "zosLevel-TST2": {
-                    "foreground": "#98FB98"
-                },
-                "zosLevel-ZHBPLEX": {
-                    "foreground": "#1192e8"
-                },
-                "zosLevel-ZHB1-3-1": {
-                    "foreground": "#98FB98"
-                },
-                "zosLevel-ZTXPLEX": {
-                    "foreground": "#1192e8"
-                },
-                "zosLevel-ZTX1-3-2": {
-                    "foreground": "#98FB98"
-                },
-                "zosLevel-sysplex": {
-                    "foreground": "#1192e8"
-                },
-                "zosLevel-lpar1": {
-                    "foreground": "#98FB98"
-                },
-                "zosLevel-lpar2": {
-                    "foreground": "#98FB98"
-                },
-                "zosLevel-lpar3": {
-                    "foreground": "#98FB98"
+                "zosLevel-lab2": {
+                    "foreground": "#73B761"
                 }
             }
         }
+    },
+    "workbench.colorCustomizations": {
+        "zosConfig.levelColor0": "#438FFF",
+        "zosConfig.levelColor1": "#73B761"
     }
 }

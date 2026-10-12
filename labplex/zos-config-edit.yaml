@@ -1,7 +1,7 @@
 zosconfigedit:
   allowSelfSignedCerts: true
   baseSchemas:
-  - https://169.59.163.16/pulp/content/zos-schemas/v0/zos_meta.schema.json
+  - C:/Users/Public/Desktop/schemas/zos_meta.schema.json
   levels:
   - name: labplex
     path: ./
@@ -19,16 +19,16 @@ zosconfigedit:
     parent: labplex
   configFiles:
   - name: GeneralOS.yaml
-    schema: https://169.59.163.16/pulp/content/zos-schemas/v0/GeneralOS_schema.json
+    schema: C:/Users/Public/Desktop/schemas/GeneralOS_schema.json
   - name: Application.yaml
-    schema: https://169.59.163.16/pulp/content/zos-schemas/v0/Application_schema.json
+    schema: C:/Users/Public/Desktop/schemas/Application_schema.json
   - name: Security.yaml
-    schema: https://169.59.163.16/pulp/content/zos-schemas/v0/Security_schema.json
+    schema: C:/Users/Public/Desktop/schemas/Security_schema.json
   - name: Network.yaml
-    schema: https://169.59.163.16/pulp/content/zos-schemas/v0/Network_schema.json
+    schema: C:/Users/Public/Desktop/schemas/Network_schema.json
   - name: Hardware.yaml
-    schema: https://169.59.163.16/pulp/content/zos-schemas/v0/Hardware_schema.json
+    schema: C:/Users/Public/Desktop/schemas/Hardware_schema.json
   - name: Data.yaml
-    schema: https://169.59.163.16/pulp/content/zos-schemas/v0/Data_schema.json
+    schema: C:/Users/Public/Desktop/schemas/Data_schema.json
   - name: Tools.yaml
-    schema: https://169.59.163.16/pulp/content/zos-schemas/v0/Tools_schema.json
+    schema: C:/Users/Public/Desktop/schemas/Tools_schema.json
