@@ -1,0 +1,769 @@
+{
+  "$schema": "https://ibm.com/schemas/zosconfig/v0/meta/zos_meta.schema.json",
+  "$id": "https://ibm.com/schemas/zosconfig/v0/Network/Network_schema.json",
+  "description": "Network Definitions for z/OS 3.2",
+  "x-zos-schema": {
+    "parmlib": {
+      "root": {
+        "identifier": "Network",
+        "file_patterns": [
+          "Network"
+        ]
+      }
+    }
+  },
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "tcpip_definitions": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "network_definitions": {
+          "$ref": "bpxprm/schema.json"
+        }
+      }
+    }
+  },
+  "$defs": {
+    "https://ibm.com/schemas/zosconfig/v0/Network/bpxprm/schema.json": {
+      "$schema": "https://ibm.com/schemas/zosconfig/v0/meta/zos_meta.schema.json",
+      "$id": "https://ibm.com/schemas/zosconfig/v0/Network/bpxprm/schema.json",
+      "title": "BPXPRM Network Definitions",
+      "type": "object",
+      "additionalProperties": false,
+      "x-zos-schema": {
+        "parmlib": {
+          "prefix": "BPXPRM",
+          "syntax": {
+            "ignoreParsing": {
+              "leadingWhitespace": true,
+              "columns": 72
+            },
+            "lineRange": {
+              "start": 1,
+              "stop": 71
+            },
+            "comments": [
+              {
+                "delimiter": {
+                  "start": "/*",
+                  "stop": "*/"
+                }
+              }
+            ],
+            "valueEnclosure": {
+              "characters": [
+                {
+                  "left": "(",
+                  "right": ")"
+                }
+              ]
+            }
+          }
+        }
+      },
+      "properties": {
+        "unix_sockets": {
+          "type": "object",
+          "description": "Network definitions for AF_UNIX type sockets",
+          "properties": {
+            "file_system": {
+              "type": "object",
+              "description": "(FILESYSTYPE TYPE(UDS)) Defines and starts a Physical File System (PFS) for AF_UNIX type sockets",
+              "x-zos-props": {
+                "parmlib": {
+                  "syntax": {
+                    "keywords": [
+                      "FILESYSTYPE"
+                    ],
+                    "statement": "single",
+                    "marker": [
+                      "TYPE(UDS)",
+                      "TYPE(IBMUDS)"
+                    ],
+                    "valueEnclosure": null,
+                    "keyValueSeparator": [
+                      " "
+                    ],
+                    "valueSeparator": [
+                      "\n            ",
+                      " "
+                    ]
+                  }
+                }
+              },
+              "properties": {
+                "entry_point": {
+                  "$ref": "#/$defs/filesystype/entry_point"
+                },
+                "address_space_name": {
+                  "$ref": "#/$defs/filesystype/address_space_name"
+                },
+                "parm": {
+                  "description": "(PARM) Provides a parameter to be passed directly to the file system type. The parameter format and content are specified by the file system type.",
+                  "$ref": "#/$defs/parmstring"
+                }
+              }
+            },
+            "networks": {
+              "type": "array",
+              "description": "(NETWORK TYPE(UDS)) Specifies the socket domain characteristics for the associated Physical File System (PFS) handling AF_UNIX type sockets.",
+              "x-zos-props": {
+                "parmlib": {
+                  "syntax": {
+                    "keywords": [
+                      "NETWORK"
+                    ],
+                    "statement": "multiple",
+                    "marker": [
+                      "TYPE(UDS)\n       ",
+                      "TYPE(UDS)",
+                      "TYPE(IBMUDS)"
+                    ],
+                    "valueEnclosure": null,
+                    "keyValueSeparator": [
+                      " "
+                    ],
+                    "valueSeparator": [
+                      " "
+                    ]
+                  }
+                }
+              },
+              "items": {
+                "type": "object",
+                "x-zos-props": {
+                  "parmlib": {
+                    "syntax": {
+                      "valueSeparator": [
+                        "\n        ",
+                        " "
+                      ],
+                      "valueEnclosure": null
+                    }
+                  }
+                },
+                "properties": {
+                  "domain_name": {
+                    "$ref": "#/$defs/network/domain_name"
+                  },
+                  "domain_number": {
+                    "$ref": "#/$defs/network/domain_number"
+                  },
+                  "maximum_number_of_sockets": {
+                    "$ref": "#/$defs/network/maximum_number_of_sockets"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "inet_sockets": {
+          "type": "object",
+          "description": "Network definitions for AF_INET and AF_INET6 type sockets.",
+          "properties": {
+            "file_system": {
+              "type": "object",
+              "description": "(FILESYSTYPE TYPE(INET)) Defines and starts a Socket type Physical File System (PFS) which handles requests for the AF_INET and AF_INET6 family of sockets. You must be using z/OS Communication Services (TCP/IP Services). If you use INET, you cannot use CINET.",
+              "x-zos-props": {
+                "parmlib": {
+                  "syntax": {
+                    "keywords": [
+                      "FILESYSTYPE"
+                    ],
+                    "statement": "single",
+                    "marker": [
+                      "TYPE(INET)"
+                    ],
+                    "valueEnclosure": null,
+                    "keyValueSeparator": [
+                      " "
+                    ],
+                    "valueSeparator": [
+                      "\n            ",
+                      " "
+                    ]
+                  }
+                }
+              },
+              "properties": {
+                "entry_point": {
+                  "$ref": "#/$defs/filesystype/entry_point"
+                },
+                "address_space_name": {
+                  "$ref": "#/$defs/filesystype/address_space_name"
+                },
+                "parm": {
+                  "description": "(PARM) Provides a parameter to be passed directly to the file system type. The parameter format and content are specified by the file system type.",
+                  "$ref": "#/$defs/parmstring"
+                }
+              }
+            },
+            "networks": {
+              "type": "array",
+              "description": "(NETWORK TYPE(INET)) Specifies the socket domain characteristics for the associated Physical File System (PFS) handling AF_INET and AF_INET6 type sockets.",
+              "x-zos-props": {
+                "parmlib": {
+                  "syntax": {
+                    "keywords": [
+                      "NETWORK"
+                    ],
+                    "statement": "multiple",
+                    "marker": [
+                      "TYPE(INET)\n       ",
+                      "TYPE(INET)"
+                    ],
+                    "valueEnclosure": null,
+                    "keyValueSeparator": [
+                      " "
+                    ],
+                    "valueSeparator": [
+                      " "
+                    ]
+                  }
+                }
+              },
+              "items": {
+                "type": "object",
+                "x-zos-props": {
+                  "parmlib": {
+                    "syntax": {
+                      "valueSeparator": [
+                        "\n        ",
+                        " "
+                      ],
+                      "valueEnclosure": null
+                    }
+                  }
+                },
+                "properties": {
+                  "domain_name": {
+                    "$ref": "#/$defs/network/domain_name"
+                  },
+                  "domain_number": {
+                    "$ref": "#/$defs/network/domain_number"
+                  },
+                  "maximum_number_of_sockets": {
+                    "$ref": "#/$defs/network/maximum_number_of_sockets"
+                  },
+                  "number_of_reserved_ports": {
+                    "$ref": "#/$defs/network/inaddr_any_count"
+                  },
+                  "starting_reserved_port_number": {
+                    "$ref": "#/$defs/network/inaddr_any_port"
+                  }
+                }
+              }
+            },
+            "sub_file_systems": {
+              "type": "array",
+              "description": "(SUBFILESYSTYPE TYPE(INET)) Specifies an AF_INET or AF_INET6 physical file system that is to run underneath the CINET socket file system. The TYPE() value is usually CINET and matches the TYPE operand on a previous FILESYSTYPE and NETWORK statement.",
+              "x-zos-props": {
+                "parmlib": {
+                  "syntax": {
+                    "keywords": [
+                      "SUBFILESYSTYPE"
+                    ],
+                    "statement": "multiple",
+                    "marker": [
+                      "TYPE(INET)\n               ",
+                      "TYPE(INET)"
+                    ],
+                    "valueEnclosure": null,
+                    "keyValueSeparator": [
+                      " "
+                    ],
+                    "valueSeparator": [
+                      " "
+                    ]
+                  }
+                }
+              },
+              "items": {
+                "type": "object",
+                "x-zos-props": {
+                  "parmlib": {
+                    "syntax": {
+                      "valueSeparator": [
+                        "\n              ",
+                        " "
+                      ],
+                      "valueEnclosure": null
+                    }
+                  }
+                },
+                "properties": {
+                  "name": {
+                    "$ref": "#/$defs/subfilesystype/name"
+                  },
+                  "entry_point": {
+                    "$ref": "#/$defs/subfilesystype/entry_point"
+                  },
+                  "parm": {
+                    "description": "Provides a parameter to be passed to the transport driver. The parameter format and content are specified by the file system that is receiving the data. PARM is an optional parameter. The parameter is up to 1024 characters long; the characters can be in uppercase, lowercase, or both. If the characters are not all in uppercase, the parameter must be enclosed in single quotation marks. If the physical file system specified does not expect a PARM operand, it ignores all PARM operands. Refer to the documentation for the specific physical file system for valid entry point names",
+                    "$ref": "#/$defs/parmstring"
+                  },
+                  "default": {
+                    "$ref": "#/$defs/subfilesystype/default"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "cinet_sockets": {
+          "type": "object",
+          "description": "Network definitions for AF_INET and AF_INET6 type sockets handled by a Common INET configuration. Common INET Sockets are intended to be used only if multiple network socket file systems (such as 2 TCP/IPs) are to be active at one time.",
+          "properties": {
+            "file_system": {
+              "type": "object",
+              "description": "(FILESYSTYPE TYPE(CINET)) Defines and starts a Socket type Physical File System (PFS) which handles requests for the AF_INET and AF_INET6 family of sockets. This enables many different AF_INET or dual AF_INET/AF_INET6 physical file systems to be active on the system. If you want to use CINET, you must be using z/OS Communications Server (TCP/IP Services). If you use CINET, you cannot use INET",
+              "x-zos-props": {
+                "parmlib": {
+                  "syntax": {
+                    "keywords": [
+                      "FILESYSTYPE"
+                    ],
+                    "statement": "single",
+                    "marker": [
+                      "TYPE(CINET)"
+                    ],
+                    "valueEnclosure": null,
+                    "keyValueSeparator": [
+                      " "
+                    ],
+                    "valueSeparator": [
+                      "\n            ",
+                      " "
+                    ]
+                  }
+                }
+              },
+              "properties": {
+                "entry_point": {
+                  "$ref": "#/$defs/filesystype/entry_point"
+                },
+                "address_space_name": {
+                  "$ref": "#/$defs/filesystype/address_space_name"
+                },
+                "parm": {
+                  "description": "(PARM) Provides a parameter to be passed directly to the file system type. The parameter format and content are specified by the file system type.",
+                  "$ref": "#/$defs/parmstring"
+                }
+              }
+            },
+            "networks": {
+              "type": "array",
+              "description": "(NETWORK TYPE(CINET)) Specifies the socket domain characteristics for the associated Physical File System (PFS) handling AF_INET and AF_INET6 type sockets.",
+              "x-zos-props": {
+                "parmlib": {
+                  "syntax": {
+                    "keywords": [
+                      "NETWORK"
+                    ],
+                    "statement": "multiple",
+                    "marker": [
+                      "TYPE(CINET)\n       ",
+                      "TYPE(CINET)"
+                    ],
+                    "valueEnclosure": null,
+                    "keyValueSeparator": [
+                      " "
+                    ],
+                    "valueSeparator": [
+                      " "
+                    ]
+                  }
+                }
+              },
+              "items": {
+                "type": "object",
+                "x-zos-props": {
+                  "parmlib": {
+                    "syntax": {
+                      "valueSeparator": [
+                        "\n        ",
+                        " "
+                      ],
+                      "valueEnclosure": null
+                    }
+                  }
+                },
+                "properties": {
+                  "domain_name": {
+                    "$ref": "#/$defs/network/domain_name"
+                  },
+                  "domain_number": {
+                    "$ref": "#/$defs/network/domain_number"
+                  },
+                  "maximum_number_of_sockets": {
+                    "$ref": "#/$defs/network/maximum_number_of_sockets"
+                  },
+                  "number_of_reserved_ports": {
+                    "$ref": "#/$defs/network/inaddr_any_count"
+                  },
+                  "starting_reserved_port_number": {
+                    "$ref": "#/$defs/network/inaddr_any_port"
+                  }
+                }
+              }
+            },
+            "sub_file_systems": {
+              "type": "array",
+              "description": "(SUBFILESYSTYPE TYPE(INET)) Specifies an AF_INET or AF_INET6 physical file system that is to run underneath the CINET socket file system. The TYPE() value is usually CINET and matches the TYPE operand on a previous FILESYSTYPE and NETWORK statement.",
+              "x-zos-props": {
+                "parmlib": {
+                  "syntax": {
+                    "keywords": [
+                      "SUBFILESYSTYPE"
+                    ],
+                    "statement": "multiple",
+                    "marker": [
+                      "TYPE(CINET)\n             ",
+                      "TYPE(CINET)"
+                    ],
+                    "valueEnclosure": null,
+                    "keyValueSeparator": [
+                      " "
+                    ],
+                    "valueSeparator": [
+                      " "
+                    ]
+                  }
+                }
+              },
+              "items": {
+                "type": "object",
+                "x-zos-props": {
+                  "parmlib": {
+                    "syntax": {
+                      "valueSeparator": [
+                        "\n              ",
+                        " "
+                      ],
+                      "valueEnclosure": null
+                    }
+                  }
+                },
+                "properties": {
+                  "name": {
+                    "$ref": "#/$defs/subfilesystype/name"
+                  },
+                  "entry_point": {
+                    "$ref": "#/$defs/subfilesystype/entry_point"
+                  },
+                  "parm": {
+                    "description": "(PARM) Provides a parameter to be passed to the transport driver. The parameter format and content are specified by the file system that is receiving the data",
+                    "$ref": "#/$defs/parmstring"
+                  },
+                  "default": {
+                    "$ref": "#/$defs/subfilesystype/default"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "$defs": {
+        "parmstring": {
+          "type": "string",
+          "x-zos-props": {
+            "parmlib": {
+              "syntax": {
+                "keywords": [
+                  "PARM"
+                ],
+                "valueEnclosure": {
+                  "characters": [
+                    {
+                      "left": "('",
+                      "right": "')"
+                    },
+                    {
+                      "left": "/\\(\\s*\\'/",
+                      "right": "/\\'\\s*\\)/"
+                    }
+                  ]
+                },
+                "parsing": {
+                  "stripWhitespace": false
+                }
+              }
+            }
+          }
+        },
+        "filesystype": {
+          "$comment": "The properties of this object define the descriptions and PARMLIB syntax for the FILESYSTYPE parameters.",
+          "entry_point": {
+            "type": "string",
+            "description": "(ENTRYPOINT) Specifies the name of the load module entry point that the system calls to initialize the PFS during system startup.",
+            "x-zos-props": {
+              "parmlib": {
+                "syntax": {
+                  "keywords": [
+                    "ENTRYPOINT"
+                  ],
+                  "valueEnclosure": {
+                    "characters": [
+                      {
+                        "left": "(",
+                        "right": ")"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "address_space_name": {
+            "type": "object",
+            "description": "ASNAME(proc_name[,'start_parms']) Address space name and start parameters",
+            "x-zos-props": {
+              "parmlib": {
+                "syntax": {
+                  "keywords": [
+                    "ASNAME"
+                  ],
+                  "valueEnclosure": {
+                    "characters": [
+                      {
+                        "left": "(",
+                        "right": ")"
+                      }
+                    ]
+                  },
+                  "valueSeparator": [
+                    ","
+                  ]
+                }
+              }
+            },
+            "properties": {
+              "procedure_name": {
+                "type": "string",
+                "minimumLength": 1,
+                "maximumLength": 8,
+                "description": "'proc_name' specifies the name of a procedure in SYS1.PROCLIB that is to be used to start the address space that is initialized by the physical file system (PFS). Specify ASNAME for any PFS that does not run in the kernel address space. The name that you specify is also used for the name of the address space.",
+                "x-zos-props": {
+                  "parmlib": {
+                    "syntax": {
+                      "valueEnclosure": null,
+                      "order": 1
+                    }
+                  }
+                }
+              },
+              "start_parms": {
+                "type": "string",
+                "minimumLength": 1,
+                "maximumLength": 100,
+                "description": "'start_parms' is an optional quoted string that is to be appended to the proc_name when the address space is started. The string can be up to 100 characters long. The start_parms are not validated; they are passed to the system when the address space is started with an internal command",
+                "x-zos-props": {
+                  "parmlib": {
+                    "syntax": {
+                      "valueEnclosure": {
+                        "characters": [
+                          {
+                            "left": "'",
+                            "right": "'"
+                          }
+                        ]
+                      },
+                      "order": 2
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "subfilesystype": {
+          "name": {
+            "type": "string",
+            "description": "(NAME) Specifies the name that identifies this file system to the CINET physical file system",
+            "x-zos-props": {
+              "parmlib": {
+                "syntax": {
+                  "keywords": [
+                    "NAME"
+                  ],
+                  "valueEnclosure": {
+                    "characters": [
+                      {
+                        "left": "(",
+                        "right": ")"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "entry_point": {
+            "type": "string",
+            "description": "(ENTRYPOINT) Specifies the name of the load module that contains the entry point into the file system type.",
+            "x-zos-props": {
+              "parmlib": {
+                "syntax": {
+                  "keywords": [
+                    "ENTRYPOINT"
+                  ],
+                  "valueEnclosure": {
+                    "characters": [
+                      {
+                        "left": "(",
+                        "right": ")"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "parm": {
+            "$ref": "#/$defs/parmstring"
+          },
+          "default": {
+            "type": "boolean",
+            "description": "Whether this is the default subfilesystem",
+            "x-zos-props": {
+              "parmlib": {
+                "syntax": {
+                  "booleanValues": {
+                    "true": [
+                      "DEFAULT"
+                    ]
+                  },
+                  "valueEnclosure": null
+                }
+              }
+            }
+          }
+        },
+        "network": {
+          "domain_name": {
+            "type": "string",
+            "minimumLength": 1,
+            "maximumLength": 16,
+            "description": "(DOMAINNAME) The 1 - 16 character name by which this socket file system domain is to be known",
+            "x-zos-props": {
+              "parmlib": {
+                "syntax": {
+                  "keywords": [
+                    "DOMAINNAME"
+                  ],
+                  "valueEnclosure": {
+                    "characters": [
+                      {
+                        "left": "(",
+                        "right": ")"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "domain_number": {
+            "type": "string",
+            "enum": [
+              "AF_UNIX",
+              "AF_INET",
+              "AF_INET6"
+            ],
+            "description": "(DOMAINNUMBER) A number that matches the value that is defined for this domain name.",
+            "x-zos-props": {
+              "parmlib": {
+                "syntax": {
+                  "keywords": [
+                    "DOMAINNUMBER"
+                  ],
+                  "enumValueMapping": {
+                    "AF_UNIX": "1",
+                    "AF_INET": "2",
+                    "AF_INET6": "19"
+                  },
+                  "valueEnclosure": {
+                    "characters": [
+                      {
+                        "left": "(",
+                        "right": ")"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "maximum_number_of_sockets": {
+            "type": "integer",
+            "description": "(MAXSOCKETS) Specifies the maximum number of sockets that are supported by this file system for this address family",
+            "minimum": 0,
+            "maximum": 16777215,
+            "x-zos-props": {
+              "parmlib": {
+                "syntax": {
+                  "keywords": [
+                    "MAXSOCKETS"
+                  ],
+                  "valueEnclosure": {
+                    "characters": [
+                      {
+                        "left": "(",
+                        "right": ")"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "inaddr_any_port": {
+            "type": "integer",
+            "description": "Starting port number to reserve.",
+            "x-zos-props": {
+              "parmlib": {
+                "syntax": {
+                  "keywords": [
+                    "INADDRANYPORT"
+                  ],
+                  "valueEnclosure": {
+                    "characters": [
+                      {
+                        "left": "(",
+                        "right": ")"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "inaddr_any_count": {
+            "type": "integer",
+            "description": "Number of ports to reserve.",
+            "x-zos-props": {
+              "parmlib": {
+                "syntax": {
+                  "keywords": [
+                    "INADDRANYCOUNT"
+                  ],
+                  "valueEnclosure": {
+                    "characters": [
+                      {
+                        "left": "(",
+                        "right": ")"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

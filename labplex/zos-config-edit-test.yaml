@@ -1,0 +1,34 @@
+zosconfigedit:
+  allowSelfSignedCerts: true
+  baseSchemas:
+  - /Users/aslan/Downloads/Schemas-09-02-2026/zos_meta.schema.json
+  levels:
+  - name: labplex
+    path: ./
+    glyph: 🕸️
+    color: '#438FFF'
+  - name: lab1
+    path: ./lab1
+    color: '#73B761'
+    glyph: 🖥️
+    parent: labplex
+  - name: lab2
+    path: ./lab2
+    color: '#73B761'
+    glyph: 🖥️
+    parent: labplex
+  configFiles:
+  - name: GeneralOS.yaml
+    schema: /Users/aslan/Downloads/Schemas-09-02-2026/GeneralOS_schema.json
+  - name: Application.yaml
+    schema: /Users/aslan/Downloads/Schemas-09-02-2026/Application_schema.json
+  - name: Security.yaml
+    schema: /Users/aslan/Downloads/Schemas-09-02-2026/Security_schema.json
+  - name: Network.yaml
+    schema: /Users/aslan/Downloads/Schemas-09-02-2026/Network_schema.json
+  - name: Hardware.yaml
+    schema: /Users/aslan/Downloads/Schemas-09-02-2026/Hardware_schema.json
+  - name: Data.yaml
+    schema: /Users/aslan/Downloads/Schemas-09-02-2026/Data_schema.json
+  - name: Tools.yaml
+    schema: /Users/aslan/Downloads/Schemas-09-02-2026/Tools_schema.json

@@ -13,7 +13,7 @@ boot_definitions:
         amount: 512
         units: K
     io_definitions:
-      io_definition_suffix: 9
+      io_definition_suffix: "09"
       high_level_qualifier: ATSPLEX
       os_configuration_identifier: MVS1
       eligible_device_table: "00"

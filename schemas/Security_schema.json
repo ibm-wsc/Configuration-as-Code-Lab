@@ -1,0 +1,458 @@
+{
+  "$schema": "https://ibm.com/schemas/zosconfig/v0/meta/zos_meta.schema.json",
+  "$id": "https://ibm.com/schemas/zosconfig/v0/Security/Security_schema.json",
+  "title": "Security",
+  "description": "z/OS Security Definitions",
+  "x-zos-schema": {
+    "parmlib": {
+      "root": {
+        "identifier": "Security",
+        "file_patterns": [
+          "Security"
+        ]
+      }
+    }
+  },
+  "additionalProperties": false,
+  "type": "object",
+  "properties": {
+    "racf_definitions": {
+      "description": "RACF (Resource Access Control Facility) configuration definitions",
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "irrprm_definitions": {
+          "description": "RACF data set name table, range table, and sysplex communications options",
+          "$ref": "irrprm/schema.json"
+        }
+      }
+    }
+  },
+  "$defs": {
+    "https://ibm.com/schemas/zosconfig/v0/Security/irrprm/schema.json": {
+      "$schema": "https://ibm.com/schemas/zosconfig/v0/meta/zos_meta.schema.json",
+      "$id": "https://ibm.com/schemas/zosconfig/v0/Security/irrprm/schema.json",
+      "title": "IRRPRMxx Configuration Schema",
+      "description": "Schema for IRRPRMxx parmlib member - RACF data set name table, range table, and sysplex communications options. https://www.ibm.com/docs/en/zos/latest?topic=member-irrprmxx-parmlib-parameter-syntax",
+      "x-zos-schema": {
+        "parmlib": {
+          "prefix": "IRRPRM",
+          "syntax": {
+            "lineRange": {
+              "start": 1,
+              "stop": 71
+            },
+            "comments": [
+              {
+                "delimiter": {
+                  "start": "/*",
+                  "stop": "*/"
+                }
+              }
+            ],
+            "ignoreParsing": {
+              "columns": 72
+            },
+            "keyValueSeparator": [
+              ""
+            ],
+            "valueEnclosure": {
+              "characters": [
+                {
+                  "left": "(",
+                  "right": ")"
+                }
+              ]
+            }
+          }
+        }
+      },
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "database_options": {
+          "description": "Header statement for RACF initialization portion of the parmlib member. Required for each parmlib member that is processed.",
+          "type": "object",
+          "additionalProperties": false,
+          "x-zos-props": {
+            "parmlib": {
+              "syntax": {
+                "keywords": [
+                  "DATABASE_OPTIONS"
+                ],
+                "statement": "single",
+                "keyValueSeparator": [
+                  "\n  ",
+                  "\n",
+                  " "
+                ],
+                "valueSeparator": [
+                  "\n  ",
+                  "\n"
+                ],
+                "valueEnclosure": null
+              }
+            }
+          },
+          "properties": {
+            "sysplex": {
+              "description": "Specifies the sysplex environment. NOCOMMUNICATIONS (alias: NOCOMM) means RACF not enabled for sysplex communications. COMMUNICATIONS (alias: COMM) means RACF enabled for sysplex communications in non-data sharing mode. DATASHARING means RACF enabled for sysplex communications in data sharing mode. When COMMUNICATIONS or DATASHARING is specified, 20% of the BUFFERS value is used for backup data set.",
+              "type": "string",
+              "enum": [
+                "NOCOMMUNICATIONS",
+                "NOCOMM",
+                "COMMUNICATIONS",
+                "COMM",
+                "DATASHARING"
+              ],
+              "default": "NOCOMMUNICATIONS",
+              "x-zos-props": {
+                "parmlib": {
+                  "syntax": {
+                    "keywords": [
+                      "SYSPLEX"
+                    ],
+                    "enumValueMapping": {
+                      "NOCOMMUNICATIONS": "NOCOMMUNICATIONS",
+                      "NOCOMM": "NOCOMM",
+                      "COMMUNICATIONS": "COMMUNICATIONS",
+                      "COMM": "COMM",
+                      "DATASHARING": "DATASHARING"
+                    }
+                  }
+                }
+              }
+            },
+            "dataset_name_table": {
+              "description": "Data set name table section (alias: DSNT). Defines primary and backup RACF data set pairs. Maximum 90 primary/backup pairs. Cannot be split between multiple parmlib members. If specified in multiple members, only first occurrence is processed.",
+              "type": "object",
+              "additionalProperties": false,
+              "x-zos-props": {
+                "parmlib": {
+                  "syntax": {
+                    "keywords": [
+                      "DATASETNAMETABLE",
+                      "DSNT"
+                    ],
+                    "valueEnclosure": null,
+                    "valueSeparator": [
+                      "\n    ",
+                      " "
+                    ],
+                    "keyValueSeparator": [
+                      "\n    ",
+                      "\n",
+                      " "
+                    ]
+                  }
+                }
+              },
+              "properties": {
+                "entries": {
+                  "description": "Array of primary/backup data set pair entries. Each entry is assigned a sequence number (1-90) based on its position in the array. These sequence numbers are referenced by the range table.",
+                  "type": "array",
+                  "x-zos-props": {
+                    "parmlib": {
+                      "syntax": {
+                        "parameter": "multiple",
+                        "valueEnclosure": null
+                      }
+                    }
+                  },
+                  "items": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "x-zos-props": {
+                      "parmlib": {
+                        "syntax": {
+                          "keywords": [
+                            "ENTRY"
+                          ],
+                          "valueEnclosure": null,
+                          "keyValueSeparator": [
+                            "\n      ",
+                            "\n"
+                          ],
+                          "valueSeparator": [
+                            "\n      ",
+                            " "
+                          ]
+                        }
+                      }
+                    },
+                    "properties": {
+                      "primary_dataset_name": {
+                        "description": "(PRIMARYDSN, aliases: PRIMARY, PRIM) Name of the primary RACF data set. If not specified or set to '*', operator is prompted at initialization. Must follow z/OS data set naming conventions.",
+                        "type": "string",
+                        "x-zos-props": {
+                          "parmlib": {
+                            "syntax": {
+                              "keywords": [
+                                "PRIMARYDSN",
+                                "PRIMARY",
+                                "PRIM"
+                              ],
+                              "valueEnclosure": {
+                                "characters": [
+                                  {
+                                    "left": "(",
+                                    "right": ")"
+                                  },
+                                  {
+                                    "left": "/\\(\\s*'/",
+                                    "right": "/'\\s*\\)/"
+                                  }
+                                ]
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "backup_dataset_name": {
+                        "description": "(BACKUPDSN, aliases: BACKUP, BACK) Name of the backup RACF data set. If not specified or set to '*', operator is prompted at initialization. If blank, backup is not defined and operator is not prompted. Must follow z/OS data set naming conventions.",
+                        "type": "string",
+                        "x-zos-props": {
+                          "parmlib": {
+                            "syntax": {
+                              "valueEnclosure": {
+                                "characters": [
+                                  {
+                                    "left": "(",
+                                    "right": ")"
+                                  },
+                                  {
+                                    "left": "/\\(\\s*'/",
+                                    "right": "/'\\s*\\)/"
+                                  }
+                                ]
+                              },
+                              "keywords": [
+                                "BACKUPDSN",
+                                "BACKUP",
+                                "BACK"
+                              ]
+                            }
+                          }
+                        }
+                      },
+                      "update_backup": {
+                        "description": "(UPDATEBACKUP, alias: UPDATEBACK) Specifies update option for backup data set. ALL means all updates including statistics are duplicated to backup. NONE means no updates are duplicated to backup. NOSTATS means all updates except statistics are duplicated to backup.",
+                        "type": "string",
+                        "enum": [
+                          "ALL",
+                          "NONE",
+                          "NOSTATS"
+                        ],
+                        "default": "NONE",
+                        "x-zos-props": {
+                          "parmlib": {
+                            "syntax": {
+                              "keywords": [
+                                "UPDATEBACKUP",
+                                "UPDATEBACK"
+                              ]
+                            }
+                          }
+                        }
+                      },
+                      "buffers": {
+                        "description": "(BUFFERS, alias: BUF) Number of data blocks kept resident for primary data set. If sysplex communications is enabled (SYSPLEX is COMMUNICATIONS or DATASHARING), 20% of this value is used for backup data set.",
+                        "type": "integer",
+                        "minimum": 0,
+                        "maximum": 255,
+                        "default": 255,
+                        "x-zos-props": {
+                          "parmlib": {
+                            "syntax": {
+                              "keywords": [
+                                "BUFFERS",
+                                "BUF"
+                              ]
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "minItems": 1,
+                  "maxItems": 90
+                }
+              }
+            },
+            "range_table": {
+              "description": "Range table section (aliases: RANGE, RNG). Maps starting ranges to data set name table entries. Not required if only one entry exists in data set name table. First entry must be binary zeros. Entries must be in ascending order. Each range must point to valid data set name table entry. Each data set name table entry must be referenced by at least one range. Cannot be split between multiple parmlib members. If specified in multiple members, only first occurrence is processed. NOTE: Cross-reference validation (ENTRYNUMBER must reference valid data set name table entry) and ordering validation (ascending order, first entry binary zeros) require custom validation logic.",
+              "type": "object",
+              "additionalProperties": false,
+              "x-zos-props": {
+                "parmlib": {
+                  "syntax": {
+                    "keywords": [
+                      "RANGETABLE",
+                      "RANGE",
+                      "RNG"
+                    ],
+                    "valueEnclosure": null,
+                    "valueSeparator": [
+                      "\n    ",
+                      " "
+                    ],
+                    "keyValueSeparator": [
+                      "\n    ",
+                      "\n",
+                      " "
+                    ]
+                  }
+                }
+              },
+              "properties": {
+                "ranges": {
+                  "description": "Array of range entries. Each range consists of a START value and an ENTRYNUMBER that references a data set name table entry. The first range must have START value of binary zeros (e.g., '00' in HEX format). Ranges must be in ascending order.",
+                  "type": "array",
+                  "x-zos-props": {
+                    "parmlib": {
+                      "syntax": {
+                        "valueSeparator": [
+                          "\n    ",
+                          " "
+                        ],
+                        "parameter": "multiple",
+                        "valueEnclosure": null
+                      }
+                    }
+                  },
+                  "minItems": 1,
+                  "additionalProperties": false,
+                  "items": {
+                    "type": "object",
+                    "x-zos-props": {
+                      "parmlib": {
+                        "syntax": {
+                          "valueEnclosure": null,
+                          "parameter": "multiple",
+                          "valueSeparator": [
+                            "\n    ",
+                            ""
+                          ]
+                        }
+                      }
+                    },
+                    "additionalProperties": false,
+                    "required": [
+                      "start",
+                      "entry_number"
+                    ],
+                    "properties": {
+                      "start": {
+                        "description": "Starting range for a primary/backup data set pair. Can be specified as character data (CHAR format, max 44 characters) or hexadecimal data (HEX format, max 88 hex characters, even number required). If not quoted, lowercase characters are folded to uppercase. Quoting is required for lowercase characters, blanks, multi-line values, or strings containing single quotes (quote must be doubled). First entry must be binary zeros. When using RACF internal profile naming, must use internal forms of entry names.",
+                        "type": "object",
+                        "additionalProperties": false,
+                        "required": [
+                          "value"
+                        ],
+                        "x-zos-props": {
+                          "parmlib": {
+                            "syntax": {
+                              "order": -1,
+                              "keywords": [
+                                "START"
+                              ],
+                              "keyValueSeparator": [
+                                ""
+                              ],
+                              "valueSeparator": [
+                                " "
+                              ],
+                              "parameter": "single"
+                            }
+                          }
+                        },
+                        "properties": {
+                          "value": {
+                            "description": "The start value as a string. For HEX format, must contain only 0-9 and A-F characters and have even number of characters.",
+                            "anyOf": [
+                              {
+                                "type": "string",
+                                "minLength": 1,
+                                "x-zos-props": {
+                                  "parmlib": {
+                                    "syntax": {
+                                      "order": -1,
+                                      "valueEnclosure": {
+                                        "characters": [
+                                          {
+                                            "left": "'",
+                                            "right": "'"
+                                          }
+                                        ]
+                                      },
+                                      "parsing": {
+                                        "valuePattern": "/[^']+/"
+                                      }
+                                    }
+                                  }
+                                }
+                              },
+                              {
+                                "type": "string",
+                                "minLength": 1,
+                                "x-zos-props": {
+                                  "parmlib": {
+                                    "syntax": {
+                                      "order": -1,
+                                      "valueEnclosure": null,
+                                      "parsing": {
+                                        "valuePattern": "/[^\\s]+/"
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            ]
+                          },
+                          "format": {
+                            "description": "Format of the start value. CHAR interprets as character data (max 44 characters). HEX interprets as hexadecimal data (max 88 hex characters, even number required, only 0-9 and A-F accepted).",
+                            "type": "string",
+                            "enum": [
+                              "CHAR",
+                              "HEX"
+                            ],
+                            "default": "CHAR",
+                            "x-zos-props": {
+                              "parmlib": {
+                                "syntax": {
+                                  "order": 0,
+                                  "valueEnclosure": null
+                                }
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "entry_number": {
+                        "description": "(ENTRYNUMBER, alias: ENTRYNUM) Sequence number of entry in data set name table (1-90). References the relative position of an entry in the data set name table array. Must correspond to an existing data set name table entry. NOTE: Cross-reference validation requires custom logic to verify the referenced entry exists.",
+                        "type": "integer",
+                        "minimum": 1,
+                        "maximum": 90,
+                        "x-zos-props": {
+                          "parmlib": {
+                            "syntax": {
+                              "order": 0,
+                              "keywords": [
+                                "ENTRYNUMBER",
+                                "ENTRYNUM"
+                              ]
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

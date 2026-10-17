@@ -1,0 +1,607 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ibm.com/schemas/zosconfig/v0/meta/zos_meta.schema.json",
+  "$vocabulary": {
+    "https://json-schema.org/draft/2020-12/vocab/core": true,
+    "https://json-schema.org/draft/2020-12/vocab/applicator": true,
+    "https://json-schema.org/draft/2020-12/vocab/unevaluated": true,
+    "https://json-schema.org/draft/2020-12/vocab/validation": true,
+    "https://json-schema.org/draft/2020-12/vocab/meta-data": true,
+    "https://json-schema.org/draft/2020-12/vocab/format-annotation": true,
+    "https://json-schema.org/draft/2020-12/vocab/content": true,
+    "https://ibm.com/vocab/zos_vocab.schema.json": false
+  },
+  "$dynamicAnchor": "meta",
+  "title": "Core and Validation specifications meta-schema",
+  "allOf": [
+    {
+      "$ref": "https://json-schema.org/draft/2020-12/schema"
+    },
+    {
+      "$ref": "vocab/zos_vocab.schema.json"
+    }
+  ],
+  "$defs": {
+    "https://ibm.com/schemas/zosconfig/v0/meta/vocab/zos_vocab.schema.json": {
+      "$schema": "https://json-schema.org/draft/2020-12/schema",
+      "$id": "https://ibm.com/schemas/zosconfig/v0/meta/vocab/zos_vocab.schema.json",
+      "type": [
+        "object",
+        "boolean"
+      ],
+      "title": "z/OS Config Registry JSON Schema Vocabulary",
+      "properties": {
+        "x-zos-schema": {
+          "description": "Global and default properties used by z/OS tooling when processing this subschema. Properties specified here apply to the subschema globablly. Many of the attributes defined here can be overridden by individual elements in this subschema or by subschema included via the $ref keyword by specifying the \"x-zos-props\" property on that element.",
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "parmlib": {
+              "description": "Global and default properties used for converting z/OS configurations between their PARMLIB and YAML formats.",
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "prefix": {
+                  "title": "(x-zos-schema) Parmlib Member Prefix",
+                  "$ref": "#/$defs/x-parmlib-prefix"
+                },
+                "root": {
+                  "title": "(x-zos-schema) Configuration for root schemas",
+                  "$ref": "#/$defs/x-parmlib-root"
+                },
+                "syntax": {
+                  "title": "(x-zos-schema) Global Parmlib Syntax",
+                  "description": "Default properties which define the syntax for PARMLIB statements, parameters, and values.\n The properties defined in \"x-zos-schema/parmlib/syntax\" apply to all parameters of this subschema. If a property of \"x-zos-props/parmlib/syntax\" is omitted from a particular parameter's definition, the corresponding property in \"x-zos-schema/parmlib/syntax\" will be used in its place during YAML<->PARMLIB conversion. The properties specified in \"x-zos-props/parmlib/syntax\" on a parameter override the defaults specified in \"x-zos-props/parmlib/syntax\" for that particular parameter ONLY.\n The following defines the fundamentals of how this syntax is applied.\nThe basic unit of a PARMLIB member is a PARMLIB statement, and a PARMLIB member will consist of one or more PARMLIB statements. A PARMLIB statement consists of one or more PARMLIB parameters and their values. The start of a PARMLIB statement is designated by the \"x-zos-props/parmlib/syntax/statement\" property. The start of a PARMLIB statement may be specified in the \"x-zos-props\" property at the root level of this subschema, on a single PARMLIB parameter, or multiple PARMLIB parameters. \n PARMLIB parameters are elements defined within this subschema that meet one of the following criteria:\n 1) The element's definition includes the \"x-zos-props\" property.\n 2) The element is a scalar data type (string, boolean, number) AND is the child of a PARMLIB statement or parameter.\n Elements defined with array or object data type that DO NOT include the \"x-zos-props\" property in their definition are ignored in the YAML<->PARMLIB conversion (**however their child properties/items will still be processed**). These types of elements are considered part of YAML structure that do not correlate directly to a PARMLIB statement or parameter.\nIn general, the PARMLIB Syntax properties will be used to convert PARMLIB statements, parameters and their values in the following general format:\n keyword ~ keyValueSeparator ~ valueEnclosure ~ [value] ~ valueEnclosure\nWhere [value] is the value specified for the key within the YAML document. (Note, the character '~' is used here to communicate concatenation and will not be rendered literally in the output.)\nIf [value] is an array or object, each item/property will be converted using the same general format and separated using the character specified by valueSeparator.\n Each PARMLIB syntax property has additional considerations and functionality not detailed here. Please see each property for a full explanation.",
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "lineRange": {
+                      "title": "(x-zos-schema) Default start and stop column for statements and parameters",
+                      "$ref": "#/$defs/x-parmlib-lineRange"
+                    },
+                    "lineContinuation": {
+                      "title": "(x-zos-schema) Default line continuation syntax for statements and parameters",
+                      "$ref": "#/$defs/x-parmlib-lineContinuation"
+                    },
+                    "keyValueSeparator": {
+                      "title": "(x-zos-schema) Default key value separators for statements and parameters",
+                      "$ref": "#/$defs/x-parmlib-keyValueSeparator"
+                    },
+                    "valueSeparator": {
+                      "title": "(x-zos-schema) Default value separators for statements and parameters",
+                      "$ref": "#/$defs/x-parmlib-valueSeparator"
+                    },
+                    "valueEnclosure": {
+                      "title": "(x-zos-schema) Default value enclosure for statements and parameters",
+                      "$ref": "#/$defs/x-parmlib-valueEnclosure"
+                    },
+                    "booleanValues": {
+                      "title": "(x-zos-schema) Default mapping of boolean values to PARMLIB representation",
+                      "$ref": "#/$defs/x-parmlib-booleanValues"
+                    },
+                    "comments": {
+                      "title": "(x-zos-schema) Default Comment Syntax",
+                      "$ref": "#/$defs/x-parmlib-comments"
+                    },
+                    "ignoreParsing": {
+                      "title": "(x-zos-schema) Syntax ignored during PARMLIB->YAML conversion",
+                      "$ref": "#/$defs/x-parmlib-ignoreParsing"
+                    },
+                    "collate_defaults": {
+                      "additionalProperties": false,
+                      "type": "object",
+                      "properties": {
+                        "array": {
+                          "$ref": "#/$defs/x-parmlib-collate"
+                        },
+                        "object": {
+                          "$ref": "#/$defs/x-parmlib-collate"
+                        },
+                        "primitive": {
+                          "$ref": "#/$defs/x-parmlib-collate"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "tags": {
+              "$ref": "#/$defs/x-tags"
+            }
+          }
+        },
+        "x-zos-props": {
+          "description": "Properties used by z/OS tooling when processing this subschema. Properties specified here apply to this parameter only and may override properties specified in \"x-zos-schema\"",
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "parmlib": {
+              "description": "Properties used for converting z/OS configurations between their PARMLIB and YAML formats. Properties specified here apply to this parameter only and may override properties specified in \"x-zos-schema/parmlib\"",
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "release": {
+                  "title": "(x-zos-props) z/OS Release",
+                  "$ref": "#/$defs/x-parmlib-zos-release"
+                },
+                "reference": {
+                  "title": "(x-zos-props) PARMLIB Reference",
+                  "$ref": "#/$defs/x-parmlib-reference"
+                },
+                "syntax": {
+                  "title": "(x-zos-props) PARMLIB Syntax",
+                  "description": "Properties which define the PARMLIB syntax for this particular parameter and its value(s).Properties specified here apply to this parameter only and may override properties specified in \"x-zos-schema/parmlib/syntax\". If any properties are omitted, the corresponding properties in \"x-zos-schema/parmlib/syntax\" will be used.\nThe following defines the fundamentals of how this syntax is applied.\nThe basic unit of a PARMLIB member is a PARMLIB statement, and a PARMLIB member will consist of one or more PARMLIB statements. A PARMLIB statement consists of one or more PARMLIB parameters and their values. The start of a PARMLIB statement is designated by the \"x-zos-props/parmlib/syntax/statement\" property. The start of a PARMLIB statement may be specified in the \"x-zos-props\" property at the root level of this subschema, on a single PARMLIB parameter, or multiple PARMLIB parameters. \n PARMLIB parameters are elements defined within this subschema that meet one of the following criteria:\n 1) The element's definition includes the \"x-zos-props\" property.\n 2) The element is a scalar data type (string, boolean, number) AND is the child of a PARMLIB statement or parameter.\n Elements defined with array or object data type that DO NOT include the \"x-zos-props\" property in their definition are ignored in the YAML<->PARMLIB conversion (**however their child properties/items will still be processed**). These types of elements are considered part of YAML structure that do not correlate directly to a PARMLIB statement or parameter.\nIn general, the PARMLIB Syntax properties will be used to convert PARMLIB statements, parameters and their values in the following general format:\n keyword ~ keyValueSeparator ~ valueEnclosure ~ [value] ~ valueEnclosure\nWhere [value] is the value specified for the key within the YAML document. (Note, the character '~' is used here to communicate concatenation and will not be rendered literally in the output.)\nIf [value] is an array or object, each item/property will be converted using the same general format and separated using the character specified by valueSeparator.\n Each PARMLIB syntax property has additional considerations and functionality not detailed here. Please see each property for a full explanation.",
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "keywords": {
+                      "title": "(x-zos-props) Specifying PARMLIB parameter representation",
+                      "$ref": "#/$defs/x-parmlib-keywords"
+                    },
+                    "enumValueMapping": {
+                      "title": "(x-zos-props) Mapping enum values to PARMLIB representation",
+                      "$ref": "#/$defs/x-parmlib-enum-value-mapping"
+                    },
+                    "booleanValues": {
+                      "title": "(x-zos-props) Mapping boolean values to PARMLIB representation",
+                      "$ref": "#/$defs/x-parmlib-booleanValues"
+                    },
+                    "statement": {
+                      "title": "(x-zos-props) Designating the start of a PARMLIB statement and the type",
+                      "$ref": "#/$defs/x-parmlib-statement"
+                    },
+                    "parameter": {
+                      "title": "(x-zos-props) Designating the type of a PARMLIB parameter",
+                      "$ref": "#/$defs/x-parmlib-parameter"
+                    },
+                    "marker": {
+                      "title": "(x-zos-props) Adding a marker value to a statement",
+                      "$ref": "#/$defs/x-parmlib-marker"
+                    },
+                    "order": {
+                      "title": "(x-zos-props) Specifying the order of positional parameters",
+                      "$ref": "#/$defs/x-parmlib-order"
+                    },
+                    "lineRange": {
+                      "title": "(x-zos-props) Parameter-specific start and stop column.",
+                      "$ref": "#/$defs/x-parmlib-lineRange"
+                    },
+                    "lineContinuation": {
+                      "title": "(x-zos-props) Parameter-specific line continuation syntax",
+                      "$ref": "#/$defs/x-parmlib-lineContinuation"
+                    },
+                    "keyValueSeparator": {
+                      "title": "(x-zos-props) Parameter-specific key value separators",
+                      "$ref": "#/$defs/x-parmlib-keyValueSeparator"
+                    },
+                    "valueSeparator": {
+                      "title": "(x-zos-props) Parameter-specific value separators",
+                      "$ref": "#/$defs/x-parmlib-valueSeparator"
+                    },
+                    "valueEnclosure": {
+                      "title": "(x-zos-props) Parameter-specific value enclosures",
+                      "$ref": "#/$defs/x-parmlib-valueEnclosure"
+                    },
+                    "collate": {
+                      "title": "(x-zos-props) Parameter-specific collate strategy",
+                      "$ref": "#/$defs/x-parmlib-collate"
+                    },
+                    "format": {
+                      "title": "(x-zos-props) Parameter-specific format",
+                      "$ref": "#/$defs/x-parmlib-format"
+                    },
+                    "parsing": {
+                      "title": "(x-zos-props) Parameter-specific parsing configuration",
+                      "$ref": "#/$defs/x-parmlib-parsing"
+                    },
+                    "rendering": {
+                      "title": "(x-zos-props) Parameter-specific rendering configuration",
+                      "$ref": "#/$defs/x-parmlib-rendering"
+                    }
+                  }
+                },
+                "keySyntax": {
+                  "title": "(x-zos-props) PARMLIB Key Syntax",
+                  "description": "Properties which define the PARMLIB key syntax for this particular parameter and its value(s). If this property is present and the current instance is an object, this defines the rules for parsing/rendering the keys of this object.\nThis can be used if keys in a YAML document are part of the corresponding PARMLIB member and are not only structural.\nIf defined the child keys and values will be rendered in this general format:\n keySyntax.valueEnclosure ~ [key] ~ keySyntax.valueEnclosure ~ keySyntax.keyValueSeparator ~ [value]\nThe [value] will be rendered according to the syntax specified for it.",
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "keyValueSeparator": {
+                      "title": "(x-zos-props) Parameter-specific key value separators for object keys",
+                      "$ref": "#/$defs/x-parmlib-keyValueSeparator"
+                    },
+                    "valueEnclosure": {
+                      "title": "(x-zos-props) Parameter-specific value enclosures for object keys",
+                      "$ref": "#/$defs/x-parmlib-valueEnclosure"
+                    }
+                  }
+                }
+              }
+            },
+            "tags": {
+              "$ref": "#/$defs/x-tags"
+            }
+          }
+        }
+      },
+      "$defs": {
+        "x-parmlib-prefix": {
+          "description": "The Prefix of the PARMLIB Member for which this subschema defines and validates the YAML representation of.\nNOTE: This value cannot be overwridden by individual elements in this subschema or by subschema included via the $ref keyword. Any subschema referenced within this subschema are assumed to belong to this same PARMLIB member.",
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 8
+        },
+        "x-parmlib-root": {
+          "description": "Configuration defining the root of a specific schema. This defines the entry point for a specific YAML configuration file like GeneralOS.yaml.\nNOTE: This should only be used by root schema maintainers",
+          "type": "object",
+          "properties": {
+            "identifier": {
+              "description": "The unique identifier to use for the specified root schema (e.g. GeneralOS). This will also be used as the filename for the generated configuration YAML file.",
+              "type": "string"
+            },
+            "file_patterns": {
+              "description": "List of regular expressions matching file names that are associated with this root schema. The file names exclude the final extension and are used to auto-detect the schema to use for configuration files.",
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "identifier"
+          ]
+        },
+        "x-parmlib-zos-release": {
+          "description": "The lowest level z/OS release for which this parameter is supported.",
+          "type": "string"
+        },
+        "x-parmlib-reference": {
+          "description": "The Prefix of the PARMLIB Member this property is referencing. The property this is defined on should be a string or array of strings defining the suffixes",
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 8
+        },
+        "x-parmlib-keywords": {
+          "description": "The literal text that should be rendered in PARMLIB for this parameter. This property allows JSON Schema authors to define YAML keys that follow industry standard terminology and the z/OS Simplification Goverance Board Guidance while maintaining a relationship to the actual PARMLIB parameter. If this parameter has more than one literal representation accepted by the z/OS component which consumes this PARMLIB member (e.g. abbreviations, aliases), please specify all acceptable forms. The first specified form in this list will be used when converting YAML -> PARMLIB. The additionally specified forms will be looked for when converting PARMLIB -> YAML.\nNOTE - If omitted, the following will be true:\n1) The [value] will still be rendered\n2) The valueEnclosure, booleanValues, and enumValueMapping properties will still processed.\n3) The keyValueSeparator property will be IGNORED. If defined as an array all elements but the first may be regular expressions indicated by enclosing '/' (e.g. '/[a-z]+/').",
+          "$ref": "#/$defs/x-parmlib-token-list"
+        },
+        "x-parmlib-booleanValues": {
+          "description": "The literal text that should be rendered in PARMLIB in place of the value for boolean type parameters. Specify all acceptable values for true/false in an individual array. The first value specified in each array will be used in YAML->PARMLIB rendering.\nExample: { \"booleanValue\": { \"true\": [\"YES\", \"Y\"], \"false\": [\"NO\", \"N\"] }\n",
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "true": {
+              "description": "The literal text that should be rendered in PARMLIB when the value for this parameter is True.\n NOTE: If this property is omitted and [value] = True, then the keyword, keyValueSeparataor, valueEnclosure, and valueSeparator properties will be IGNORED and the [value] will NOT be rendered. If defined as an array all elements but the first may be regular expressions indicated by enclosing '/' (e.g. '/[a-z]+/').",
+              "$ref": "#/$defs/x-parmlib-token-list"
+            },
+            "false": {
+              "description": "The literal text that should be rendered in PARMLIB when the value for this parameter is False.\n NOTE: If this property is omitted and [value] = False, then the keyword, keyValueSeparataor, valueEnclosure, and valueSeparator properties will be IGNORED and the [value] will NOT be rendered. If defined as an array all elements but the first may be regular expressions indicated by enclosing '/' (e.g. '/[a-z]+/').",
+              "$ref": "#/$defs/x-parmlib-token-list"
+            }
+          }
+        },
+        "x-parmlib-enum-value-mapping": {
+          "description": "The literal text that should be rendered in PARMLIB when the value for this parameter is an enumeration. For each enumeration value, specify that value as the key in the properties and the literal text that should be rendered in PARMLIB when that enumeration value is selected as the value for that key. If defined as an array all elements but the first may be regular expressions indicated by enclosing '/' (e.g. '/[a-z]+/').",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/x-parmlib-token-list"
+          }
+        },
+        "x-parmlib-statement": {
+          "description": "This parameter is the beginning of a PARMLIB statement. A PARMLIB Statement consists of one or more Parameters and their value(s), has a clear beginning and end, and may span one or more lines within a PARMLIB member.A PARMLIB statement can be processed as a 'single' or a 'multiple'\n[multiple]\n1) This parameter is treated as the start of multiple statements. \n2) Each item/property of the array/object will be rendered as a **separate statement**, separated by the character specified by the valueSeparator property and a new line.\n3) Each statement will be prefixed by the string specified by the keyword property of the parameter designated as the start of the statement.\n4)The values of each item/property (regardless of data type) will be rendered following the general format.\n[single]\n1) This parameter is treated as the start of a single statement. \n2) Each item/property of the array/object will be treated as parameters of this statement, separated by the character specified by the valueSeparator property.",
+          "type": "string",
+          "enum": [
+            "single",
+            "multiple"
+          ]
+        },
+        "x-parmlib-parameter": {
+          "description": "Explicitly define the type of a PARMLIB parameter. Usually a PARMLIB parameter has one or more sub-parameters depending on the type of this parameter.\nIf a parameter is of type `single` all sub-parameters are rendered directly as the value of one parameter. The `single` type is the default behavior for all parameters.\nParameters of type 'multiple' are rendered analog to the 'multiple' statement. If the parameter is an array or object the parameter will be repeated for each direct child.",
+          "type": "string",
+          "default": "single",
+          "enum": [
+            "single",
+            "multiple"
+          ]
+        },
+        "x-parmlib-marker": {
+          "description": "A marker value or list of marker values to add to a PARMLIB statement for identification or categorization. The marker is rendered as part of the statement and can appear anywhere after the keyword. This is typically used to distinguish between different types of statements within the same PARMLIB member (e.g., TYPE(1), TYPE(2)). When parsing PARMLIB back to YAML, the marker helps identify which schema property the statement belongs to.",
+          "type": [
+            "string",
+            "array"
+          ],
+          "items": {
+            "type": "string"
+          }
+        },
+        "x-parmlib-order": {
+          "description": "Specify the order in which this parameter and its value should be rendered. This value can be considered an order 'weight' or 'priority': all parameters of a given statement which specify the this property will be sorted in ascending order based on the value of this property.\nNOTE: If this property is omitted, it will be added to the sorted list of parameters AFTER all ordered parameters. It is expected to appear in the PARMLIB statement AFTER the ordered, or positional, parameters and will be rendered as such.",
+          "type": "integer"
+        },
+        "x-parmlib-lineRange": {
+          "description": "The allowable column range for this PARMLIB Statement or parameter within a PARMLIB member. A typical PARMLIB member will be a member of a Partitioned Dataset defined with a fixed record length of 80. Some PARMLIB members have restrictions on where PARMLIB Statements can begin and end that deviates from begining in column 1 and ending, or needing line continuation, in column 80. This property allows JSON Schema authors to specify those restrictions.\nIf the PARMLIB Statement would exceed the 'stop' column specified in this range when rendered, the PARMLIB statement will be be continued on the next line and the character specified by the lineContinuation property will be used to indicate a line continuation. The continued PARMLIB statement will be indented to the column specified by the property lineRange.start\nIf this property is specified for a PARMLIB parameter that is NOT designated as the start of a PARMLIB statement, this property will limit the starting and stopping position but will not apply line continuation if the PARMLIB parameter would exceed the 'stop' column specified in this range. Instead, if a line continuation is required, the values specified on the PARMLIB statement will be used.",
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "start": {
+              "description": "The first column at which a PARMLIB statement may begin or be continued.",
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 80
+            },
+            "stop": {
+              "description": "The last column at which a PARMLIB statement may extend to before requiring a line continuation.",
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 80
+            }
+          }
+        },
+        "x-parmlib-lineContinuation": {
+          "description": "The character(s) used to indicate a PARMLIB statement or parameter is continued on the next line of the PARMLIB member. This is used when a rendered PARMLIB statment would exceed the column range specified by the property lineRange.stop.\nNOTE: If a newline indicates line continuation, specify '\n'.",
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string"
+          }
+        },
+        "x-parmlib-keyValueSeparator": {
+          "description": "The character(s) used to separate the PARMLIB parameter from its value(s). \nFor example, consider the IEASYS PARMLIB statement FIX=(00,KR,L). The character '=' is used to separate the IEASYS PARMLIB keyword 'FIX' from its values '00,KR,L'. If defined as an array all elements but the first may be regular expressions indicated by enclosing '/' (e.g. '/[a-z]+/').",
+          "$ref": "#/$defs/x-parmlib-token-list"
+        },
+        "x-parmlib-valueSeparator": {
+          "description": "The character(s) used to separate the PARMLIB parameter from its value(s).\nFor example, consider the IEASYS PARMLIB statement FIX=(00,KR,L). The character ',' is used to separate the individual values '00' 'KR' and 'L'. If defined as an array all elements but the first may be regular expressions indicated by enclosing '/' (e.g. '/[a-z]+/').",
+          "$ref": "#/$defs/x-parmlib-token-list"
+        },
+        "x-parmlib-valueEnclosure": {
+          "description": "The character(s) used to enclose the value of a parameter.\nFor example, consider the IEASYS PARMLIB statement FIX=(00,KR,L). The characters '(' and ')' are used to enclose the values '00,KR,L'.This property is specified as an array of left and right enclosure pairs. If multiple enclosure types are supported, specify all possible characters as left/right pairs in the \"characters\" array.",
+          "type": [
+            "object",
+            "null"
+          ],
+          "additionalProperties": false,
+          "required": [
+            "characters"
+          ],
+          "properties": {
+            "characters": {
+              "description": "The possible left/right enclosure pairs. The left/right properties can be defined as arrays to allow defining multiple variants of the same enclosure. This should be done if the enclosures functionality equivalent (e.g. \"('\" and \"/(\\s*'/\" should be grouped together).",
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "left": {
+                    "description": "The character used to enclose the value of a key-value pair on the left side of the value. If defined as an array all elements but the first may be regular expressions indicated by enclosing '/' (e.g. '/[a-z]+/').",
+                    "$ref": "#/$defs/x-parmlib-token-list"
+                  },
+                  "right": {
+                    "description": "The character used to enclose the value of a key-value pair on the right side of the value. If defined as an array all elements but the first may be regular expressions indicated by enclosing '/' (e.g. '/[a-z]+/').",
+                    "$ref": "#/$defs/x-parmlib-token-list"
+                  }
+                }
+              }
+            },
+            "optional": {
+              "description": "If true, this PARMLIB parameter can be specified without enclosing the value. For example, consider the ALLOC parameter of the IEASYS parmlib. Both ALLOC=01 and ALLOC=(01,02) are valid syntax.\nNOTE: this property only informs the conversion from PARMLIB->YAML. When converting YAML->PARMLIB a value enclsoure will always be used.",
+              "type": "boolean"
+            }
+          }
+        },
+        "x-parmlib-comments": {
+          "description": "Specifies the supported syntax for comments within the PARMLIB member. If the PARMLIB member supports various comment syntaxes, then specify each syntax combination as a single item in the array of comment syntax. Each item is either a plain comment object (pattern/delimiter/range) or a conditional comment object (condition + comments).",
+          "type": "array",
+          "items": {
+            "oneOf": [
+              {
+                "$ref": "#/$defs/x-parmlib-comment-plain"
+              },
+              {
+                "$ref": "#/$defs/x-parmlib-comment-conditional"
+              }
+            ]
+          }
+        },
+        "x-parmlib-comment-plain": {
+          "description": "A plain comment definition. Must specify either 'pattern' (a regex that matches the whole comment) or 'delimiter' (start/stop character pair), but not both. An optional 'range' can constrain which columns the delimiter-based comment may span.",
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "pattern": {
+              "description": "The regular expression pattern that defines the comment syntax.",
+              "type": "string"
+            },
+            "delimiter": {
+              "description": "The character used to delimit the comment.",
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "start": {
+                  "description": "The character used to enclose the comment.",
+                  "type": "string"
+                },
+                "stop": {
+                  "description": "The character used to enclose the comment.",
+                  "type": "string"
+                }
+              }
+            },
+            "range": {
+              "description": "The column range in which a comment with the specified delimiters can span.",
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "start": {
+                  "description": "The column in which a comment can start with the specified delimiter.",
+                  "type": "integer"
+                },
+                "stop": {
+                  "description": "The column in which a comment can extend to with the specified delimiter.",
+                  "type": "integer"
+                }
+              }
+            }
+          },
+          "oneOf": [
+            {
+              "required": [
+                "pattern"
+              ],
+              "not": {
+                "required": [
+                  "delimiter"
+                ]
+              }
+            },
+            {
+              "required": [
+                "delimiter"
+              ],
+              "not": {
+                "required": [
+                  "pattern"
+                ]
+              }
+            }
+          ]
+        },
+        "x-parmlib-comment-conditional": {
+          "description": "A conditional comment definition. The 'condition' regex is tested against the entire content of the PARMLIB member being parsed (whole-member, not per-section or per-line, using re.DOTALL). If the regex matches anywhere in the member, the nested 'comments' rules are applied to the whole member during preprocessing. Nesting a conditional comment inside another conditional comment is not supported.",
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "condition",
+            "comments"
+          ],
+          "properties": {
+            "condition": {
+              "description": "A regular expression matched against the entire member text. If it matches anywhere in the member (re.DOTALL), the nested comment rules are applied.",
+              "type": "string"
+            },
+            "comments": {
+              "description": "Plain comment objects to apply when the condition matches. Each entry follows the same pattern/delimiter/range structure as a top-level plain comment object.",
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "$ref": "#/$defs/x-parmlib-comment-plain"
+              }
+            }
+          }
+        },
+        "x-parmlib-ignoreParsing": {
+          "description": "PARMLIB syntax or characteristics that should be ignored when converting PARMLIB->YAML",
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "leadingWhitespace": {
+              "description": "If true, ignore leading whitespace in the input PARMLIB member",
+              "type": "boolean"
+            },
+            "whitespace": {
+              "description": "If true, ignore extra whitespace in the input PARMLIB member",
+              "type": "boolean"
+            },
+            "columns": {
+              "description": "If set, ignore text starting in this column in the input PARMLIB member",
+              "type": "integer"
+            }
+          }
+        },
+        "x-parmlib-format": {
+          "description": "A format specifier to apply to string, integer, or float values.\nThe specifier follows the Python 'Format Specification Mini-Language' (https://docs.python.org/3/library/string.html#format-specification-mini-language).",
+          "type": "string"
+        },
+        "x-parmlib-parsing": {
+          "title": "Configuration specific to parsing parmlib members. ",
+          "description": "The settings allow configure grammar generation or parsing behavior.\nUsually zosconfig generates parsing expression automatically. In cases were the syntax of a parmlib member is not general enough to be parsed by the generated grammar, the properties here can be used to help generate a working parser\nNothing in this section impacts validation or rendering.\nYou should work with the zosconfig development team to ensure the settings in this section are correct.",
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "valuePattern": {
+              "description": "Regular expression used to match values in the generated grammar.\nThis property can be used to specify the regular expression that should be used to match a parmlib value.\nThe regular expression should only match the raw value excluding any valueEnclosure or other syntax and should only be used for primitiv types (e.g. string, integer not array and object)",
+              "type": "string",
+              "format": "regex"
+            },
+            "fixedWidth": {
+              "description": "Specifies the fixed character width for parsing a field value from PARMLIB format.\nUse this for PARMLIB parameters where each field value occupies a specific number of characters, parsed sequentially with separators between fields.\nThe value represents the exact number of characters the field occupies.\nFields are parsed sequentially with separators between them.\nIf any field has an 'order' property specified, all fields are sorted by order (fields without order are sorted alphabetically by name).\nIf no fields have 'order' specified, fields are parsed in the order they appear in the schema.\nThe field value may include trailing spaces within the fixed width.\nDifferent from 'lineRange', which specifies absolute column positions.\nNote: This property only affects parsing (PARMLIB -> YAML). For rendering (YAML -> PARMLIB), use 'format' to control value formatting or 'lineRange' for column positioning.",
+              "type": "integer",
+              "minimum": 1
+            },
+            "stripWhitespace": {
+              "description": "Controls whether leading and trailing whitespace should be stripped from parsed string values.\nWhen set to true (default), whitespace is removed from the beginning and end of parsed values.\nWhen set to false, whitespace is preserved as-is from the PARMLIB member.\nThis is applied before any replacement patterns specified in the 'replace' property.\nNote: This property only affects parsing (PARMLIB -> YAML).",
+              "type": "boolean",
+              "default": true
+            },
+            "replace": {
+              "description": "List of regex-based find-and-replace operations to apply to parsed string values.\nEach replacement is specified as a string in the format '/pattern/replacement/' where:\n- pattern: A regular expression pattern to match in the parsed value\n- replacement: The string to replace matched patterns with\n- Both pattern and replacement are delimited by forward slashes\nReplacements are applied in order after whitespace stripping (if enabled).\nExample: [\"/OLD/NEW/\", \"/\\\\s+/ /\"] replaces 'OLD' with 'NEW' and collapses multiple spaces to single space.\nNote: This property only affects parsing (PARMLIB -> YAML).",
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "^/(?:[^/]|\\\\/)*\\/(?:[^/]|\\\\/)*\\/(?:[imslux?]+)?$"
+              }
+            },
+            "ignoreOrder": {
+              "description": "Specify if the parsing process should ignore the order specified for this item.\nIn some situation elements need to be only ordered for rendering purposes. This option disables order handling during parser generation.",
+              "type": "boolean",
+              "default": false
+            }
+          }
+        },
+        "x-parmlib-rendering": {
+          "title": "Configuration specific to rendering YAML to PARMLIB format.",
+          "description": "The settings control how values are transformed and formatted when converting from YAML to PARMLIB format.\nThese properties allow customization of string output including pattern replacement and linebreak handling.\nNote: These properties only affect rendering (YAML -> PARMLIB), not parsing or validation.",
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "replace": {
+              "description": "List of regex-based find-and-replace operations to apply to string values before rendering to PARMLIB format.\nEach replacement is specified as a string in the format '/pattern/replacement/' where:\n- pattern: A regular expression pattern to match in the value\n- replacement: The string to replace matched patterns with\n- Both pattern and replacement are delimited by forward slashes\nReplacements are applied in order before the value is written to the PARMLIB member.\nExample: [\"/NEW/OLD/\", \"/ +/ /\"] replaces 'NEW' with 'OLD' and collapses multiple spaces to single space.\nNote: This property only affects rendering (YAML -> PARMLIB).",
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "^/(?:[^/]|\\\\/)*\\/(?:[^/]|\\\\/)*\\/(?:[imslux?]+)?$"
+              }
+            },
+            "allowLinebreaks": {
+              "description": "Controls whether the renderer may insert line breaks within string values to avoid exceeding PARMLIB record boundaries.\nNewline characters already present in string values are preserved regardless of this setting.\nWhen set to true, the renderer may break long string values across multiple lines at appropriate positions.\nWhen set to false (default), the renderer will not insert additional line breaks beyond those already present in the value.\nThis is useful for PARMLIB parameters that support multi-line values.\nNote: This property only affects rendering (YAML -> PARMLIB).",
+              "type": "boolean",
+              "default": false
+            }
+          }
+        },
+        "x-parmlib-collate": {
+          "description": "Strategy for handling multiple occurrences of the same parameter during PARMLIB parsing.\nControls how duplicate parameters are merged when converting PARMLIB -> YAML.\nDefault behavior:\n- For object types: 'merge' (merge properties at sub-object level)\n- For array types: 'mergeright' (append new values to end)\n- For simple types: 'last' (keep last occurrence)\n- For properties with statement='multiple' or parameter='multiple': 'mergeright'\nNote: This property only affects parsing (PARMLIB -> YAML), not rendering (YAML -> PARMLIB).",
+          "type": "string",
+          "enum": [
+            "first",
+            "last",
+            "merge",
+            "mergeleft",
+            "mergeright"
+          ]
+        },
+        "x-parmlib-token-list": {
+          "description": "The string literal(s) used as tokens in PARMLIB syntax. If defined as an array all elements but the first may be regular expressions indicated by enclosing '/' (e.g. '/[a-z]+/'). The first element or if a string is defined can not be a regular expression.",
+          "type": [
+            "string",
+            "array",
+            "null"
+          ],
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1
+        },
+        "x-tags": {
+          "description": "A list of free-form tags that can be used to identify specific schemas and drive tool specific behavior. Tags should be namespaced by using a unique prefix to prevent conflicts between different tools.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

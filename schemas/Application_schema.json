@@ -1,0 +1,2323 @@
+{
+  "$schema": "https://ibm.com/schemas/zosconfig/v0/meta/zos_meta.schema.json",
+  "$id": "https://ibm.com/schemas/zosconfig/v0/Application/Application_schema.json",
+  "title": "Application Hosting Environment Configuration",
+  "description": "Schema for z/OS Application Hosting Environment configuration parameters",
+  "x-zos-schema": {
+    "parmlib": {
+      "root": {
+        "identifier": "Application",
+        "file_patterns": [
+          "Application"
+        ]
+      }
+    }
+  },
+  "additionalProperties": false,
+  "type": "object",
+  "properties": {
+    "subsystem_definitions": {
+      "description": "Subsystem initialization definitions",
+      "$ref": "iefssn/schema.json"
+    },
+    "tso_definitions": {
+      "$ref": "./ikjtso/schema.json"
+    }
+  },
+  "$defs": {
+    "https://ibm.com/schemas/zosconfig/v0/Application/ikjtso/schema.json": {
+      "$schema": "https://ibm.com/schemas/zosconfig/v0/meta/zos_meta.schema.json",
+      "$id": "https://ibm.com/schemas/zosconfig/v0/Application/ikjtso/schema.json",
+      "title": "(IKJTSOxx) TSO/E Commands and Programs Configuration \n https://www.ibm.com/docs/en/zos/latest?topic=sys1parmlib-ikjtsoxx-tsoe-commands-programs",
+      "description": "(IKJTSOxx) Defines authorized TSO/E commands, programs, and system defaults for TSO/E operations including ALLOCATE, SEND, RECEIVE, TRANSMIT, CONSOLE, and TEST commands.",
+      "x-zos-schema": {
+        "parmlib": {
+          "prefix": "IKJTSO",
+          "syntax": {
+            "comments": [
+              {
+                "delimiter": {
+                  "start": "/*",
+                  "stop": "*/"
+                }
+              }
+            ],
+            "lineContinuation": [
+              "+"
+            ],
+            "ignoreParsing": {
+              "leadingWhitespace": true,
+              "whitespace": true,
+              "columns": 72
+            },
+            "lineRange": {
+              "start": 1,
+              "stop": 71
+            }
+          }
+        }
+      },
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "allocate": {
+          "type": "object",
+          "description": "(ALLOCATE DEFAULT)\nDefault disposition for data sets required by a program.)\n",
+          "x-zos-props": {
+            "parmlib": {
+              "syntax": {
+                "statement": "single",
+                "keywords": [
+                  "ALLOCATE"
+                ],
+                "keyValueSeparator": [
+                  " "
+                ],
+                "valueEnclosure": null,
+                "valueSeparator": null
+              }
+            }
+          },
+          "properties": {
+            "default": {
+              "type": "string",
+              "description": "(ALLOCATE DEFAULT)\nDefault disposition for data sets required by a program.",
+              "enum": [
+                "Exclusive Access (OLD)",
+                "Shared Access (SHR)"
+              ],
+              "default": "Exclusive Access (OLD)",
+              "x-zos-props": {
+                "parmlib": {
+                  "syntax": {
+                    "keywords": [
+                      "DEFAULT"
+                    ],
+                    "valueEnclosure": {
+                      "characters": [
+                        {
+                          "left": "(",
+                          "right": ")"
+                        }
+                      ]
+                    },
+                    "enumValueMapping": {
+                      "Exclusive Access (OLD)": "OLD",
+                      "Shared Access (SHR)": "SHR"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "authorized_commands": {
+          "type": "array",
+          "description": "(AUTHCMD)\nList of authorized TSO/E commands. Each command name can be up to 8 characters. Include VLFNOTE if using VLF and the TSO/E VLFNOTE command.",
+          "items": {
+            "type": "string",
+            "pattern": "^[A-Z@#$][A-Z0-9@#$]{0,7}$",
+            "minLength": 1,
+            "maxLength": 8
+          },
+          "x-zos-props": {
+            "parmlib": {
+              "syntax": {
+                "statement": "single",
+                "keywords": [
+                  "AUTHCMD NAMES"
+                ],
+                "valueSeparator": [
+                  " ",
+                  ","
+                ],
+                "valueEnclosure": {
+                  "characters": [
+                    {
+                      "left": "(",
+                      "right": ")"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "authorized_programs": {
+          "type": "array",
+          "description": "(AUTHPGM)\nList of authorized programs that can be invoked via the CALL command. Each program name can be up to 8 characters.",
+          "items": {
+            "type": "string",
+            "pattern": "^[A-Z@#$][A-Z0-9@#$]{0,7}$",
+            "minLength": 1,
+            "maxLength": 8
+          },
+          "x-zos-props": {
+            "parmlib": {
+              "syntax": {
+                "statement": "single",
+                "keywords": [
+                  "AUTHPGM NAMES"
+                ],
+                "valueSeparator": [
+                  " ",
+                  ","
+                ],
+                "valueEnclosure": {
+                  "characters": [
+                    {
+                      "left": "(",
+                      "right": ")"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "apf_authorized_programs": {
+          "type": "array",
+          "description": "(AUTHTSF)\nList of APF-authorized programs that can be called through the TSO/E service facility. Do not add IBM product programs unless specifically instructed by product documentation (e.g., do not add IDCAMS). Each program name can be up to 8 characters.",
+          "items": {
+            "type": "string",
+            "pattern": "^[A-Z@#$][A-Z0-9@#$]{0,7}$",
+            "minLength": 1,
+            "maxLength": 8
+          },
+          "x-zos-props": {
+            "parmlib": {
+              "syntax": {
+                "statement": "single",
+                "keywords": [
+                  "AUTHTSF NAMES"
+                ],
+                "valueSeparator": [
+                  " ",
+                  ","
+                ],
+                "valueEnclosure": {
+                  "characters": [
+                    {
+                      "left": "(",
+                      "right": ")"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "background_execution_restricted": {
+          "type": "array",
+          "description": "(NOTBKGND)\nList of commands that cannot be issued in the background. Each command name can be up to 8 characters.",
+          "items": {
+            "type": "string",
+            "pattern": "^[A-Z@#$][A-Z0-9@#$]{0,7}$",
+            "minLength": 1,
+            "maxLength": 8
+          },
+          "x-zos-props": {
+            "parmlib": {
+              "syntax": {
+                "statement": "single",
+                "keywords": [
+                  "NOTBKGND NAMES"
+                ],
+                "valueSeparator": [
+                  " ",
+                  ","
+                ],
+                "valueEnclosure": {
+                  "characters": [
+                    {
+                      "left": "(",
+                      "right": ")"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "help": {
+          "type": "array",
+          "description": "(HELP)\nMessage help text datasets organized by language. Up to 255 datasets can be specified per language.",
+          "x-zos-props": {
+            "parmlib": {
+              "syntax": {
+                "statement": "single",
+                "keywords": [
+                  "HELP"
+                ],
+                "keyValueSeparator": [
+                  " "
+                ],
+                "valueSeparator": [
+                  " ",
+                  ","
+                ],
+                "valueEnclosure": null
+              }
+            }
+          },
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "language",
+              "source"
+            ],
+            "x-zos-props": {
+              "parmlib": {
+                "syntax": {
+                  "valueEnclosure": null
+                }
+              }
+            },
+            "properties": {
+              "language": {
+                "type": "string",
+                "description": "(language)\nLanguage name for help text datasets.",
+                "enum": [
+                  "Simplified Chinese (CHS)",
+                  "Traditional Chinese (CHT)",
+                  "Danish (DAN)",
+                  "German (DEU)",
+                  "Swiss German (DES)",
+                  "Greek (ELL)",
+                  "UK English (ENG)",
+                  "US English uppercase (ENP)",
+                  "US English mixed case (ENU)",
+                  "Spanish (ESP)",
+                  "Finnish (FIN)",
+                  "French (FRA)",
+                  "Belgian French (FRB)",
+                  "Canadian French (FRC)",
+                  "Swiss French (FRS)",
+                  "Icelandic (ISL)",
+                  "Italian (ITA)",
+                  "Swiss Italian (ITS)",
+                  "Japanese (JPN)",
+                  "Korean (KOR)",
+                  "Dutch (NLD)",
+                  "Belgian Dutch (NLB)",
+                  "Norwegian (NOR)",
+                  "Portuguese (PTG)",
+                  "Brazil Portuguese (PTB)",
+                  "Rhaeto-Romanic (RMS)",
+                  "Russian (RUS)",
+                  "Swedish (SVE)",
+                  "Thai (THA)",
+                  "Turkish (TRK)"
+                ],
+                "x-zos-props": {
+                  "parmlib": {
+                    "syntax": {
+                      "order": -1,
+                      "enumValueMapping": {
+                        "Simplified Chinese (CHS)": "CHS",
+                        "Traditional Chinese (CHT)": "CHT",
+                        "Danish (DAN)": "DAN",
+                        "German (DEU)": "DEU",
+                        "Swiss German (DES)": "DES",
+                        "Greek (ELL)": "ELL",
+                        "UK English (ENG)": "ENG",
+                        "US English uppercase (ENP)": "ENP",
+                        "US English mixed case (ENU)": "ENU",
+                        "Spanish (ESP)": "ESP",
+                        "Finnish (FIN)": "FIN",
+                        "French (FRA)": "FRA",
+                        "Belgian French (FRB)": "FRB",
+                        "Canadian French (FRC)": "FRC",
+                        "Swiss French (FRS)": "FRS",
+                        "Icelandic (ISL)": "ISL",
+                        "Italian (ITA)": "ITA",
+                        "Swiss Italian (ITS)": "ITS",
+                        "Japanese (JPN)": "JPN",
+                        "Korean (KOR)": "KOR",
+                        "Dutch (NLD)": "NLD",
+                        "Belgian Dutch (NLB)": "NLB",
+                        "Norwegian (NOR)": "NOR",
+                        "Portuguese (PTG)": "PTG",
+                        "Brazil Portuguese (PTB)": "PTB",
+                        "Rhaeto-Romanic (RMS)": "RMS",
+                        "Russian (RUS)": "RUS",
+                        "Swedish (SVE)": "SVE",
+                        "Thai (THA)": "THA",
+                        "Turkish (TRK)": "TRK"
+                      }
+                    }
+                  }
+                }
+              },
+              "source": {
+                "description": "(dsname)\nMVS dataset name(s) containing help text for this language. Can be a single dataset name (string) or multiple dataset names (array). Up to 255 datasets can be specified.",
+                "x-zos-props": {
+                  "parmlib": {
+                    "syntax": {
+                      "valueSeparator": [
+                        ",",
+                        " "
+                      ],
+                      "valueEnclosure": {
+                        "characters": [
+                          {
+                            "left": "(",
+                            "right": ")"
+                          }
+                        ]
+                      }
+                    }
+                  }
+                },
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "pattern": "^[A-Z@#$][A-Z0-9@#$]{0,7}(\\.[A-Z@#$][A-Z0-9@#$]{0,7}){0,21}$",
+                  "maxLength": 44,
+                  "minLength": 1,
+                  "x-zos-props": {
+                    "parmlib": {
+                      "syntax": {
+                        "valueEnclosure": null
+                      }
+                    }
+                  }
+                },
+                "maxItems": 255,
+                "minItems": 1
+              }
+            }
+          }
+        },
+        "logon": {
+          "type": "object",
+          "description": "(LOGON)\nSystem settings for the TSO/E LOGON command.",
+          "additionalProperties": false,
+          "x-zos-props": {
+            "parmlib": {
+              "syntax": {
+                "statement": "single",
+                "keywords": [
+                  "LOGON"
+                ],
+                "keyValueSeparator": [
+                  " "
+                ],
+                "valueSeparator": [
+                  " ",
+                  ","
+                ]
+              }
+            }
+          },
+          "properties": {
+            "reconnect": {
+              "type": "boolean",
+              "description": "(LOGONHERE)\n Honor RECONNECT option even when system does not detect disconnected state. Allows users to reconnect from new terminal without canceling previous session.",
+              "x-zos-props": {
+                "parmlib": {
+                  "syntax": {
+                    "keywords": [
+                      "LOGONHERE"
+                    ],
+                    "valueEnclosure": {
+                      "characters": [
+                        {
+                          "left": "(",
+                          "right": ")"
+                        }
+                      ]
+                    },
+                    "booleanValues": {
+                      "true": [
+                        "ON"
+                      ],
+                      "false": [
+                        "OFF"
+                      ]
+                    }
+                  }
+                }
+              },
+              "default": true
+            },
+            "prompt_credentials_first": {
+              "type": "boolean",
+              "description": "(PASSWORDPREPROMPT)\nPrompt for user ID and password before presenting any other information. Warning: TSO/E logon exits may need updates. Users defined to UADS (not RACF) cannot log on unless RACF is inactive.",
+              "x-zos-props": {
+                "parmlib": {
+                  "syntax": {
+                    "keywords": [
+                      "PASSWORDPREPROMPT"
+                    ],
+                    "valueEnclosure": {
+                      "characters": [
+                        {
+                          "left": "(",
+                          "right": ")"
+                        }
+                      ]
+                    },
+                    "booleanValues": {
+                      "true": [
+                        "ON"
+                      ],
+                      "false": [
+                        "OFF"
+                      ]
+                    }
+                  }
+                }
+              },
+              "default": false
+            },
+            "enable_passphrase": {
+              "type": "boolean",
+              "description": "(PASSPHRASE)\nAllow users to enter up to 100 characters in password field. 8 or fewer characters treated as password, more than 8 treated as passphrase.",
+              "x-zos-props": {
+                "parmlib": {
+                  "syntax": {
+                    "keywords": [
+                      "PASSPHRASE"
+                    ],
+                    "valueEnclosure": {
+                      "characters": [
+                        {
+                          "left": "(",
+                          "right": ")"
+                        }
+                      ]
+                    },
+                    "booleanValues": {
+                      "true": [
+                        "ON"
+                      ],
+                      "false": [
+                        "OFF"
+                      ]
+                    }
+                  }
+                }
+              },
+              "default": false
+            },
+            "timeout_minutes": {
+              "type": "integer",
+              "description": "(TIMEOUT)\nMinutes before LOGON session is terminated. 0 means no timeout.",
+              "x-zos-props": {
+                "parmlib": {
+                  "syntax": {
+                    "keywords": [
+                      "TIMEOUT"
+                    ],
+                    "valueEnclosure": {
+                      "characters": [
+                        {
+                          "left": "(",
+                          "right": ")"
+                        }
+                      ]
+                    }
+                  }
+                }
+              },
+              "minimum": 0,
+              "maximum": 255,
+              "default": 5
+            },
+            "maximum_userid_length": {
+              "type": "integer",
+              "description": "(USERIDMAX)\nMaximum user ID or prefix length. Setting to 8 affects SUBMIT job names, SEND message storage, and Information Center Facility compatibility.",
+              "x-zos-props": {
+                "parmlib": {
+                  "syntax": {
+                    "keywords": [
+                      "USERIDMAX"
+                    ],
+                    "valueEnclosure": {
+                      "characters": [
+                        {
+                          "left": "(",
+                          "right": ")"
+                        }
+                      ]
+                    }
+                  }
+                }
+              },
+              "enum": [
+                7,
+                8
+              ],
+              "default": 7
+            },
+            "verify_applid": {
+              "type": "boolean",
+              "description": "(VERIFYAPPL)\nDetermine APPLID for system and pass to RACF for verification during logon. Can limit access to different systems sharing RACF database.",
+              "x-zos-props": {
+                "parmlib": {
+                  "syntax": {
+                    "keywords": [
+                      "VERIFYAPPL"
+                    ],
+                    "valueEnclosure": {
+                      "characters": [
+                        {
+                          "left": "(",
+                          "right": ")"
+                        }
+                      ]
+                    },
+                    "booleanValues": {
+                      "true": [
+                        "ON"
+                      ],
+                      "false": [
+                        "OFF"
+                      ]
+                    }
+                  }
+                }
+              },
+              "default": false
+            }
+          }
+        },
+        "console": {
+          "type": "object",
+          "description": "(CONSOLE)\nInstallation defaults for the TSO/E CONSOLE command.",
+          "additionalProperties": false,
+          "x-zos-props": {
+            "parmlib": {
+              "syntax": {
+                "statement": "single",
+                "keywords": [
+                  "CONSOLE"
+                ],
+                "keyValueSeparator": [
+                  " "
+                ],
+                "valueSeparator": [
+                  " ",
+                  ","
+                ]
+              }
+            }
+          },
+          "properties": {
+            "unsolicited_queue_size": {
+              "type": "object",
+              "description": "Unsolicited message queue size settings.",
+              "additionalProperties": false,
+              "properties": {
+                "initial": {
+                  "type": "integer",
+                  "description": "(INITUNUM)\nInitial number of unsolicited messages that can be queued to extended MCS console session. Exit IKJCNX50 invoked at 80%, IKJCNX64 at 100%.",
+                  "x-zos-props": {
+                    "parmlib": {
+                      "syntax": {
+                        "keywords": [
+                          "INITUNUM"
+                        ],
+                        "valueEnclosure": {
+                          "characters": [
+                            {
+                              "left": "(",
+                              "right": ")"
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  },
+                  "minimum": 1,
+                  "default": 1000
+                },
+                "maximum": {
+                  "type": "integer",
+                  "description": "(MAXUNUM)\nMaximum number of unsolicited messages that can be queued. Can only be changed through parmlib UPDATE command for active sessions.",
+                  "x-zos-props": {
+                    "parmlib": {
+                      "syntax": {
+                        "keywords": [
+                          "MAXUNUM"
+                        ],
+                        "valueEnclosure": {
+                          "characters": [
+                            {
+                              "left": "(",
+                              "right": ")"
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  },
+                  "minimum": 1,
+                  "default": 10000
+                }
+              }
+            },
+            "solicited_queue_size": {
+              "type": "object",
+              "description": "Solicited message queue size settings.",
+              "additionalProperties": false,
+              "properties": {
+                "initial": {
+                  "type": "integer",
+                  "description": "(INITSNUM)\nInitial number of solicited messages that can be queued to extended MCS console session. Exit IKJCNX50 invoked at 80%, IKJCNX64 at 100%.",
+                  "x-zos-props": {
+                    "parmlib": {
+                      "syntax": {
+                        "keywords": [
+                          "INITSNUM"
+                        ],
+                        "valueEnclosure": {
+                          "characters": [
+                            {
+                              "left": "(",
+                              "right": ")"
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  },
+                  "minimum": 1,
+                  "default": 1000
+                },
+                "maximum": {
+                  "type": "integer",
+                  "description": "(MAXSNUM)\nMaximum number of solicited messages that can be queued. Can only be changed through parmlib UPDATE command for active sessions.",
+                  "x-zos-props": {
+                    "parmlib": {
+                      "syntax": {
+                        "keywords": [
+                          "MAXSNUM"
+                        ],
+                        "valueEnclosure": {
+                          "characters": [
+                            {
+                              "left": "(",
+                              "right": ")"
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  },
+                  "minimum": 1,
+                  "default": 10000
+                }
+              }
+            }
+          }
+        },
+        "platform_commands": {
+          "description": "(PLATCMD NAMES(cmd1,cmd2...) | PLATCMD NONE)\nCommands executed on TSO/E command invocation platform. These commands do not require task termination processing.\n\nThe following values can be specified:\n- Array of command names. (PLATCMD NAMES(cmd1,cmd2...)) \n- The string \"none\" to indicate no commands are eligible. (PLATCMD NONE)",
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "^[A-Z@#$][A-Z0-9@#$]{0,7}$",
+                "minLength": 1,
+                "maxLength": 8
+              },
+              "x-zos-props": {
+                "parmlib": {
+                  "syntax": {
+                    "statement": "single",
+                    "keywords": [
+                      "PLATCMD NAMES"
+                    ],
+                    "valueSeparator": [
+                      " ",
+                      ","
+                    ],
+                    "valueEnclosure": {
+                      "characters": [
+                        {
+                          "left": "(",
+                          "right": ")"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "type": "string",
+              "enum": [
+                "none"
+              ],
+              "x-zos-props": {
+                "parmlib": {
+                  "syntax": {
+                    "statement": "single",
+                    "keywords": [
+                      "PLATCMD"
+                    ],
+                    "keyValueSeparator": [
+                      " "
+                    ],
+                    "valueSeparator": [
+                      " ",
+                      ","
+                    ],
+                    "enumValueMapping": {
+                      "none": "NONE"
+                    }
+                  }
+                }
+              }
+            }
+          ],
+          "default": "none"
+        },
+        "platform_programs": {
+          "description": "(PLATPGM NAMES(pgm1,pgm2...) | PLATPGM NONE)\nPrograms executed on TSO/E command invocation platform. These programs do not require task termination processing.\n\nThe following values can be specified:\n- Array of program names. (PLATPGM NAMES(pgm1,pgm2...)) \n- The string \"none\" to indicate no programs are eligible. (PLATPGM NONE)",
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "^[A-Z@#$][A-Z0-9@#$]{0,7}$",
+                "minLength": 1,
+                "maxLength": 8
+              },
+              "x-zos-props": {
+                "parmlib": {
+                  "syntax": {
+                    "statement": "single",
+                    "keywords": [
+                      "PLATPGM NAMES"
+                    ],
+                    "valueSeparator": [
+                      " ",
+                      ","
+                    ],
+                    "valueEnclosure": {
+                      "characters": [
+                        {
+                          "left": "(",
+                          "right": ")"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "type": "string",
+              "enum": [
+                "none"
+              ],
+              "x-zos-props": {
+                "parmlib": {
+                  "syntax": {
+                    "statement": "single",
+                    "keywords": [
+                      "PLATPGM"
+                    ],
+                    "keyValueSeparator": [
+                      " "
+                    ],
+                    "valueSeparator": [
+                      " ",
+                      ","
+                    ],
+                    "enumValueMapping": {
+                      "none": "NONE"
+                    }
+                  }
+                }
+              }
+            }
+          ],
+          "default": "none"
+        },
+        "authorized_test_commands": {
+          "type": "object",
+          "description": "(TEST)\nCommands and subcommands authorized to execute in test environment.",
+          "additionalProperties": false,
+          "x-zos-props": {
+            "parmlib": {
+              "syntax": {
+                "statement": "single",
+                "keywords": [
+                  "TEST"
+                ],
+                "keyValueSeparator": [
+                  " "
+                ],
+                "valueSeparator": [
+                  " ",
+                  ","
+                ]
+              }
+            }
+          },
+          "properties": {
+            "tso_commands": {
+              "type": "array",
+              "description": "(TSOCMD)\nInstallation-written TSO/E commands allowed to execute under TEST command.",
+              "x-zos-props": {
+                "parmlib": {
+                  "syntax": {
+                    "keywords": [
+                      "TSOCMD"
+                    ],
+                    "valueEnclosure": {
+                      "characters": [
+                        {
+                          "left": "(",
+                          "right": ")"
+                        }
+                      ]
+                    },
+                    "valueSeparator": [
+                      " ",
+                      ","
+                    ]
+                  }
+                }
+              },
+              "items": {
+                "type": "string",
+                "pattern": "^[A-Z@#$][A-Z0-9@#$]{0,7}$",
+                "maxLength": 8,
+                "minLength": 1
+              },
+              "uniqueItems": true
+            },
+            "subcommands": {
+              "type": "array",
+              "description": "(SUBCMD)\nInstallation-written subcommands that can be invoked under TEST command. Each entry specifies command name and entry point program.",
+              "x-zos-props": {
+                "parmlib": {
+                  "syntax": {
+                    "keywords": [
+                      "SUBCMD"
+                    ],
+                    "valueEnclosure": {
+                      "characters": [
+                        {
+                          "left": "(",
+                          "right": ")"
+                        }
+                      ]
+                    },
+                    "valueSeparator": [
+                      ","
+                    ]
+                  }
+                }
+              },
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "command",
+                  "entry_point"
+                ],
+                "properties": {
+                  "command": {
+                    "type": "string",
+                    "description": "Subcommand name (up to 8 characters).",
+                    "pattern": "^[A-Z@#$][A-Z0-9@#$]{0,7}$",
+                    "maxLength": 8,
+                    "x-zos-props": {
+                      "parmlib": {
+                        "syntax": {
+                          "order": -2
+                        }
+                      }
+                    }
+                  },
+                  "entry_point": {
+                    "type": "string",
+                    "description": "Entry point program name for the subcommand (up to 8 characters).",
+                    "pattern": "^[A-Z@#$][A-Z0-9@#$]{0,7}$",
+                    "maxLength": 8,
+                    "x-zos-props": {
+                      "parmlib": {
+                        "syntax": {
+                          "order": -1
+                        }
+                      }
+                    }
+                  }
+                },
+                "x-zos-props": {
+                  "parmlib": {
+                    "syntax": {
+                      "valueEnclosure": {
+                        "characters": [
+                          {
+                            "left": "(",
+                            "right": ")"
+                          }
+                        ]
+                      },
+                      "valueSeparator": [
+                        ","
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "transmit_receive": {
+          "type": "object",
+          "description": "(TRANSREC)\nCharacteristics for TRANSMIT and RECEIVE commands.",
+          "additionalProperties": false,
+          "x-zos-props": {
+            "parmlib": {
+              "syntax": {
+                "statement": "single",
+                "keywords": [
+                  "TRANSREC"
+                ],
+                "keyValueSeparator": [
+                  " "
+                ],
+                "valueSeparator": [
+                  " ",
+                  ","
+                ]
+              }
+            }
+          },
+          "properties": {
+            "node_smf_mapping": {
+              "type": "array",
+              "description": "(NODESMF)\nCorrespondence between network node names and system identifiers. Use [{'node': '*', 'smf_id': '*'}] to retrieve dynamically from JES.",
+              "x-zos-props": {
+                "parmlib": {
+                  "syntax": {
+                    "keywords": [
+                      "NODESMF"
+                    ],
+                    "valueEnclosure": {
+                      "characters": [
+                        {
+                          "left": "(",
+                          "right": ")"
+                        }
+                      ]
+                    },
+                    "valueSeparator": [
+                      ",",
+                      " "
+                    ]
+                  }
+                }
+              },
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "node",
+                  "smf_id"
+                ],
+                "x-zos-props": {
+                  "parmlib": {
+                    "syntax": {
+                      "valueEnclosure": {
+                        "characters": [
+                          {
+                            "left": "(",
+                            "right": ")"
+                          }
+                        ]
+                      },
+                      "valueSeparator": [
+                        ","
+                      ]
+                    }
+                  }
+                },
+                "properties": {
+                  "node": {
+                    "type": "string",
+                    "description": "(nodename)\nNetwork node name (must match NJERMT JES3 or NODE JES2 initialization statement). Use '*' for dynamic retrieval.",
+                    "maxLength": 8,
+                    "x-zos-props": {
+                      "parmlib": {
+                        "syntax": {
+                          "order": -2
+                        }
+                      }
+                    }
+                  },
+                  "smf_id": {
+                    "type": "string",
+                    "description": "(smfid)\nSystem identifier (must match SID parameter in SMFPRMxx). Use '*' for dynamic retrieval.",
+                    "maxLength": 4,
+                    "x-zos-props": {
+                      "parmlib": {
+                        "syntax": {
+                          "order": -1
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "spool_class": {
+              "type": "string",
+              "description": "(SPOOLCL)\nOutput class default for transmitted data. Applies to outgoing data only.",
+              "pattern": "^[A-Z0-9*]$",
+              "default": "B",
+              "x-zos-props": {
+                "parmlib": {
+                  "syntax": {
+                    "keywords": [
+                      "SPOOLCL"
+                    ],
+                    "valueEnclosure": {
+                      "characters": [
+                        {
+                          "left": "(",
+                          "right": ")"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            },
+            "encryption_mode": {
+              "type": "string",
+              "description": "(CIPHER)\nData encryption control. \n automatic - Automatically encrypt every transmission. \n user - Encryption is user option (default). \n none - Encryption not allowed, overrides ENCIPHER operand on the TRANSMIT command.",
+              "x-zos-props": {
+                "parmlib": {
+                  "syntax": {
+                    "keywords": [
+                      "CIPHER"
+                    ],
+                    "valueEnclosure": {
+                      "characters": [
+                        {
+                          "left": "(",
+                          "right": ")"
+                        }
+                      ]
+                    },
+                    "enumValueMapping": {
+                      "automatic": "ALWAYS",
+                      "user": "YES",
+                      "none": "NO"
+                    }
+                  }
+                }
+              },
+              "enum": [
+                "automatic",
+                "user",
+                "none"
+              ],
+              "default": "user"
+            },
+            "output_warning_intervals": {
+              "type": "object",
+              "description": "(OUTWARN)\nIntervals at which warning messages are issued when transmitting large files.",
+              "additionalProperties": false,
+              "x-zos-props": {
+                "parmlib": {
+                  "syntax": {
+                    "keywords": [
+                      "OUTWARN"
+                    ],
+                    "valueEnclosure": {
+                      "characters": [
+                        {
+                          "left": "(",
+                          "right": ")"
+                        }
+                      ]
+                    },
+                    "valueSeparator": [
+                      ","
+                    ]
+                  }
+                }
+              },
+              "required": [
+                "first_warning_records"
+              ],
+              "properties": {
+                "first_warning_records": {
+                  "type": "integer",
+                  "description": "(n1)\nNumber of records before first warning message.",
+                  "minimum": 1,
+                  "default": 10000,
+                  "x-zos-props": {
+                    "parmlib": {
+                      "syntax": {
+                        "order": -2
+                      }
+                    }
+                  }
+                },
+                "subsequent_warning_records": {
+                  "type": "integer",
+                  "description": "(n2)\nNumber of records before second and subsequent warning messages.",
+                  "minimum": 1,
+                  "default": 5000,
+                  "x-zos-props": {
+                    "parmlib": {
+                      "syntax": {
+                        "order": -1
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "output_limit_records": {
+              "type": "integer",
+              "description": "(OUTLIM)\nMaximum number of records before transmission is terminated. If <= 16777215, passed to JES as OUTLIM value.",
+              "minimum": 1,
+              "default": 30000,
+              "x-zos-props": {
+                "parmlib": {
+                  "syntax": {
+                    "keywords": [
+                      "OUTLIM"
+                    ],
+                    "valueEnclosure": {
+                      "characters": [
+                        {
+                          "left": "(",
+                          "right": ")"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            },
+            "vio_unit": {
+              "type": "string",
+              "description": "(VIO)\nDevice type for temporary space allocation. Should be device type designated as VIO at IPL to ensure data integrity.",
+              "maxLength": 8,
+              "minLength": 0,
+              "x-zos-props": {
+                "parmlib": {
+                  "syntax": {
+                    "keywords": [
+                      "VIO"
+                    ],
+                    "valueEnclosure": {
+                      "characters": [
+                        {
+                          "left": "(",
+                          "right": ")"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            },
+            "log_middle_qualifier": {
+              "type": "string",
+              "description": "(LOGSEL)\nDefault middle qualifier for log dataset name. Can be overridden by :LOGSEL tag in NAMES dataset control section.",
+              "pattern": "^[A-Z@#$][A-Z0-9@#$]{0,7}$",
+              "maxLength": 8,
+              "minLength": 1,
+              "x-zos-props": {
+                "parmlib": {
+                  "syntax": {
+                    "keywords": [
+                      "LOGSEL"
+                    ],
+                    "valueEnclosure": {
+                      "characters": [
+                        {
+                          "left": "(",
+                          "right": ")"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            },
+            "log_suffix_qualifier": {
+              "type": "string",
+              "description": "(LOGNAME)\nDefault suffix qualifier for log dataset name. Can be overridden by LOGNAME operand of TRANSMIT command or :LOGNAME tag in NAMES dataset.",
+              "pattern": "^[A-Z@#$][A-Z0-9@#$]{0,7}$",
+              "maxLength": 8,
+              "minLength": 1,
+              "x-zos-props": {
+                "parmlib": {
+                  "syntax": {
+                    "keywords": [
+                      "LOGNAME"
+                    ],
+                    "valueEnclosure": {
+                      "characters": [
+                        {
+                          "left": "(",
+                          "right": ")"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            },
+            "user_control_dataset": {
+              "type": "string",
+              "description": "(USRCTL)\nName for NAMES dataset. Default is userid.NAMES.TEXT. Maximum 44 characters including prefix.",
+              "pattern": "^[A-Z@#$][A-Z0-9@#$]{0,7}(\\.[A-Z@#$][A-Z0-9@#$]{0,7}){0,4}$",
+              "maxLength": 44,
+              "minLength": 1,
+              "x-zos-props": {
+                "parmlib": {
+                  "syntax": {
+                    "keywords": [
+                      "USRCTL"
+                    ],
+                    "valueEnclosure": {
+                      "characters": [
+                        {
+                          "left": "(",
+                          "right": ")"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            },
+            "system_control_dataset": {
+              "type": "string",
+              "description": "(SYSCTL)\nAlternate NAMES dataset for global standard nicknames. Not prefixed by TSO/E. Maximum 44 characters.",
+              "pattern": "^[A-Z@#$][A-Z0-9@#$]{0,7}(\\.[A-Z@#$][A-Z0-9@#$]{0,7}){0,4}$",
+              "maxLength": 44,
+              "minLength": 1,
+              "x-zos-props": {
+                "parmlib": {
+                  "syntax": {
+                    "keywords": [
+                      "SYSCTL"
+                    ],
+                    "valueEnclosure": {
+                      "characters": [
+                        {
+                          "left": "(",
+                          "right": ")"
+                        },
+                        {
+                          "left": "('",
+                          "right": "')"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            },
+            "sysout_class": {
+              "type": "string",
+              "description": "(SYSOUT)\nSYSOUT class for messages from utility programs like IEBCOPY. Use '*' to write to terminal.",
+              "pattern": "^[A-Z0-9*]$",
+              "default": "*",
+              "x-zos-props": {
+                "parmlib": {
+                  "syntax": {
+                    "keywords": [
+                      "SYSOUT"
+                    ],
+                    "valueEnclosure": {
+                      "characters": [
+                        {
+                          "left": "(",
+                          "right": ")"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            },
+            "dataset_prefix_mode": {
+              "type": "string",
+              "description": "(DAPREFIX)\nHow control and log datasets are prefixed. \n TUPREFIX - Use PREFIX from User Profile Table (default). \n USERID - Use user ID when PROFILE NOPREFIX is in effect.",
+              "enum": [
+                "User Profile Table",
+                "User ID"
+              ],
+              "default": "TUPREFIX",
+              "x-zos-props": {
+                "parmlib": {
+                  "syntax": {
+                    "keywords": [
+                      "DAPREFIX"
+                    ],
+                    "valueEnclosure": {
+                      "characters": [
+                        {
+                          "left": "(",
+                          "right": ")"
+                        }
+                      ]
+                    },
+                    "enumValueMapping": {
+                      "User Profile Table": "TUPREFIX",
+                      "User ID": "USERID"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "send": {
+          "type": "object",
+          "description": "(SEND)\nDefaults for TSO/E SEND and LISTBC commands, and OPERATOR SEND command.",
+          "additionalProperties": false,
+          "x-zos-props": {
+            "parmlib": {
+              "syntax": {
+                "statement": "single",
+                "keywords": [
+                  "SEND"
+                ],
+                "keyValueSeparator": [
+                  " "
+                ],
+                "valueSeparator": [
+                  " ",
+                  ","
+                ]
+              }
+            }
+          },
+          "properties": {
+            "allow_operator_send": {
+              "type": "boolean",
+              "description": "(OPERSEND)\nAllow authorized OPERATOR command users to issue SEND subcommand.",
+              "x-zos-props": {
+                "parmlib": {
+                  "syntax": {
+                    "keywords": [
+                      "OPERSEND"
+                    ],
+                    "valueEnclosure": {
+                      "characters": [
+                        {
+                          "left": "(",
+                          "right": ")"
+                        }
+                      ]
+                    },
+                    "booleanValues": {
+                      "true": [
+                        "ON"
+                      ],
+                      "false": [
+                        "OFF"
+                      ]
+                    }
+                  }
+                }
+              },
+              "default": true
+            },
+            "allow_user_send": {
+              "type": "boolean",
+              "description": "(USERSEND)\nAllow users to issue SEND command to send messages or notes to other terminal users.",
+              "x-zos-props": {
+                "parmlib": {
+                  "syntax": {
+                    "keywords": [
+                      "USERSEND"
+                    ],
+                    "valueEnclosure": {
+                      "characters": [
+                        {
+                          "left": "(",
+                          "right": ")"
+                        }
+                      ]
+                    },
+                    "booleanValues": {
+                      "true": [
+                        "ON"
+                      ],
+                      "false": [
+                        "OFF"
+                      ]
+                    }
+                  }
+                }
+              },
+              "default": true
+            },
+            "save_messages": {
+              "type": "boolean",
+              "description": "(SAVE)\nSave messages in installation-specified log.",
+              "x-zos-props": {
+                "parmlib": {
+                  "syntax": {
+                    "keywords": [
+                      "SAVE"
+                    ],
+                    "valueEnclosure": {
+                      "characters": [
+                        {
+                          "left": "(",
+                          "right": ")"
+                        }
+                      ]
+                    },
+                    "booleanValues": {
+                      "true": [
+                        "ON"
+                      ],
+                      "false": [
+                        "OFF"
+                      ]
+                    }
+                  }
+                }
+              },
+              "default": true
+            },
+            "use_broadcast_dataset": {
+              "type": "boolean",
+              "description": "(USEBROD)\nStore messages in broadcast dataset when user has no individual log. Ignored if not using individual user logs.",
+              "x-zos-props": {
+                "parmlib": {
+                  "syntax": {
+                    "keywords": [
+                      "USEBROD"
+                    ],
+                    "valueEnclosure": {
+                      "characters": [
+                        {
+                          "left": "(",
+                          "right": ")"
+                        }
+                      ]
+                    },
+                    "booleanValues": {
+                      "true": [
+                        "ON"
+                      ],
+                      "false": [
+                        "OFF"
+                      ]
+                    }
+                  }
+                }
+              },
+              "default": true
+            },
+            "check_broadcast_dataset": {
+              "type": "boolean",
+              "description": "(CHKBROD)\nLISTBC checks broadcast dataset for messages. Only applies when USEBROD is ON and using user logs.",
+              "x-zos-props": {
+                "parmlib": {
+                  "syntax": {
+                    "keywords": [
+                      "CHKBROD"
+                    ],
+                    "valueEnclosure": {
+                      "characters": [
+                        {
+                          "left": "(",
+                          "right": ")"
+                        }
+                      ]
+                    },
+                    "booleanValues": {
+                      "true": [
+                        "ON"
+                      ],
+                      "false": [
+                        "OFF"
+                      ]
+                    }
+                  }
+                }
+              },
+              "default": true
+            },
+            "broadcast_dataset": {
+              "type": "object",
+              "description": "(BROADCAST)\nBroadcast dataset configuration and switching options.",
+              "additionalProperties": false,
+              "x-zos-props": {
+                "parmlib": {
+                  "syntax": {
+                    "keywords": [
+                      "BROADCAST"
+                    ],
+                    "valueEnclosure": {
+                      "characters": [
+                        {
+                          "left": "(",
+                          "right": ")"
+                        }
+                      ]
+                    },
+                    "valueSeparator": [
+                      " ",
+                      ","
+                    ]
+                  }
+                }
+              },
+              "properties": {
+                "dataset_name": {
+                  "type": "string",
+                  "description": "(DATASET)\n Fully qualified broadcast dataset name. Must be formatted with SYNC command and cataloged or volume specified.",
+                  "pattern": "^[A-Z@#$][A-Z0-9@#$]{0,7}(\\.[A-Z@#$][A-Z0-9@#$]{0,7}){0,21}$",
+                  "maxLength": 44,
+                  "default": "SYS1.BRODCAST",
+                  "x-zos-props": {
+                    "parmlib": {
+                      "syntax": {
+                        "keywords": [
+                          "DATASET"
+                        ],
+                        "valueEnclosure": {
+                          "characters": [
+                            {
+                              "left": "(",
+                              "right": ")"
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  }
+                },
+                "volume": {
+                  "type": "string",
+                  "description": "(VOLUME)\n Volume serial where broadcast dataset resides.",
+                  "pattern": "^[A-Z0-9]{1,6}$",
+                  "maxLength": 6,
+                  "minLength": 1,
+                  "x-zos-props": {
+                    "parmlib": {
+                      "syntax": {
+                        "keywords": [
+                          "VOLUME"
+                        ],
+                        "valueEnclosure": {
+                          "characters": [
+                            {
+                              "left": "(",
+                              "right": ")"
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  }
+                },
+                "switch_timeout_seconds": {
+                  "type": "integer",
+                  "description": "(TIMEOUT)\n Seconds a switch request waits for resources before timing out.",
+                  "minimum": 0,
+                  "maximum": 999,
+                  "default": 5,
+                  "x-zos-props": {
+                    "parmlib": {
+                      "syntax": {
+                        "keywords": [
+                          "TIMEOUT"
+                        ],
+                        "valueEnclosure": {
+                          "characters": [
+                            {
+                              "left": "(",
+                              "right": ")"
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  }
+                },
+                "prompt_before_switch": {
+                  "type": "boolean",
+                  "description": "(PROMPT|NOPROMPT) \n Prompt before switching broadcast dataset. PROMPT (true) or NOPROMPT (false).",
+                  "x-zos-props": {
+                    "parmlib": {
+                      "syntax": {
+                        "booleanValues": {
+                          "true": [
+                            "PROMPT"
+                          ],
+                          "false": [
+                            "NOPROMPT"
+                          ]
+                        }
+                      }
+                    }
+                  },
+                  "default": true
+                }
+              }
+            },
+            "protect_user_logs": {
+              "type": "boolean",
+              "description": "(MSGPROTECT)\nSecurity protect individual user logs from user. Changes log naming: OFF=userid.logname, ON=logname.userid. Requires RACF 1.9+ for security label checking.",
+              "x-zos-props": {
+                "parmlib": {
+                  "syntax": {
+                    "keywords": [
+                      "MSGPROTECT"
+                    ],
+                    "valueEnclosure": {
+                      "characters": [
+                        {
+                          "left": "(",
+                          "right": ")"
+                        }
+                      ]
+                    },
+                    "booleanValues": {
+                      "true": [
+                        "ON"
+                      ],
+                      "false": [
+                        "OFF"
+                      ]
+                    }
+                  }
+                }
+              },
+              "default": false
+            },
+            "log_dataset_name": {
+              "type": "string",
+              "description": "(LOGNAME)\nLog dataset name qualifier or '*' to store in broadcast dataset. Naming depends on MSGPROTECT setting.",
+              "pattern": "^([A-Z@#$][A-Z0-9@#$]{0,7}(\\.[A-Z@#$][A-Z0-9@#$]{0,7}){0,4}|\\*)$",
+              "maxLength": 44,
+              "minLength": 1,
+              "x-zos-props": {
+                "parmlib": {
+                  "syntax": {
+                    "keywords": [
+                      "LOGNAME"
+                    ],
+                    "valueEnclosure": {
+                      "characters": [
+                        {
+                          "left": "(",
+                          "right": ")"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            },
+            "sysplex_only_sharing": {
+              "type": "boolean",
+              "description": "(SYSPLEXSHR)\nBroadcast dataset shared only among systems in sysplex (not outside). Give same value in every system's IKJTSOxx to avoid confusion.",
+              "x-zos-props": {
+                "parmlib": {
+                  "syntax": {
+                    "keywords": [
+                      "SYSPLEXSHR"
+                    ],
+                    "valueEnclosure": {
+                      "characters": [
+                        {
+                          "left": "(",
+                          "right": ")"
+                        }
+                      ]
+                    },
+                    "booleanValues": {
+                      "true": [
+                        "ON"
+                      ],
+                      "false": [
+                        "OFF"
+                      ]
+                    }
+                  }
+                }
+              },
+              "default": false
+            },
+            "user_log_allocation": {
+              "type": "object",
+              "description": "(USERLOGSIZE)\nSpace allocation for user log datasets.",
+              "additionalProperties": false,
+              "x-zos-props": {
+                "parmlib": {
+                  "syntax": {
+                    "keywords": [
+                      "USERLOGSIZE"
+                    ],
+                    "valueEnclosure": {
+                      "characters": [
+                        {
+                          "left": "(",
+                          "right": ")"
+                        }
+                      ]
+                    },
+                    "valueSeparator": [
+                      ",",
+                      " "
+                    ]
+                  }
+                }
+              },
+              "required": [
+                "primary_tracks",
+                "secondary_tracks"
+              ],
+              "properties": {
+                "primary_tracks": {
+                  "type": "integer",
+                  "description": "(primary-quantity)\n Primary allocation in tracks.",
+                  "minimum": 1,
+                  "default": 1,
+                  "x-zos-props": {
+                    "parmlib": {
+                      "syntax": {
+                        "order": -3
+                      }
+                    }
+                  }
+                },
+                "secondary_tracks": {
+                  "type": "integer",
+                  "description": "(secondary-quantity)\n Secondary allocation in tracks.",
+                  "minimum": 1,
+                  "default": 2,
+                  "x-zos-props": {
+                    "parmlib": {
+                      "syntax": {
+                        "order": -2
+                      }
+                    }
+                  }
+                },
+                "directory_blocks": {
+                  "type": "integer",
+                  "description": "(dir-block)\n Directory blocks for partitioned datasets.",
+                  "minimum": 1,
+                  "default": 20,
+                  "x-zos-props": {
+                    "parmlib": {
+                      "syntax": {
+                        "order": -1
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "operator_send_wait": {
+              "type": "boolean",
+              "description": "(OPERSEWAIT)\nWAIT (true) or NOWAIT (false) for OPERATOR SEND when not explicitly specified. WAIT means messages sent only when all users can receive. NOWAIT sends to users whose terminals are not busy.",
+              "x-zos-props": {
+                "parmlib": {
+                  "syntax": {
+                    "keywords": [
+                      "OPERSEWAIT"
+                    ],
+                    "valueEnclosure": {
+                      "characters": [
+                        {
+                          "left": "(",
+                          "right": ")"
+                        }
+                      ]
+                    },
+                    "booleanValues": {
+                      "true": [
+                        "ON"
+                      ],
+                      "false": [
+                        "OFF"
+                      ]
+                    }
+                  }
+                }
+              },
+              "default": false
+            }
+          }
+        }
+      }
+    },
+    "https://ibm.com/schemas/zosconfig/v0/Application/iefssn/schema.json": {
+      "$schema": "https://ibm.com/schemas/zosconfig/v0/meta/zos_meta.schema.json",
+      "$id": "https://ibm.com/schemas/zosconfig/v0/Application/iefssn/schema.json",
+      "title": "IEFSSNxx Subsystem Definitions",
+      "description": "The IEFSSNxx parmlib member contains parameters that define the primary subsystem and the various secondary subsystems that are to be initialized during system initialization. IEFSSNxx allows you to name the subsystem initialization routine to be given control during master scheduler initialization, specify the input parameter string to be passed to the subsystem initialization routine, specify a primary subsystem name and whether you want it started automatically, and specify whether the initialization routines for the subsystem are to run in parallel. https://www.ibm.com/docs/en/zos/latest?topic=sys1parmlib-iefssnxx-subsystem-definitions-keyword-parameter-form",
+      "x-zos-schema": {
+        "parmlib": {
+          "prefix": "IEFSSN",
+          "syntax": {
+            "lineRange": {
+              "start": 1,
+              "stop": 71
+            },
+            "ignoreParsing": {
+              "columns": 72,
+              "leadingWhitespace": true
+            },
+            "comments": [
+              {
+                "delimiter": {
+                  "start": "/*",
+                  "stop": "*/"
+                }
+              },
+              {
+                "pattern": "/\\*.*$"
+              }
+            ]
+          }
+        }
+      },
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "parallel_initialization": {
+          "description": "(BEGINPARALLEL SUBSYS) Definitions for subsystems that can be started in parallel.\n (SUBSYS) Each item defines a subsystem to be added to the system. If more than one SUBSYS statement appears for the same subsystem name, the first statement is the definition for the subsystem. The duplicate statements are ignored and a message is sent to the console.",
+          "anyOf": [
+            {
+              "type": "array",
+              "minItems": 1,
+              "x-zos-props": {
+                "parmlib": {
+                  "syntax": {
+                    "statement": "single",
+                    "keywords": [
+                      "BEGINPARALLEL"
+                    ],
+                    "keyValueSeparator": [
+                      "\n  ",
+                      " "
+                    ],
+                    "valueSeparator": [
+                      "\n  ",
+                      " "
+                    ],
+                    "order": 0
+                  }
+                }
+              },
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "x-zos-props": {
+                  "parmlib": {
+                    "syntax": {
+                      "keywords": [
+                        "SUBSYS"
+                      ],
+                      "keyValueSeparator": [
+                        " "
+                      ],
+                      "valueSeparator": [
+                        "\n         ",
+                        " "
+                      ]
+                    }
+                  }
+                },
+                "properties": {
+                  "subsystem_name": {
+                    "$ref": "#/$defs/subsystem_name"
+                  },
+                  "console_name": {
+                    "$ref": "#/$defs/console_name"
+                  },
+                  "initialization_routine": {
+                    "$ref": "#/$defs/initialization_routine"
+                  },
+                  "initialization_parameters": {
+                    "$ref": "#/$defs/initialization_parameters"
+                  },
+                  "primary": {
+                    "$ref": "#/$defs/primary"
+                  },
+                  "automatic_start": {
+                    "$ref": "#/$defs/automatic_start"
+                  }
+                },
+                "required": [
+                  "subsystem_name"
+                ],
+                "allOf": [
+                  {
+                    "if": {
+                      "properties": {
+                        "initialization_parameters": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "initialization_parameters"
+                      ]
+                    },
+                    "then": {
+                      "required": [
+                        "initialization_routine"
+                      ],
+                      "errorMessage": "initialization_parameters can only be specified when initialization_routine is specified"
+                    }
+                  },
+                  {
+                    "if": {
+                      "properties": {
+                        "automatic_start": {
+                          "type": "boolean"
+                        }
+                      },
+                      "required": [
+                        "automatic_start"
+                      ]
+                    },
+                    "then": {
+                      "properties": {
+                        "primary": {
+                          "const": true
+                        }
+                      },
+                      "required": [
+                        "primary"
+                      ],
+                      "errorMessage": "start can only be specified when primary is true"
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "type": "boolean",
+              "default": true,
+              "x-zos-props": {
+                "parmlib": {
+                  "syntax": {
+                    "statement": "single",
+                    "booleanValues": {
+                      "true": [
+                        "BEGINPARALLEL"
+                      ]
+                    },
+                    "order": 0
+                  }
+                }
+              }
+            }
+          ]
+        },
+        "serial_initialization": {
+          "description": "(SUBSYS) Definitions for subsystems that can be started serially (these subsystems CANNOT be started in parallel).\n Each item defines a subsystem to be added to the system. If more than one SUBSYS statement appears for the same subsystem name, the first statement is the definition for the subsystem. The duplicate statements are ignored and a message is sent to the console.",
+          "type": "array",
+          "minItems": 0,
+          "x-zos-props": {
+            "parmlib": {
+              "syntax": {
+                "statement": "multiple",
+                "keywords": [
+                  "SUBSYS"
+                ],
+                "keyValueSeparator": [
+                  " "
+                ],
+                "valueSeparator": [
+                  " "
+                ],
+                "order": -1
+              }
+            }
+          },
+          "items": {
+            "anyOf": [
+              {
+                "type": "object",
+                "x-zos-props": {
+                  "parmlib": {
+                    "syntax": {
+                      "valueSeparator": [
+                        "\n       ",
+                        ""
+                      ]
+                    }
+                  }
+                },
+                "additionalProperties": false,
+                "properties": {
+                  "subsystem_name": {
+                    "$ref": "#/$defs/subsystem_name"
+                  },
+                  "console_name": {
+                    "$ref": "#/$defs/console_name"
+                  },
+                  "initialization_routine": {
+                    "$ref": "#/$defs/initialization_routine"
+                  },
+                  "initialization_parameters": {
+                    "$ref": "#/$defs/initialization_parameters"
+                  },
+                  "primary": {
+                    "$ref": "#/$defs/primary"
+                  },
+                  "automatic_start": {
+                    "$ref": "#/$defs/automatic_start"
+                  }
+                },
+                "required": [
+                  "subsystem_name"
+                ],
+                "allOf": [
+                  {
+                    "if": {
+                      "properties": {
+                        "initialization_parameters": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "initialization_parameters"
+                      ]
+                    },
+                    "then": {
+                      "required": [
+                        "initialization_routine"
+                      ],
+                      "errorMessage": "initialization_parameters can only be specified when initialization_routine is specified"
+                    }
+                  },
+                  {
+                    "if": {
+                      "properties": {
+                        "automatic_start": {
+                          "type": "boolean"
+                        }
+                      },
+                      "required": [
+                        "automatic_start"
+                      ]
+                    },
+                    "then": {
+                      "properties": {
+                        "primary": {
+                          "const": true
+                        }
+                      },
+                      "required": [
+                        "primary"
+                      ],
+                      "errorMessage": "start can only be specified when primary is true"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      },
+      "$defs": {
+        "subsystem_name": {
+          "description": "(SUBNAME) The name of the subsystem. This name must begin with an alphabetic or national character (#, @, or $), and the remaining characters (if any) can be alphanumeric or national. You can include any number of records in the IEFSSNxx parmlib member.",
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 4,
+          "pattern": "^[A-Z@#$][A-Z0-9@#$]{0,3}$",
+          "x-zos-props": {
+            "parmlib": {
+              "syntax": {
+                "order": -2,
+                "keywords": [
+                  "SUBNAME"
+                ],
+                "keyValueSeparator": [
+                  " "
+                ],
+                "valueEnclosure": {
+                  "characters": [
+                    {
+                      "left": "(",
+                      "right": ")"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "console_name": {
+          "description": "(CONSNAME) The name of the console to which any messages that the SSI issues as part of initialization processing are to be routed. This name is optional and can be 2-8 characters long. This console name is also passed to the routine named on the INITRTN keyword if it is specified. The default is to issue messages to the consoles that are receiving the INTIDS routing attribute.",
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 8,
+          "pattern": "^[A-Z0-9@#$]{2,8}$",
+          "x-zos-props": {
+            "parmlib": {
+              "syntax": {
+                "order": -1,
+                "keywords": [
+                  "CONSNAME"
+                ],
+                "keyValueSeparator": [
+                  ""
+                ],
+                "valueEnclosure": {
+                  "characters": [
+                    {
+                      "left": "(",
+                      "right": ")"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "initialization_routine": {
+          "description": "(INITRTN) The name of the subsystem initialization routine. This name is optional and can be 1-8 characters long. The first character can be either alphabetic or national (#, @, or $). The remaining characters can be either alphanumeric or national. The routine receives control in supervisor state key 0. It must be the name of a program accessible through LNKLST.",
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 8,
+          "pattern": "^[A-Z@#$][A-Z0-9@#$]{0,7}$",
+          "x-zos-props": {
+            "parmlib": {
+              "syntax": {
+                "order": 1,
+                "keywords": [
+                  "INITRTN"
+                ],
+                "keyValueSeparator": [
+                  ""
+                ],
+                "valueEnclosure": {
+                  "characters": [
+                    {
+                      "left": "(",
+                      "right": ")"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "initialization_parameters": {
+          "description": "(INITPARM) Input parameters to be passed to the subsystem initialization routine. The input parameters are optional and are variable in length for a maximum of 60 characters. If blanks, commas, semicolons, quotation marks, or parentheses are included in the parameters, the entire parm field must be enclosed in single quotation marks (represented as two single quotation marks). The INITPARM keyword can only be specified if the INITRTN keyword is specified.",
+          "type": "string",
+          "maxLength": 60,
+          "x-zos-props": {
+            "parmlib": {
+              "syntax": {
+                "order": 2,
+                "keywords": [
+                  "INITPARM"
+                ],
+                "keyValueSeparator": [
+                  ""
+                ],
+                "valueEnclosure": {
+                  "characters": [
+                    {
+                      "left": "('",
+                      "right": "')"
+                    },
+                    {
+                      "left": "(",
+                      "right": ")"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "primary": {
+          "description": "(PRIMARY) Parameter indicating whether this is the primary subsystem. The primary subsystem is typically a job entry subsystem (either JES2 or JES3). This parameter is optional. Initialize the primary subsystem before any secondary subsystem except SMS. If you specify PRIMARY on more than one statement, the system issues message IEFJ0081 and defines the second subsystem but ignores the PRIMARY specification. The IEFSSNxx parmlib member is the only way to define the primary subsystem. It cannot be defined using dynamic SSI services IEFSSREQ=ADD macro or the SETSSI command.",
+          "type": "boolean",
+          "default": false,
+          "x-zos-props": {
+            "parmlib": {
+              "syntax": {
+                "order": 3,
+                "keywords": [
+                  "PRIMARY"
+                ],
+                "keyValueSeparator": [
+                  ""
+                ],
+                "valueEnclosure": {
+                  "characters": [
+                    {
+                      "left": "(",
+                      "right": ")"
+                    }
+                  ]
+                },
+                "booleanValues": {
+                  "true": [
+                    "YES"
+                  ],
+                  "false": [
+                    "NO"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "automatic_start": {
+          "description": "(START) Parameter indicating whether an automatic START command should be issued for the primary subsystem. If the parmlib entry for the primary subsystem is START(NO), the operator must start it later with a START command. If the parmlib entry for the primary subsystem does not specify the START parameter, it defaults to START(YES). The START parameter cannot be specified for a secondary subsystem. If you specify the PRIMARY(NO) parameter, there is no default for the START parameter.",
+          "type": "boolean",
+          "x-zos-props": {
+            "parmlib": {
+              "syntax": {
+                "order": 4,
+                "keywords": [
+                  "START"
+                ],
+                "keyValueSeparator": [
+                  ""
+                ],
+                "valueEnclosure": {
+                  "characters": [
+                    {
+                      "left": "(",
+                      "right": ")"
+                    }
+                  ]
+                },
+                "booleanValues": {
+                  "true": [
+                    "YES"
+                  ],
+                  "false": [
+                    "NO"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
