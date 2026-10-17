@@ -754,7 +754,7 @@ boot_definitions:
       //*         DD  DSN=SYS1.PARMLIB.IBM,DISP=SHR
       //*SYSUADS  DD  DSN=SYS1.UADS,DISP=SHR
       //SYSLBC   DD  DSN=SYS1.BRODCAST,
-      //             DISP=SHR
+      //             DISP=SHR   
   system_augmentation_definitions:
     authorized_program_files_list_format: DYNAMIC
     authorized_program_files_to_add:
