@@ -119,7 +119,7 @@ boot_definitions:
         display_on_the_console: true
       sysplex_configuration: MULTISYSTEM
       maximum_amount_of_real_storage: 0
-      reduced_error_recovery: YES
+      reduced_error_recovery: "YES"
       storage_reconfiguration_amount: 0
       number_of_adress_space_vector_table_entries_reserved_for_replace: 200
       system_queue_area_sizes:
