@@ -33,8 +33,8 @@ data_management_definitions:
     sms_definition:
       active_control_dataset: ATSPLEX.SMS.ACDS
       activity_keypoint_intervals:
-      - 200
-      - 200
+        - 200
+        - 200
       automatic_class_selection:
         use_defaults: true
       communications_dataset: ATSPLEX.SMS.COMMDS
@@ -43,14 +43,14 @@ data_management_definitions:
         deadlock_detection:
           interval: 15
         server_names:
-        - 1
-        - 2
+          - 1
+          - 2
         system_names:
-        - ATS1
-        - ATS2
+          - ATS1
+          - ATS2
         use_warm_start:
-        - true
-        - true
+          - true
+          - true
       enabled_shared_writing_of_pdse_in_sysplex: true
       general_interval: 15
       pdse_configuration:
@@ -68,31 +68,31 @@ data_management_definitions:
       smf_time_stamping: true
       trace_configuration:
         deselect_events:
-        - ALL
+          - ALL
         enabled: false
         select_events:
-        - ACSINT
-        - ACSPRO
+          - ACSINT
+          - ACSPRO
 vatlst:
   vatdef:
     ipluse: PRIVATE
     sysuse: PRIVATE
   volume_entries:
-  - entry:
-      volume_specifications:
-        volume_serial: USRAT%
-        specific_identifier: false
-        mount_attribute: false
-      use_attribute: '0'
-      device_type: '*'
-    mount_message_suppression: true
-    extra_message: SYSTEM                         STORAGE VOLUME
-  - entry:
-      volume_specifications:
-        volume_serial: USRAT%
-        specific_identifier: false
-        mount_attribute: false
-      use_attribute: '0'
-      device_type: '*'
-    mount_message_suppression: true
-    extra_message: SYSTEM                         STORAGE VOLUME
+    - entry:
+        volume_specifications:
+          volume_serial: USRAT%
+          specific_identifier: false
+          mount_attribute: false
+        use_attribute: "0"
+        device_type: "*"
+      mount_message_suppression: true
+      extra_message: SYSTEM                         STORAGE VOLUME
+    - entry:
+        volume_specifications:
+          volume_serial: USRAT%
+          specific_identifier: false
+          mount_attribute: false
+        use_attribute: "0"
+        device_type: "*"
+      mount_message_suppression: true
+      extra_message: SYSTEM                         STORAGE VOLUME
