@@ -78,21 +78,17 @@ vatlst:
     ipluse: PRIVATE
     sysuse: PRIVATE
   volume_entries:
-    - entry:
-        volume_specifications:
-          volume_serial: USRAT%
-          specific_identifier: false
-          mount_attribute: false
-        use_attribute: "0"
-        device_type: "*"
+    - volume_serial: USRAT%
+      specific_identifier: false
+      mount_attribute: false
+      use_attribute: "0"
+      device_type: "*"
       mount_message_suppression: true
       extra_message: SYSTEM                         STORAGE VOLUME
-    - entry:
-        volume_specifications:
-          volume_serial: USRAT%
-          specific_identifier: false
-          mount_attribute: false
-        use_attribute: "0"
-        device_type: "*"
+    - volume_serial: USRAT%
+      specific_identifier: false
+      mount_attribute: false
+      use_attribute: "0"
+      device_type: "*"
       mount_message_suppression: true
       extra_message: SYSTEM                         STORAGE VOLUME
