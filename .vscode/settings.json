@@ -283,5 +283,7 @@
     "workbench.colorCustomizations": {
         "zosConfig.levelColor0": "#438FFF",
         "zosConfig.levelColor1": "#73B761"
-    }
+    },
+    "yaml.completion": false,
+    "editor.wordBasedSuggestions": "off"
 }

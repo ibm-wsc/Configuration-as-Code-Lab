@@ -1,7 +1,7 @@
 zosconfigedit:
   allowSelfSignedCerts: true
   baseSchemas:
-  - C:/Users/Public/Desktop/schemas/zos_meta.schema.json
+  - /Users/aslan/Downloads/Schemas 2026-10-16/zos_meta.schema.json
   levels:
   - name: labplex
     path: ./
@@ -19,16 +19,16 @@ zosconfigedit:
     parent: labplex
   configFiles:
   - name: GeneralOS.yaml
-    schema: C:/Users/Public/Desktop/schemas/GeneralOS_schema.json
+    schema: /Users/aslan/Downloads/Schemas 2026-10-16/GeneralOS_schema.json
   - name: Application.yaml
-    schema: C:/Users/Public/Desktop/schemas/Application_schema.json
+    schema: /Users/aslan/Downloads/Schemas 2026-10-16/Application_schema.json
   - name: Security.yaml
-    schema: C:/Users/Public/Desktop/schemas/Security_schema.json
+    schema: /Users/aslan/Downloads/Schemas 2026-10-16/Security_schema.json
   - name: Network.yaml
-    schema: C:/Users/Public/Desktop/schemas/Network_schema.json
+    schema: /Users/aslan/Downloads/Schemas 2026-10-16/Network_schema.json
   - name: Hardware.yaml
-    schema: C:/Users/Public/Desktop/schemas/Hardware_schema.json
+    schema: /Users/aslan/Downloads/Schemas 2026-10-16/Hardware_schema.json
   - name: Data.yaml
-    schema: C:/Users/Public/Desktop/schemas/Data_schema.json
+    schema: /Users/aslan/Downloads/Schemas 2026-10-16/Data_schema.json
   - name: Tools.yaml
-    schema: C:/Users/Public/Desktop/schemas/Tools_schema.json
+    schema: /Users/aslan/Downloads/Schemas 2026-10-16/Tools_schema.json
