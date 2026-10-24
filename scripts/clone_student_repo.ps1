@@ -21,8 +21,9 @@
     saved and this is omitted, the script prompts for it.
 
 .PARAMETER Pat
-    GitHub PAT as a SecureString. Optional once saved. If none is saved and
-    this is omitted, PowerShell prompts with masked input.
+    GitHub PAT as plain text. Optional once saved. If none is saved and this
+    is omitted, PowerShell prompts with masked input (which avoids leaving the
+    token in your shell history).
 
 .PARAMETER Reset
     Deletes the saved student number and PAT, then exits.
@@ -32,7 +33,7 @@
     (first run prompts for anything missing and saves it; later runs need nothing)
 
 .EXAMPLE
-    .\clone_student_repo.ps1 -StudentNumber 07 -Pat (Read-Host "PAT" -AsSecureString)
+    .\clone_student_repo.ps1 -StudentNumber 07 -Pat "<your token>"
     (replaces the saved values)
 
 .EXAMPLE
@@ -45,7 +46,7 @@ param(
     [string]$StudentNumber,
 
     [Parameter(ParameterSetName = "Clone")]
-    [securestring]$Pat,
+    [string]$Pat,
 
     [Parameter(Mandatory = $true, ParameterSetName = "Reset")]
     [switch]$Reset,
@@ -89,16 +90,19 @@ else {
     Write-Host "Student number saved."
 }
 
-# Resolve the PAT: parameter (and save it) > saved file > prompt (and save it)
+# Resolve the PAT (kept as a SecureString): parameter (and save it) > saved file > prompt (and save it)
 if (-not $Pat -and (Test-Path -LiteralPath $patFile)) {
-    $Pat = Get-Content -LiteralPath $patFile -Raw | ConvertTo-SecureString
+    $securePat = Get-Content -LiteralPath $patFile -Raw | ConvertTo-SecureString
     Write-Host "Using saved PAT."
 }
 else {
-    if (-not $Pat) {
-        $Pat = Read-Host "GitHub PAT" -AsSecureString
+    if ($Pat) {
+        $securePat = ConvertTo-SecureString -String $Pat -AsPlainText -Force
     }
-    $Pat | ConvertFrom-SecureString | Set-Content -LiteralPath $patFile -NoNewline
+    else {
+        $securePat = Read-Host "GitHub PAT" -AsSecureString
+    }
+    $securePat | ConvertFrom-SecureString | Set-Content -LiteralPath $patFile -NoNewline
     Write-Host "PAT saved (encrypted) in $patFile"
 }
 
@@ -115,7 +119,7 @@ if (Test-Path -LiteralPath $CloneDirectory) {
 # Clone the student branch. The PAT is sent as an HTTP auth header so it does
 # not appear in the clone URL or in the saved git remote.
 $studentBranch = "student-$StudentNumber"
-$plainPat = [System.Net.NetworkCredential]::new("", $Pat).Password
+$plainPat = [System.Net.NetworkCredential]::new("", $securePat).Password
 $pair     = "x-access-token:$plainPat"
 $basic    = [Convert]::ToBase64String([Text.Encoding]::ASCII.GetBytes($pair))
 Write-Host "Cloning branch $studentBranch into $CloneDirectory..."
