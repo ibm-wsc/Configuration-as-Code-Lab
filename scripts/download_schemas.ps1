@@ -7,17 +7,36 @@
     Lists the files in the repository's "schemas" folder through the GitHub
     API and downloads every *.json file over HTTPS. The destination directory
     is created if it does not exist. Existing files are overwritten.
-    Works with Windows PowerShell 5.1 and PowerShell 7+. No git required.
+    Works with Windows PowerShell 5.1 and PowerShell 7+. After downloading, it
+    sets the global git user.name and user.email (git must be installed).
+
+.PARAMETER StudentNumber
+    Two-digit student number (for example 07). The script clones branch
+    "student-<StudentNumber>".
+
+.PARAMETER Pat
+    GitHub personal access token, as a SecureString. If omitted, PowerShell
+    prompts for it with masked input.
 
 .EXAMPLE
-    powershell -ExecutionPolicy Bypass -File .\download_schemas.ps1
+    .\download_schemas.ps1 -StudentNumber 07
+    (prompts for the PAT)
 
 .EXAMPLE
-    .\download_schemas.ps1 -Destination "D:\my-schemas" -Branch main
+    $pat = Read-Host "GitHub PAT" -AsSecureString
+    .\download_schemas.ps1 -StudentNumber 07 -Pat $pat -Destination "D:\my-schemas"
 #>
 [CmdletBinding()]
 param(
+    [Parameter(Mandatory = $true)]
+    [ValidatePattern('^\d{2}$')]
+    [string]$StudentNumber,
+
+    [Parameter(Mandatory = $true)]
+    [securestring]$Pat,
+
     [string]$Destination = "C:\Users\itzuser\Documents\schemas",
+    [string]$CloneDirectory = "C:\Users\itzuser\Configuration-as-Code-Lab",
     [string]$Owner       = "ibm-wsc",
     [string]$Repo        = "Configuration-as-Code-Lab",
     [string]$Branch      = "main",
@@ -68,3 +87,26 @@ foreach ($file in $files) {
 }
 
 Write-Host "Done. Downloaded $count schema file(s) to $Destination"
+
+# Configure the global git identity for the lab
+git config --global user.name "Lab Student"
+git config --global user.email "noone@deadzone.com"
+
+# Remove any existing clone of the lab repository
+if (Test-Path -LiteralPath $CloneDirectory) {
+    Write-Host "Removing existing directory: $CloneDirectory"
+    Remove-Item -LiteralPath $CloneDirectory -Recurse -Force
+}
+
+# Clone the student branch. The PAT is sent as an HTTP auth header so it does
+# not appear in the clone URL or in the saved git remote.
+$StudentBranch = "student-$StudentNumber"
+$plainPat = [System.Net.NetworkCredential]::new("", $Pat).Password
+$pair     = "x-access-token:$plainPat"
+$basic    = [Convert]::ToBase64String([Text.Encoding]::ASCII.GetBytes($pair))
+Write-Host "Cloning branch $StudentBranch into $CloneDirectory..."
+git -c "http.extraHeader=Authorization: Basic $basic" clone -b $StudentBranch "https://github.com/$Owner/$Repo.git" $CloneDirectory
+if ($LASTEXITCODE -ne 0) {
+    Write-Error "git clone failed."
+    exit 1
+}
