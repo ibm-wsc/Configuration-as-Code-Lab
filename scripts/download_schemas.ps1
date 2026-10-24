@@ -7,6 +7,8 @@
     Lists the files in the repository's "schemas" folder through the GitHub
     API and downloads every *.json file over HTTPS. The destination directory
     is created if it does not exist. Existing files are overwritten.
+    It then downloads the .vsix from the repository's "vscodeplugin" folder and
+    installs it with the VS Code "code" command (VS Code must be installed).
     Works with Windows PowerShell 5.1 and PowerShell 7+. No git required.
     Git setup and cloning live in clone_student_repo.ps1.
 
@@ -22,7 +24,8 @@ param(
     [string]$Owner       = "ibm-wsc",
     [string]$Repo        = "Configuration-as-Code-Lab",
     [string]$Branch      = "main",
-    [string]$SchemaPath  = "schemas"
+    [string]$SchemaPath  = "schemas",
+    [string]$ExtensionPath = "vscodeplugin"
 )
 
 $ErrorActionPreference = "Stop"
@@ -69,3 +72,54 @@ foreach ($file in $files) {
 }
 
 Write-Host "Done. Downloaded $count schema file(s) to $Destination"
+
+# Download and install the VS Code extension (.vsix)
+Write-Host "Fetching VS Code extension from $Owner/$Repo ($Branch)..."
+try {
+    $pluginItems = Invoke-RestMethod -Uri "https://api.github.com/repos/$Owner/$Repo/contents/${ExtensionPath}?ref=$Branch" -Headers @{ "User-Agent" = "schema-downloader" } -TimeoutSec 30
+}
+catch {
+    Write-Error "Unable to list the extension from GitHub: $($_.Exception.Message)"
+    exit 1
+}
+
+$vsix = @($pluginItems | Where-Object { $_.type -eq "file" -and $_.name -like "*.vsix" } | Sort-Object name) | Select-Object -Last 1
+if (-not $vsix) {
+    Write-Error "No .vsix file found at '$ExtensionPath' on branch '$Branch'."
+    exit 1
+}
+
+$vsixTarget = Join-Path -Path $env:TEMP -ChildPath $vsix.name
+Write-Host "Downloading: $($vsix.name)"
+try {
+    Invoke-WebRequest -Uri $vsix.download_url -OutFile $vsixTarget -UseBasicParsing -TimeoutSec 120
+}
+catch {
+    Write-Error "Failed to download $($vsix.name): $($_.Exception.Message)"
+    exit 1
+}
+
+# Locate the VS Code command-line launcher
+$codeCmd = Get-Command code -ErrorAction SilentlyContinue
+if ($codeCmd) {
+    $code = $codeCmd.Source
+}
+else {
+    $code = @(
+        "$env:LOCALAPPDATA\Programs\Microsoft VS Code\bin\code.cmd",
+        "$env:ProgramFiles\Microsoft VS Code\bin\code.cmd"
+    ) | Where-Object { Test-Path -LiteralPath $_ } | Select-Object -First 1
+}
+if (-not $code) {
+    Write-Error "VS Code 'code' command not found. Install VS Code, or install manually: $vsixTarget"
+    exit 1
+}
+
+Write-Host "Installing extension $($vsix.name)..."
+& $code --install-extension $vsixTarget --force
+if ($LASTEXITCODE -ne 0) {
+    Write-Error "Extension install failed (exit code $LASTEXITCODE)."
+    exit 1
+}
+
+Write-Host "Done. Installed $($vsix.name). Restart VS Code if it is open."
